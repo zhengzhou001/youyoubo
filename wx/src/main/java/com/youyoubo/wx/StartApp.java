@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.base","com.youyoubo.wx"})
 public class StartApp {
 	public static void main(String[] args) {
+		System.out.println(22);
 		SpringApplication.run(StartApp.class, args);
 	}
 }
