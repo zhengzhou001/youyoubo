@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="base">
+	 <insert id="testInsert"  parameterType="java.util.Map">
+	 	insert into MYTEST (id,name,create_date) values (#{id},#{name},sysdate)
+	 </insert>
+	  <delete id="testDelete"  parameterType="java.util.Map">
+	 	delete  MYTEST where id= #{id}  
+	 </delete>
+	 <update id="testUpdate"  parameterType="java.util.Map">
+	 	update   MYTEST set name=#{name} where id=#{id}
+	 </update>
+	 
+	 <select id="testSelect"  parameterType="java.util.Map" resultType="java.util.Map">
+	 	select id name,to_char(create_date,'YYYY-MM-DD hh24:mi:ss')  as create_datefrom  MYTEST where name=#{name}
+	 </select>
+	 
+	  <select id="testSelectOne"  parameterType="java.util.Map" resultType="java.util.Map">
+	 	select id name,to_char(create_date,'YYYY-MM-DD hh24:mi:ss') as create_date from  MYTEST where name=#{name}
+	 </select>
+	 <select id="testSelectCount"  parameterType="java.util.Map" resultType="java.lang.Integer">
+	 	select count(1) from  MYTEST where name=#{name}
+	 </select> 
+</mapper>
