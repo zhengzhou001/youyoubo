@@ -1,0 +1,119 @@
+package com.base.core.tools;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
+import org.apache.log4j.Logger;
+
+
+/**
+ */
+public class BaseTools {
+	private static Logger log = Logger.getLogger(BaseTools.class);
+
+	protected BaseTools() {
+
+	}
+	private static int seq = 0;
+	private static final int MAX_PER_SECOND = 1000;
+
+	/**
+	 * 生成15位的数字流水号(16位以后会出现科学计数影响业务操作)
+	 * <p>
+	 * <I>生成规则为:</I><b>yyMMddHHmmss+1位顺序号</b>
+	 * </p>
+	 *
+	 * @return 15位流水号
+	 */
+	public static synchronized String getNextSeq() {
+		seq++;
+		return (new SimpleDateFormat("yyMMddHHmmss").format(new Date()))
+				+ String.format("%03d", seq %= MAX_PER_SECOND);
+	}
+
+
+	/**
+	 * 获取count个随机数子
+	 * @param count 随机数个数
+	 * @return count随机数字
+	 */
+	public static  String getRandomNumber(int count){
+		StringBuffer sb = new StringBuffer();
+		String str = "0123456789";
+		Random r = new Random();
+		for(int i=0;i<count;i++){
+			int num = r.nextInt(str.length());
+			sb.append(str.charAt(num));
+			str = str.replace((str.charAt(num)+""), "");
+		}
+		return sb.toString();
+	}
+	/**
+	 * 将时间字符串转换为指定格式字符串
+	 * @param sourceDateStr 2018-01-01 12:00:00
+	 * @param sourceDateFormat yyyy-MM-dd HH:mm:ss
+	 * @param targetDateFormat yyyyMMdd
+	 * @return 20180101
+	 */
+	public static  String getFormatDateStr(String sourceDateStr,String sourceDateFormat,String targetDateFormat){
+		try {
+			SimpleDateFormat sourceSimpleDateFormat = new SimpleDateFormat(sourceDateFormat);
+			SimpleDateFormat targetSimpleDateFormat = new SimpleDateFormat(targetDateFormat);
+			Date date = sourceSimpleDateFormat.parse(sourceDateStr);
+			return targetSimpleDateFormat.format(date);
+		} catch (ParseException e) {
+			return "";
+		}
+	}
+	
+	/**
+	 * 时间字符串转时间对象
+	 * @param sourceDateStr
+	 * @param sourceDateFormat
+	 * @return Date
+	 */
+	public static  Date getDateByStr(String sourceDateStr,String sourceDateFormat){
+		try {
+			SimpleDateFormat sourceSimpleDateFormat = new SimpleDateFormat(sourceDateFormat);
+			Date date = sourceSimpleDateFormat.parse(sourceDateStr);
+			return date;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 取得当前日期
+	 *
+	 * @param type 格式类型 0:yyyy-MM-dd 1:yyyy-MM-dd HH:mm:ss 2:yyyyMMdd 3:HHmmss 4:yyyyMMddHHmmss
+	 * @return String 返回当前年月日
+	 */
+	public static String getCurStrDate(int type) {
+		String pattern = "yyyy-MM-dd HH:mm:ss";
+		switch (type) {
+		case 0:
+			pattern = "yyyy-MM-dd";
+			break;
+		case 1:
+			pattern = "yyyy-MM-dd HH:mm:ss";
+			break;
+		case 2:
+			pattern = "yyyyMMdd";
+			break;
+		case 3:
+			pattern = "HHmmss";
+			break;
+		case 4:
+			pattern = "yyyyMMddHHmmss";
+			break;
+		}
+		return (new SimpleDateFormat(pattern)).format(new Date());
+	}
+
+	public static void main(String[] args) {
+
+
+	}
+}
