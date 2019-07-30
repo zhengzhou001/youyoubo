@@ -12,7 +12,12 @@
 	 </update>
 	 
 	 <select id="testSelect"  parameterType="java.util.Map" resultType="java.util.Map">
-	 	select id name,to_char(create_date,'YYYY-MM-DD hh24:mi:ss')  as create_datefrom  MYTEST where name=#{name}
+	 	select id ,name,DATE_FORMAT(T.CREATE_DATE,'%Y-%m-%d %H:%i:%s') CREATE_DATE   from  MYTEST T 
+	 	  <where>
+	 	  <if test="name != null and name != ''">
+				AND T.NAME = #{name}
+			</if>
+	 	  </where>
 	 </select>
 	 
 	  <select id="testSelectOne"  parameterType="java.util.Map" resultType="java.util.Map">

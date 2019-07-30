@@ -27,7 +27,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
 @MapperScan(basePackages = DruidConfiguration.PACKAGE, sqlSessionFactoryRef = "sqlSessionFactory")
 public class DruidConfiguration {
 	private Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
-	static final String PACKAGE = "com.dingbo.phone.*.mapper";
+	static final String PACKAGE = "com.youyoubo.wx.*.mapper";
 	static final String MAPPER_LOCATION = "classpath:mapper/**/*.xml";
 
 	@Value("${spring.datasource.url}")
