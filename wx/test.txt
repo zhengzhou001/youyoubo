@@ -1,0 +1,19 @@
+319231
+警告! 远程连接密码只出现一次，您以后每次远程连接登录时都需要输入该密码，请做好记录存档工作。
+
+root 密码
+1qaz!QAZ
+
+
+mv 移动文件
+
+
+
+mysql root 密码youyou
+
+
+grant all PRIVILEGES on *.* to 'root'@'%'  identified by 'youyou';
+
+
+
+service mysqld restart  重启mysql
