@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youyoubo.wx.access.mapper.WxUserListMapper" >
+	<resultMap id="BaseResultMap" type="com.youyoubo.wx.access.entity.WxUserListEntity" >
+		<result column="TOTAL" property="total"  />
+		<result column="ROWNO" property="rowno"  />
+	</resultMap>
+	<!--海关发票导入通用查询条件 -->
+	<sql id="WX_USER_LIST_WHERE">
+		<where>
+		 <if test="id != null and id != ''">
+				AND T.ID = #{id}
+		 </if>
+		 <if test="userId != null and userId != ''">
+				AND T.USER_ID = #{userId}
+		 </if>
+		 <if test="gzhId != null and gzhId != ''">
+				AND T.GZH_ID = #{gzhId}
+		 </if>
+		</where>
+	</sql>
+	 
+    
+    <!-- 微信消息记录 -->
+    <insert id="insertWxUserList" parameterType="com.youyoubo.wx.access.entity.WxUserListEntity" >
+    	insert into WX_USER_LIST 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null and id != ''">
+				  ID ,
+			</if>
+			<if test="userId != null and userId != ''">
+				  USER_ID ,
+			</if>
+			<if test="gzhId != null and gzhId != ''">
+				  GZH_ID ,
+			</if>
+		 	CREATE_DATE,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+		 <if test="id != null and id != ''">
+				  #{id} ,
+			</if>
+			<if test="userId != null and userId != ''">
+				  #{userId} ,
+			</if>
+			<if test="gzhId != null and gzhId != ''">
+				  #{gzhId} ,
+			</if>
+			now(),
+		</trim>
+    </insert>
+      
+    <!-- 纳税人登记信息删除-->
+    <delete id="deleteWxUserList" parameterType="com.youyoubo.wx.access.entity.WxUserListEntity" >
+    	delete  from WX_USER_LIST 
+    	<where>
+		 <if test="id != null and id != ''">
+				AND ID = #{id}
+		 </if>
+		 <if test="userId != null and userId != ''">
+				AND USER_ID = #{userId}
+		 </if>
+		 <if test="gzhId != null and gzhId != ''">
+				AND GZH_ID = #{gzhId}
+		 </if>
+		</where>
+		  
+    </delete>
+      <!-- 稽核记录明细信息表通用查询个数 -->
+    <select id="selectWxUserListCount" parameterType="com.youyoubo.wx.access.entity.WxUserListEntity" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_USER_LIST T <where>
+		 <if test="id != null and id != ''">
+				AND ID = #{id}
+		 </if>
+		 <if test="userId != null and userId != ''">
+				AND USER_ID = #{userId}
+		 </if>
+		 <if test="gzhId != null and gzhId != ''">
+				AND GZH_ID = #{gzhId}
+		 </if>
+		</where>
+    </select>
+</mapper>

@@ -50,10 +50,7 @@ public class AccessAction {
 	
 	
 	public static void main(String[] args) {
-		 String d="1564453650";
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-		 String string= sdf.format(new Date(Long.valueOf(d+"000"))); 
-		 System.out.println(string);
+		 
 		 
 	}
 
