@@ -1,0 +1,4 @@
+2019-07-31 11:39:53 [INFO] [main] com.youyoubo.wx.StartApp - Starting StartApp v1.0 on M7NRAZF6X2ZPB25 with PID 4628 (E:\youyoubo_git\wx\target\wx-1.0.jar started by Administrator in E:\youyoubo_git\wx\target)
+2019-07-31 11:39:53 [INFO] [main] com.youyoubo.wx.StartApp - The following profiles are active: dev
+2019-07-31 11:39:54 [INFO] [main] o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4ac68d3e: startup date [Wed Jul 31 11:39:54 CST 2019]; root of context hierarchy
+2019-07-31 11:39:54 [INFO] [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.3.6.Final

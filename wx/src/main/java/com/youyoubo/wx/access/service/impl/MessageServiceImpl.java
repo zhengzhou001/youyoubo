@@ -19,6 +19,9 @@ import com.youyoubo.wx.access.entity.WxUserListEntity;
 import com.youyoubo.wx.access.mapper.WxMessageListMapper;
 import com.youyoubo.wx.access.mapper.WxUserListMapper;
 import com.youyoubo.wx.access.service.IMessageService;
+import com.youyoubo.wx.util.AccessTokenController;
+import com.youyoubo.wx.util.CreateMenu;
+import com.youyoubo.wx.util.HttpRequestUtil;
 import com.youyoubo.wx.util.MessageUtil;
 import com.youyoubo.wx.util.enu.EventTypeEnum;
 import com.youyoubo.wx.util.enu.ReceiveMsgTypeEnum;
@@ -82,6 +85,13 @@ public class MessageServiceImpl implements IMessageService{
 						wxUserListEntity.setId(BaseTools.getNextSeq());
 						wxUserListMapper.insertWxUserList(wxUserListEntity);
 					}
+					//
+					String token = AccessTokenController.getInstance().getAccess_token();
+					String url = CreateMenu.GetUserInfoUrl;
+					url = String.format(url,token,fromUserName);
+					String json = HttpRequestUtil.httpGet(url);
+					logger.info(json);
+					
 					respContent = "谢谢关注";
 				}else {
 					//带场景关注
