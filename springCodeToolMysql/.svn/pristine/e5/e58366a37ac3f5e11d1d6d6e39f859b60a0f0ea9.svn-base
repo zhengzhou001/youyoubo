@@ -1,0 +1,93 @@
+package ${basePackage}.entity;
+
+import com.tcwy.distribute.entity.BaseEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+
+/**
+ * <ol>
+ * date:${date} editor:${editor}
+ * <li>创建文档</li>
+ * <li>${tabelComments}实体对象</li>
+ * </ol>
+ * <ol>
+ *
+ * @author <a href="${author}">${editor}</a>
+ * @version 1.0
+ * @since 1.0
+ */
+@ApiModel(value="${tabelComments}")
+public class ${className}Entity extends BaseEntity{
+    <#list colList  as col>
+	<#assign DATA_TYPE='${col.DATA_TYPE}'>
+	<#if DATA_TYPE=="DATE">
+	@ApiModelProperty(value="备注：${col.COMMENTS}，类型：${col.DATA_TYPE}，长度：${col.DATA_LENGTH}，整数长度：${col.DATA_PRECISION}，小数长度：${col.DATA_SCALE}")
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP} ;
+	   
+	private ${col.javaType} ${col.COLUMN_NAME_HUMP}_MIN ;
+	
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP}_MAX ;
+	<#else>
+	@ApiModelProperty(value="备注：${col.COMMENTS}，类型：${col.DATA_TYPE}，长度：${col.DATA_LENGTH}，整数长度：${col.DATA_PRECISION}，小数长度：${col.DATA_SCALE}")
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP} ;
+    
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP}_LIKE ;
+	
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP}_LLIKE ;
+	
+    private ${col.javaType} ${col.COLUMN_NAME_HUMP}_RLIKE ;
+	</#if>
+	
+    </#list>
+    
+    <#list colList  as col>
+    <#assign DATA_TYPE='${col.DATA_TYPE}'>
+	<#if DATA_TYPE=="DATE">
+	public void set${col.COLUMN_NAME_METHOD}(${col.javaType} ${col.COLUMN_NAME_HUMP}){
+    	this.${col.COLUMN_NAME_HUMP}=${col.COLUMN_NAME_HUMP};
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}(){
+    	return this.${col.COLUMN_NAME_HUMP};
+    }
+    public void set${col.COLUMN_NAME_METHOD}_MIN(${col.javaType} ${col.COLUMN_NAME_HUMP}_MIN){
+    	this.${col.COLUMN_NAME_HUMP}_MIN=${col.COLUMN_NAME_HUMP}_MIN;
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}_MIN(){
+    	return this.${col.COLUMN_NAME_HUMP}_MIN;
+    }
+    public void set${col.COLUMN_NAME_METHOD}_MAX(${col.javaType} ${col.COLUMN_NAME_HUMP}_MAX){
+    	this.${col.COLUMN_NAME_HUMP}_MAX=${col.COLUMN_NAME_HUMP}_MAX;
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}_MAX(){
+    	return this.${col.COLUMN_NAME_HUMP}_MAX;
+    }
+	<#else>
+	public void set${col.COLUMN_NAME_METHOD}(${col.javaType} ${col.COLUMN_NAME_HUMP}){
+    	this.${col.COLUMN_NAME_HUMP}=${col.COLUMN_NAME_HUMP};
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}(){
+    	return this.${col.COLUMN_NAME_HUMP};
+    }
+    public void set${col.COLUMN_NAME_METHOD}_LIKE(${col.javaType} ${col.COLUMN_NAME_HUMP}_LIKE){
+    	this.${col.COLUMN_NAME_HUMP}_LIKE=${col.COLUMN_NAME_HUMP}_LIKE;
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}_LIKE(){
+    	return this.${col.COLUMN_NAME_HUMP}_LIKE;
+    }
+    public void set${col.COLUMN_NAME_METHOD}_LLIKE(${col.javaType} ${col.COLUMN_NAME_HUMP}_LLIKE){
+    	this.${col.COLUMN_NAME_HUMP}_LLIKE=${col.COLUMN_NAME_HUMP}_LLIKE;
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}_LLIKE(){
+    	return this.${col.COLUMN_NAME_HUMP}_LLIKE;
+    }
+    public void set${col.COLUMN_NAME_METHOD}_RLIKE(${col.javaType} ${col.COLUMN_NAME_HUMP}_RLIKE){
+    	this.${col.COLUMN_NAME_HUMP}_RLIKE=${col.COLUMN_NAME_HUMP}_RLIKE;
+    }
+    public ${col.javaType} get${col.COLUMN_NAME_METHOD}_RLIKE(){
+    	return this.${col.COLUMN_NAME_HUMP}_RLIKE;
+    }
+	</#if>
+	
+    </#list>
+}

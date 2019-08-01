@@ -1,0 +1,75 @@
+package ${basePackage}.service.impl;
+
+import org.apache.commons.lang3.StringUtils;
+import com.base.core.tools.BaseTools;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import ${basePackage}.service.I${className}Service;
+import ${basePackage}.mapper.${className}Mapper;
+import ${basePackage}.entity.${className}Entity;
+
+/**
+ * <ol>
+ * date:${date} editor:${editor}
+ * <li>创建文档</li>
+ * <li>${tabelComments}Service实现类</li>
+ * </ol>
+ * <ol>
+ *
+ * @author <a href="${author}">${editor}</a>
+ * @version 1.0
+ * @since 1.0
+ */
+@Service
+public class ${className}ServiceImpl implements I${className}Service {
+	@Autowired
+	${className}Mapper ${humpName}Mapper;
+	/**
+	 * 增加${tabelComments}记录
+	 * @param ${className}Entity ${tabelComments}实体对象
+  	 */
+	public void insert${className}(${className}Entity ${humpName}Entity) throws Exception{
+		${humpName}Entity.set${keyMap.COLUMN_NAME_METHOD}(BaseTools.getNextSeq());
+		${humpName}Mapper.insert${className}(${humpName}Entity);
+	}
+	
+	/**
+	 * 删除${tabelComments}记录
+	 * @param ${className}Entity ${tabelComments}实体对象
+  	 */
+	public void delete${className}(${className}Entity ${humpName}Entity) throws Exception{
+ 		if(StringUtils.isEmpty(${humpName}Entity.get${keyMap.COLUMN_NAME_METHOD}())){
+			 throw new Exception("主键不能为空");
+		}
+		${humpName}Mapper.delete${className}(${humpName}Entity);
+	}
+	
+	/**
+	 * 修改${tabelComments}记录
+	 * @param ${className}Entity ${tabelComments}实体对象
+  	 */
+	public void update${className}(${className}Entity ${humpName}Entity) throws Exception{
+		if(StringUtils.isEmpty(${humpName}Entity.get${keyMap.COLUMN_NAME_METHOD}())){
+			 throw new Exception("主键不能为空");
+		}
+		${humpName}Mapper.update${className}(${humpName}Entity);
+	}
+	/**
+	 * 查询${tabelComments}记录
+	 * @param ${className}Entity ${tabelComments}实体对象
+	 * @return List<${className}Entity>返回符合条件的${tabelComments}实体对象结果集
+ 	 */
+	public	List<${className}Entity> select${className}(${className}Entity ${humpName}Entity) throws Exception{
+		return ${humpName}Mapper.select${className}(${humpName}Entity);
+	}
+	
+	/**
+	 * 查询${tabelComments}记录数
+	 * @param ${className}Entity ${tabelComments}实体对象
+	 * @return int返回符合条件的${tabelComments}实体对象个数
+ 	 */
+	public	int select${className}Count(${className}Entity ${humpName}Entity){
+		return ${humpName}Mapper.select${className}Count(${humpName}Entity);
+	}
+}

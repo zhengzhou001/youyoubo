@@ -1,0 +1,91 @@
+package com.tcwy.distribute.userProvider.user.entity;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * <ol>
+ * date:2018-10-29 editor:dingshuangbo
+ * <li>创建文档</li>
+ * <li>学生表实体对象</li>
+ * </ol>
+ * <ol>
+ *
+ * @author <a href="mailto:2449709309@qq.com">dingshuangbo</a>
+ * @version 1.0
+ * @since 1.0
+ */
+@ApiModel(value="学生表")
+public class StudentEntity {
+    @ApiModelProperty(value="备注：，类型：NUMBER，长度：22，整数长度：，小数长度：")
+    private String state ;
+    
+    @ApiModelProperty(value="备注：创建时间，类型：DATE，长度：7，整数长度：，小数长度：")
+    private String createDate ;
+    
+    @ApiModelProperty(value="备注：地址，类型：VARCHAR2，长度：500，整数长度：，小数长度：")
+    private String address ;
+    
+    @ApiModelProperty(value="备注：性别，类型：CHAR，长度：1，整数长度：，小数长度：")
+    private String sex ;
+    
+    @ApiModelProperty(value="备注：年龄，类型：NUMBER，长度：22，整数长度：3，小数长度：0")
+    private String age ;
+    
+    @ApiModelProperty(value="备注：姓名，类型：VARCHAR2，长度：50，整数长度：，小数长度：")
+    private String name ;
+    
+    @ApiModelProperty(value="备注：主键，类型：NUMBER，长度：22，整数长度：18，小数长度：0")
+    private String id ;
+    
+    
+    public void setState(String state){
+    	this.state=state;
+    }
+    public String getState(){
+    	return this.state;
+    }
+    
+    public void setCreateDate(String createDate){
+    	this.createDate=createDate;
+    }
+    public String getCreateDate(){
+    	return this.createDate;
+    }
+    
+    public void setAddress(String address){
+    	this.address=address;
+    }
+    public String getAddress(){
+    	return this.address;
+    }
+    
+    public void setSex(String sex){
+    	this.sex=sex;
+    }
+    public String getSex(){
+    	return this.sex;
+    }
+    
+    public void setAge(String age){
+    	this.age=age;
+    }
+    public String getAge(){
+    	return this.age;
+    }
+    
+    public void setName(String name){
+    	this.name=name;
+    }
+    public String getName(){
+    	return this.name;
+    }
+    
+    public void setId(String id){
+    	this.id=id;
+    }
+    public String getId(){
+    	return this.id;
+    }
+    
+}
