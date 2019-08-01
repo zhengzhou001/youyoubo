@@ -120,6 +120,7 @@ public class DruidConfiguration {
 	public StatFilter statFilter(){
 		StatFilter statFilter=new StatFilter();
 		statFilter.setMergeSql(true);
+		statFilter.setLogSlowSql(true);
 		return statFilter;
 	}
 	 
