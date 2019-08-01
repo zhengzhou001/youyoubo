@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.base.core.tools.BaseTools;
 import com.youyoubo.wx.access.entity.WxMessageListEntity;
 import com.youyoubo.wx.access.entity.WxUserListEntity;
 import com.youyoubo.wx.access.mapper.WxMessageListMapper;
 import com.youyoubo.wx.access.mapper.WxUserListMapper;
 import com.youyoubo.wx.access.service.IMessageService;
+import com.youyoubo.wx.user.mapper.WX_USER_INFOMapper;
 import com.youyoubo.wx.util.AccessTokenController;
 import com.youyoubo.wx.util.CreateMenu;
 import com.youyoubo.wx.util.HttpRequestUtil;
@@ -35,6 +37,9 @@ public class MessageServiceImpl implements IMessageService{
 
 	@Autowired
 	WxUserListMapper wxUserListMapper;
+	
+	@Autowired
+	WX_USER_INFOMapper wx_USER_INFOMapper;
 
 	public  String processRequest(HttpServletRequest request) throws Exception {
 		String respMessage = null;
@@ -85,12 +90,50 @@ public class MessageServiceImpl implements IMessageService{
 						wxUserListEntity.setId(BaseTools.getNextSeq());
 						wxUserListMapper.insertWxUserList(wxUserListEntity);
 					}
+					System.out.println(2222);
+					new Thread(new Runnable() {
+						
+						@Override
+						public void run() {
+							
+							
+							
+							
+							
+							String token = AccessTokenController.getInstance().getAccess_token();
+							String url = CreateMenu.GetUserInfoUrl;
+							url = String.format(url,token,fromUserName);
+							String json = HttpRequestUtil.httpGet(url);
+							JSONObject jsonObject = JSONObject.parseObject(json);
+							Map map = JSON.parseObject(json, Map.class);
+							map.put("OPENID", jsonObject.getString("openid"));
+							map.put("GZHID", toUserName);
+							wx_USER_INFOMapper.deleteWX_USER_INFO(map);
+							
+							map.put("NICKNAME", jsonObject.getString("nickname"));
+							map.put("SEX", jsonObject.getString("sex"));
+							map.put("LANGUAGE", jsonObject.getString("language"));
+							map.put("CITY", jsonObject.getString("city"));
+							map.put("PROVINCE", jsonObject.getString("province"));
+							map.put("COUNTRY", jsonObject.getString("country"));
+							map.put("HEADIMGURL", jsonObject.getString("headimgurl"));
+							map.put("SUBSCRIBE_TIME", jsonObject.getString("subscribe_time"));
+							map.put("REMARK", jsonObject.getString("remark"));
+							map.put("GROUPID", jsonObject.getString("groupid"));
+							map.put("TAGID_LIST", jsonObject.getJSONArray("tagid_list").toJSONString());
+							map.put("SUBSCRIBE_SCENE", jsonObject.getString("subscribe_scene"));
+							map.put("QR_SCENE", jsonObject.getString("qr_scene"));
+							map.put("QR_SCENE_STR", jsonObject.getString("qr_scene_str"));
+							map.put("UNIONID", jsonObject.getString("unionid"));
+							map.put("GZHID", toUserName);
+							
+							map.put("ID", BaseTools.getNextSeq());
+							wx_USER_INFOMapper.insertWX_USER_INFO(map);
+							
+						}
+					}).start();
 					//
-					String token = AccessTokenController.getInstance().getAccess_token();
-					String url = CreateMenu.GetUserInfoUrl;
-					url = String.format(url,token,fromUserName);
-					String json = HttpRequestUtil.httpGet(url);
-					logger.info(json);
+					System.out.println(11111);
 					
 					respContent = "谢谢关注";
 				}else {
