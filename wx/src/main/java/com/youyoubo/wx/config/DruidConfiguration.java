@@ -1,6 +1,8 @@
 package com.youyoubo.wx.config;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -19,9 +21,13 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import com.alibaba.druid.filter.logging.Log4jFilter;
+import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 
 @Configuration
 @MapperScan(basePackages = DruidConfiguration.PACKAGE, sqlSessionFactoryRef = "sqlSessionFactory")
@@ -84,24 +90,63 @@ public class DruidConfiguration {
 	@Value("${spring.datasource.druid_pwd}")
 	private String druid_pwd;
 	@Bean
-    public ServletRegistrationBean druidServlet() {
-        ServletRegistrationBean reg = new ServletRegistrationBean();
-        reg.setServlet(new StatViewServlet());
-        reg.addUrlMappings("/druid/*");
-        reg.addInitParameter("loginUsername", druid_user);
-        reg.addInitParameter("loginPassword", druid_pwd);
-        reg.addInitParameter("logSlowSql", logSlowSql);
-        return reg;
-    }
+	public ServletRegistrationBean druidServlet() {
+		ServletRegistrationBean reg = new ServletRegistrationBean();
+		reg.setServlet(new StatViewServlet());
+		reg.addUrlMappings("/druid/*");
+		reg.addInitParameter("loginUsername", druid_user);
+		reg.addInitParameter("loginPassword", druid_pwd);
+		reg.addInitParameter("logSlowSql", logSlowSql);
+		return reg;
+	}
 	@Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new WebStatFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/download/*");
-        filterRegistrationBean.addInitParameter("profileEnable", "true");
-        return filterRegistrationBean;
-    }
+	public FilterRegistrationBean filterRegistrationBean() {
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+		filterRegistrationBean.setFilter(new WebStatFilter());
+		filterRegistrationBean.addUrlPatterns("/*");
+		filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/download/*");
+		filterRegistrationBean.addInitParameter("profileEnable", "true");
+		return filterRegistrationBean;
+	}
+	
+
+	@Bean
+	public Log4jFilter log4jFilter(){
+		Log4jFilter log4jFilter=new Log4jFilter();
+ 		return log4jFilter;
+	}
+	
+	@Bean
+	public StatFilter statFilter(){
+		StatFilter statFilter=new StatFilter();
+		statFilter.setMergeSql(true);
+		return statFilter;
+	}
+	 
+	
+	
+	@Bean
+	public WallFilter wallFilter(){
+		WallFilter wallFilter=new WallFilter();
+		wallFilter.setConfig(wallConfig());
+		return wallFilter;
+
+	}
+	@Bean
+	public WallConfig wallConfig(){
+		WallConfig config =new WallConfig();
+		//config.setMultiStatementAllow(true);//允许一次执行多条语句
+		//config.setNoneBaseStatementAllow(true);//允许非基本语句的其他语句
+		config.setDeleteWhereNoneCheck(true); //检查DELETE语句是否无where条件，这是有风险的，但不是SQL注入类型的风险
+		config.setUpdateWhereNoneCheck(true); // 检查UPDATE语句是否无where条件，这是有风险的，但不是SQL注入类型的风险
+		return config;
+	}
+
+
+
+
+
+
 	@Bean(name = "dataSource")
 	@Primary
 	public DataSource dataSource() {
@@ -121,11 +166,22 @@ public class DruidConfiguration {
 		dataSource.setTestWhileIdle(testWhileIdle);
 		dataSource.setTestOnBorrow(testOnBorrow);
 		dataSource.setTestOnReturn(testOnReturn);
+		
+		//https://www.2cto.com/kf/201712/706399.html
+		//自己定义filter
+		List filterList=new ArrayList<>();
+		filterList.add(statFilter());
+		filterList.add(wallFilter());
+		filterList.add(log4jFilter());
+		dataSource.setProxyFilters(filterList);
+		
+		/** 如果需要开启wall监控，同时允许multiStatementAllow,就不要在application.yml中配置filter，自己定义
 		try {
 			dataSource.setFilters(filters);
 		} catch (SQLException e) {
 			logger.error("druid configuration initialization filter", e);
 		}
+		**/
 		return dataSource;
 	}
 
@@ -142,7 +198,7 @@ public class DruidConfiguration {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
 		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-		.getResources(DruidConfiguration.MAPPER_LOCATION));
+				.getResources(DruidConfiguration.MAPPER_LOCATION));
 		return sessionFactory.getObject();
 	}
 
