@@ -173,7 +173,10 @@ public class MessageServiceImpl implements IMessageService{
 				if("menu1".equals(requestMap.get("EventKey"))) {  //菜单1
 					String responseData = getMenu1(requestMap);
 					return responseData;
-				}else if ("menu2".equals(requestMap.get("EventKey"))) {//菜单2
+				} 
+				
+				
+				else if ("menu2".equals(requestMap.get("EventKey"))) {//菜单2
 					respContent="功能开发中";
 				}else if ("menu3".equals(requestMap.get("EventKey"))) {//菜单2
 					respContent="功能开发中";

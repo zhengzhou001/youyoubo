@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>联系我们</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <script type="text/javascript"  src="../../js/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript"  src="../../js/jquery/jquery.blockUI.js"></script>
+	<script type="text/javascript"  src="../../js/cookie/jquery.cookie.js"></script>
+	<script type="text/javascript"  src="../../js/json/json2.js"></script>
+	<script type="text/javascript"  src="../../js/base/base.tools.js"></script>
+	
+	<script type="text/javascript"  src="../../js/layui/layui.all.js"></script>
+ 	<link rel="stylesheet" href="../../js/layui/css/layui.css" media="all">
+ 	
+ 	<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&ak=lGXqjaxGLnDzSEQ73CN69v6lkXd2siyy"></script>
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+  </head>
+  
+  <body>
+   <div id="allmap"></div>
+  </body>
+</html>
+
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	 var point = new BMap.Point(113.022657,34.754146);//定义一个中心点坐标
+        map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
+ 	 	  
+	map.setCurrentCity("郑州");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>
+

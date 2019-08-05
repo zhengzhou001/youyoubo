@@ -2,6 +2,7 @@ package com.youyoubo.wx.util;
 
 import org.apache.http.entity.StringEntity;
 
+import com.youyoubo.wx.util.enu.SendMsgTypeEnum;
 import com.youyoubo.wx.util.vo.menu.MenuButton;
 import com.youyoubo.wx.util.vo.menu.MenuSubButton;
 import com.youyoubo.wx.util.vo.menu.MenusVO;
@@ -77,7 +78,14 @@ public class CreateMenu {
 		one_subButton.setUrl("http://2h240448c1.51mypc.cn/html/price/price.html");
 		one_subButton.setType("view");
 		
-		one.setSub_button(new MenuSubButton[]{one_subButton});
+		
+		MenuSubButton one_subButton2= new MenuSubButton();
+		one_subButton2.setName("位置");
+		one_subButton2.setUrl("http://2h240448c1.51mypc.cn/html/contact/contact.html");
+		one_subButton2.setType("view");
+		one_subButton2.setKey("");
+		
+		one.setSub_button(new MenuSubButton[]{one_subButton,one_subButton2});
 		// 
 		MenuButton two = new MenuButton();
 		two.setName("会员");
