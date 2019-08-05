@@ -19,14 +19,14 @@ public class CreateMenu {
 	
 	public static void main(String[] args) {
 		
-		String token = AccessTokenController.getInstance().getAccess_token();
+		/*String token = AccessTokenController.getInstance().getAccess_token();
 		String url = CreateMenu.GetUserInfoUrl;
 		url = String.format(url,token,"o_uZNwBSDkW7qD6HyHyNUh3P44gA");
 		String json = HttpRequestUtil.httpGet(url);
-		System.out.println(json);
-		/*
+		System.out.println(json);*/
+		
 		String token = AccessTokenController.getInstance().getAccess_token();
-   		createMenu(token);*/
+   		createMenu(token);
  	}
 	
 	
@@ -67,19 +67,27 @@ public class CreateMenu {
 		//==================================活动订阅==================================
 		// 
 		MenuButton one = new MenuButton();
-		one.setName("菜单一");
-		one.setType("click");
-		one.setKey("hddy_msb");
+		one.setName("美容美发");
+		//one.setType("click");
+		//one.setKey("menu1");
+		
+		
+		MenuSubButton one_subButton= new MenuSubButton();
+		one_subButton.setName("价格");
+		one_subButton.setUrl("http://2h240448c1.51mypc.cn/html/price/price.html");
+		one_subButton.setType("view");
+		
+		one.setSub_button(new MenuSubButton[]{one_subButton});
 		// 
 		MenuButton two = new MenuButton();
-		two.setName("菜单二");
+		two.setName("会员");
 		two.setType("click");
-		two.setKey("cszb_msb");
+		two.setKey("menu2");
 		//
 		MenuButton three = new MenuButton();
-		three.setName("菜单三");
+		three.setName("现场直播");
 		three.setType("click");
-		three.setKey("cszb_msba");
+		three.setKey("menu3");
 		
 		
 		
