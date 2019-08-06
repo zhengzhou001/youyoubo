@@ -80,7 +80,7 @@ public class CreateMenu {
 		
 		
 		MenuSubButton one_subButton2= new MenuSubButton();
-		one_subButton2.setName("位置");
+		one_subButton2.setName("联系我们");
 		one_subButton2.setUrl("http://2h240448c1.51mypc.cn/html/contact/contact.html");
 		one_subButton2.setType("view");
 		one_subButton2.setKey("");

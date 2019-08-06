@@ -23,19 +23,56 @@
 	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
   </head>
-  
-  <body>
-   <div id="allmap"></div>
-  </body>
+
+<body>
+	<div class="layui-form">
+  	<table class="layui-table"  >
+    <colgroup>
+      <col width="200">
+       <col width="400">
+     </colgroup>
+     
+    <tbody>
+      <tr>
+        <td colspan="2" align="center">①九造型</td>
+      </tr>
+      <tr>
+        <td>联系人</td>
+        <td>啊露</td>
+      </tr>
+      <tr>
+        <td>联系方式</td>
+        <td>18703857873</td>
+      </tr>
+      <tr>
+        <td>地址</td>
+        <td>东方现代城19号楼1楼</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+	<div id="allmap"></div>
+</body>
 </html>
 
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");    // 创建Map实例
-	 var point = new BMap.Point(113.022657,34.754146);//定义一个中心点坐标
-        map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
- 	 	  
-	map.setCurrentCity("郑州");          // 设置地图显示的城市 此项是必须设置的
+	var point = new BMap.Point(113.022657,34.754146);//定义一个中心点坐标
+    map.centerAndZoom(point,20);//设定地图的中心点和坐标并将地图显示在地图容器中
+	map.setCurrentCity("巩义市");          // 设置地图显示的城市 此项是必须设置的
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	
+	var marker = new BMap.Marker(point);  
+	map.addOverlay(marker);              // 将标注添加到地图中
+	var label = new BMap.Label("①九造型",{offset:new BMap.Size(18,0)});
+	marker.setLabel(label);
+	/* marker.addEventListener("click",getAttr);
+	function getAttr(){
+		var p = marker.getPosition();       //获取marker的位置
+		alert("marker的位置是" + p.lng + "," + p.lat);   
+	} */
+	
+	
 </script>
 
