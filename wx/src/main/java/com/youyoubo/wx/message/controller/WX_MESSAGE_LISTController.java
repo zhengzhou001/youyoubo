@@ -29,12 +29,12 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 @RestController
 @Scope("prototype")
 @RequestMapping(value="/message")
- public class WX_MESSAGE_LISTController extends BaseController {
- 	private Logger logger = LoggerFactory.getLogger(WX_MESSAGE_LISTController.class);
- 	@Autowired
+public class WX_MESSAGE_LISTController extends BaseController {
+	private Logger logger = LoggerFactory.getLogger(WX_MESSAGE_LISTController.class);
+	@Autowired
 	IWX_MESSAGE_LISTService WX_MESSAGE_LISTService;
-	
- 
+
+
 	@RequestMapping(value={"/insertWX_MESSAGE_LIST"}, method={RequestMethod.POST})
 	public BaseResult insertWX_MESSAGE_LIST(@RequestBody Map map){
 		BaseResult result = new BaseResult();
@@ -49,7 +49,7 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 		result.msg=msg;
 		return result;
 	}
-	
+
 	@RequestMapping(value={"/deleteWX_MESSAGE_LIST"}, method={RequestMethod.POST})
 	public BaseResult deleteWX_MESSAGE_LIST(@RequestBody Map map){
 		BaseResult result = new BaseResult();
@@ -64,12 +64,12 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 		result.msg=msg;
 		return result;
 	}
-	
-	 
+
+
 	@RequestMapping(value={"/updateWX_MESSAGE_LIST"}, method={RequestMethod.POST})
 	public BaseResult updateWX_MESSAGE_LIST(@RequestBody Map map){
 		BaseResult result = new BaseResult();
- 		try{
+		try{
 			WX_MESSAGE_LISTService.updateWX_MESSAGE_LIST(map);
 		} catch (Exception e) {
 			code=-1;
@@ -80,13 +80,13 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 		result.msg=msg;
 		return result;
 	}
-	
+
 	@RequestMapping(value={"/selectWX_MESSAGE_LIST"}, method={RequestMethod.POST})
 	public	BaseResult<List<Map>> selectWX_MESSAGE_LIST(@RequestBody Map map){
 		BaseResult<List<Map>> result = new BaseResult<>();
 		try{
 			result.data= WX_MESSAGE_LISTService.selectWX_MESSAGE_LIST(map);
- 		} catch (Exception e) {
+		} catch (Exception e) {
 			code=-1;
 			msg=e.getMessage();
 			logger.error(msg);
@@ -95,14 +95,14 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 		result.msg=msg;
 		return result;
 	}
-	
-	 
+
+
 	@RequestMapping(value={"/selectWX_MESSAGE_LISTCount"}, method={RequestMethod.POST})
 	public	BaseResult<Integer> selectWX_MESSAGE_LISTCount(@RequestBody Map map){
 		BaseResult<Integer> result = new BaseResult<>();
 		try{
 			result.data= WX_MESSAGE_LISTService.selectWX_MESSAGE_LISTCount(map);
- 		} catch (Exception e) {
+		} catch (Exception e) {
 			code=-1;
 			msg=e.getMessage();
 			logger.error(msg);
@@ -111,4 +111,29 @@ import com.youyoubo.wx.message.service.IWX_MESSAGE_LISTService;
 		result.msg=msg;
 		return result;
 	}
+
+
+
+	//注册用户页面 初始化
+	@RequestMapping(value={"/init"}, method={RequestMethod.POST})
+	public	BaseResult init(@RequestBody Map map){
+		BaseResult result = new BaseResult<>();
+		try{
+			//先查询用户是否已经是会员
+			
+			//1 获取openid
+			
+			
+			
+		} catch (Exception e) {
+			code=-1;
+			msg=e.getMessage();
+			logger.error(msg);
+		}
+		result.code=code;
+		result.msg=msg;
+		return result;
+	}
+
+
 }

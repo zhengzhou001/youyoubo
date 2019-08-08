@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>价格</title>
+    <title>会员介绍</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,34 +21,41 @@
   </head>
   
   <body>
-  <div class="layui-form">
-  	<table class="layui-table"  >
-    <colgroup>
-      <col width="300">
-       <col width="200">
-       <col width="200">
-     </colgroup>
-    <thead>
-      <tr>
-        <th>项目</th>
-        <th>价格</th>
-        <th>会员价格</th>
-      </tr> 
-    </thead>
-    <tbody>
-      <tr>
-        <td>精剪</td>
-        <td>38</td>
-        <td>30</td>
-      </tr>
-      <tr>
-        <td>剪发</td>
-        <td>20</td>
-        <td>15</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-    
+  	 
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+	  <legend>会员介绍</legend>
+	</fieldset>
+	<div class="layui-collapse" lay-accordion>
+	  <div class="layui-colla-item">
+	    <h2 class="layui-colla-title">会员价格</h2>
+	    <div class="layui-colla-content">
+	      <p>500元</p>
+	    </div>
+	  </div>
+	  <div class="layui-colla-item">
+	    <h2 class="layui-colla-title">会员权益</h2>
+	    <div class="layui-colla-content">
+	      <p>理发八折、染发九折</p>
+	    </div>
+	  </div>
+	  <div class="layui-colla-item">
+	    <h2 class="layui-colla-title">办理方式</h2>
+	    <div class="layui-colla-content">
+	      <p>1.关注公众号注册</p>
+	      <p>2.到店办理</p>
+	    </div>
+	  </div>
+	</div>
+	 
+	 
+	  
+	   
   </body>
+ 
 </html>
+ 
+<script type="text/javascript">
+	layui.use(['element'], function(){
+	  var element = layui.element;
+	});
+</script>

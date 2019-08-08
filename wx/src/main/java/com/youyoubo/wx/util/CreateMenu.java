@@ -89,8 +89,28 @@ public class CreateMenu {
 		// 
 		MenuButton two = new MenuButton();
 		two.setName("会员");
-		two.setType("click");
-		two.setKey("menu2");
+		//two.setType("click");
+		//two.setKey("menu2");
+		
+		MenuSubButton two_subButton= new MenuSubButton();
+		two_subButton.setName("会员介绍");
+		two_subButton.setUrl("http://2h240448c1.51mypc.cn/html/user/info.html");
+		two_subButton.setType("view");
+		
+		
+		MenuSubButton two_subButton2= new MenuSubButton();
+		two_subButton2.setName("会员办理");
+		two_subButton2.setUrl("http://2h240448c1.51mypc.cn/wechat/authorize?returnUrl=http://2h240448c1.51mypc.cn/html/member/register.html");
+		two_subButton2.setType("view");
+		
+		//openid获取
+		/**
+		two_subButton2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+AppID+"&redirect_uri="+
+				"http://2h240448c1.51mypc.cn/html/user/register.html"
+				+"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
+		 **/
+		two.setSub_button(new MenuSubButton[]{two_subButton,two_subButton2});
+		
 		//
 		MenuButton three = new MenuButton();
 		three.setName("现场直播");

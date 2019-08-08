@@ -44,4 +44,4 @@ spring:
       filters: stat,wall,log4j
       logSlowSql: true
       druid_user: youyoubo
-      druid_pwd: youyoubo 
+      druid_pwd: youyoubo

@@ -127,8 +127,11 @@ public class MessageServiceImpl implements IMessageService{
 							String json = HttpRequestUtil.httpGet(url);
 							JSONObject jsonObject = JSONObject.parseObject(json);
 							Map map = JSON.parseObject(json, Map.class);
+							if (StringUtils.isEmpty(jsonObject.getString("openid"))) {
+								return ;
+							}
 							map.put("OPENID", jsonObject.getString("openid"));
-							map.put("GZHID", toUserName);
+							map.put("GZHID", CreateMenu.AppID);
 							wx_USER_INFOMapper.deleteWX_USER_INFO(map);
 							
 							map.put("NICKNAME", jsonObject.getString("nickname"));
@@ -146,7 +149,7 @@ public class MessageServiceImpl implements IMessageService{
 							map.put("QR_SCENE", jsonObject.getString("qr_scene"));
 							map.put("QR_SCENE_STR", jsonObject.getString("qr_scene_str"));
 							map.put("UNIONID", jsonObject.getString("unionid"));
-							map.put("GZHID", toUserName);
+							map.put("GZHID", CreateMenu.AppID);
 							
 							map.put("ID", BaseTools.getNextSeq());
 							wx_USER_INFOMapper.insertWX_USER_INFO(map);

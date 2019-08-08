@@ -15,8 +15,6 @@
 String.prototype.trim = function() {
     return this.replace(/(^\s*)|(\s*$)/g, ""); //正则匹配空格  
 }
-
-
 var baseTools = (function () {
       
     return {
@@ -29,6 +27,13 @@ var baseTools = (function () {
         	dateStr = dateStr.replace(/\-/g, "/");
          	return new Date(dateStr);
         	 
+        },
+        //获取url参数
+        getUrlParam:function(name){
+        	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        	   var r = window.location.search.substr(1).match(reg);
+        	   if (r != null) return unescape(r[2]); 
+        	   return null;
         },
         trim: function (str) {
         	if(str==null){
@@ -49,7 +54,7 @@ var baseTools = (function () {
     	//显示遮罩
         showMask: function (msg) {
       ///fwzs
-           var loading = '/imgages/load/loading.gif';
+           var loading = '/images/load/loading.gif';
         	 //var loading = '/images/loading.gif';
             msg = msg ? msg : "数据加载中...";
             $.blockUI({

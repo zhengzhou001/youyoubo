@@ -106,8 +106,19 @@
 			<version>3.12</version>
 		</dependency>
 		
+		<!--微信工具包  -->
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 		
-		
+		<!--  微信支付用到 -->
+		<dependency>
+		  <groupId>com.github.binarywang</groupId>
+		  <artifactId>weixin-java-pay</artifactId>
+		  <version>3.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
