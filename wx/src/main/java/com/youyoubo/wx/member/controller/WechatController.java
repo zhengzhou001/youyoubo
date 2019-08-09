@@ -75,10 +75,10 @@ public class WechatController {
 				{"HEADIMGURL_NEW", user.getHeadImgUrl()},
 				{"REMARK_NEW", user.getRemark()}
 			}));
-			return "redirect:" + returnUrl + "?openid=" + openId;
+			return "redirect:" + returnUrl + "?openid=" + openId+"&gzhid="+CreateMenu.AppID;
 		}else{
 			//是会员，跳转会员查询页面
-			return "redirect:/html/member/memberInfo?openid=" + openId;
+			return "redirect:/html/member/memberInfo?openid=" + openId+"&gzhid="+CreateMenu.AppID;
 		}
  	}
 }
