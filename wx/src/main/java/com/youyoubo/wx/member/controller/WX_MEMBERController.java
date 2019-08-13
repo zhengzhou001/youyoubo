@@ -82,6 +82,11 @@ public class WX_MEMBERController extends BaseController {
 				result.msg=msg;
 				return result;
 			}
+			//微信支付
+			
+			
+			
+			
 			WX_MEMBERService.insertWX_MEMBER(map);
 		} catch (Exception e) {
 			code=-1;

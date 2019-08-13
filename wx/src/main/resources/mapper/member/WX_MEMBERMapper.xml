@@ -158,6 +158,19 @@
 				AND T.GZHID LIKE concat(#{GZHID_RIKE},'%')
 			</if>
 				
+			<if test="USER_TYPE != null and USER_TYPE != ''">
+				AND T.USER_TYPE = #{USER_TYPE}
+			</if>
+			<if test="USER_TYPE_LIKE != null and USER_TYPE_LIKE != ''">
+				AND T.USER_TYPE LIKE concat(concat('%',#{USER_TYPE_LIKE}),'%')
+			</if>
+			<if test="USER_TYPE_LLIKE != null and USER_TYPE_LLIKE != ''">
+				AND T.USER_TYPE LIKE concat('%',#{USER_TYPE_LIKE})
+			</if>
+			<if test="USER_TYPE_RLIKE != null and USER_TYPE_RLIKE != ''">
+				AND T.USER_TYPE LIKE concat(#{USER_TYPE_RIKE},'%')
+			</if>
+				
 		</where>
 	</sql>
 	<!-- 会员通用查询 -->
@@ -168,7 +181,7 @@
         SELECT T.ID,T.NAME,T.OPENID,
         DATE_FORMAT(T.CREATE_DATE,'%Y-%m-%d %H:%i:%s') CREATE_DATE,T.PHONE,
 			T.HEADIMG,T.SEX,T.LANGUAGE,T.CITY,T.PROVINCE,
-			T.COUNTRY,T.GZHID
+			T.COUNTRY,T.GZHID,T.USER_TYPE
          FROM WX_MEMBER T
         <include refid="WX_MEMBER_WHERE"/>
          <if test="SORTNAME != null and SORTNAME != ''">
@@ -235,6 +248,9 @@
 			<if test="GZHID != null and GZHID != ''">
 				  GZHID ,
 			</if>
+			<if test="USER_TYPE != null and USER_TYPE != ''">
+				  USER_TYPE ,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="ID != null and ID != ''">
@@ -270,6 +286,9 @@
 			</if>
 			<if test="GZHID != null and GZHID != ''">
 				 #{GZHID},  
+			</if>
+			<if test="USER_TYPE != null and USER_TYPE != ''">
+				 #{USER_TYPE},  
 			</if>
 		</trim>
     </insert>
@@ -315,6 +334,9 @@
 			<if test="GZHID_NEW != null and GZHID_NEW != ''">
 				  GZHID=  #{GZHID_NEW},
 			</if>
+			<if test="USER_TYPE_NEW != null and USER_TYPE_NEW != ''">
+				  USER_TYPE=  #{USER_TYPE_NEW},
+			</if>
 		</set>
 		<where>
 			<if test="ID != null and ID != ''">
@@ -352,6 +374,9 @@
 			</if>
 			<if test="GZHID != null and GZHID != ''">
 				AND GZHID = #{GZHID}
+			</if>
+			<if test="USER_TYPE != null and USER_TYPE != ''">
+				AND USER_TYPE = #{USER_TYPE}
 			</if>
 		</where>
     </update>
@@ -395,6 +420,9 @@
 			</if>
 			<if test="GZHID != null and GZHID != ''">
 				AND GZHID = #{GZHID}
+			</if>
+			<if test="USER_TYPE != null and USER_TYPE != ''">
+				AND USER_TYPE = #{USER_TYPE}
 			</if>
 		</where>
     </delete>

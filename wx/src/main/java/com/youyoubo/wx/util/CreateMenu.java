@@ -103,13 +103,13 @@ public class CreateMenu {
 		two_subButton2.setUrl("http://2h240448c1.51mypc.cn/wechat/authorize?returnUrl=http://2h240448c1.51mypc.cn/html/member/register.html");
 		two_subButton2.setType("view");
 		
+		MenuSubButton two_subButton3= new MenuSubButton();
+		two_subButton3.setName("会员信息");
+		two_subButton3.setUrl("http://2h240448c1.51mypc.cn/wechat/authorize?returnUrl=http://2h240448c1.51mypc.cn/html/member/memberInfo.html");
+		two_subButton3.setType("view");
+		
 		//openid获取
-		/**
-		two_subButton2.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+AppID+"&redirect_uri="+
-				"http://2h240448c1.51mypc.cn/html/user/register.html"
-				+"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
-		 **/
-		two.setSub_button(new MenuSubButton[]{two_subButton,two_subButton2});
+		two.setSub_button(new MenuSubButton[]{two_subButton,two_subButton2,two_subButton3});
 		
 		//
 		MenuButton three = new MenuButton();

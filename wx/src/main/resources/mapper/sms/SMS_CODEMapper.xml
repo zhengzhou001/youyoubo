@@ -5,7 +5,7 @@
 	<!--短信验证码通用查询条件 -->
 	<sql id="SMS_CODE_WHERE">
 		<where>
-			<if test="FLAG != null FLAG ID != ''">
+			<if test="FLAG != null and FLAG != ''">
 				AND  DATE_ADD(T.CREATE_DATE ,INTERVAL T.EXPIRE_COUNT SECOND)&gt;=NOW()
 			</if>
 			<if test="ID != null and ID != ''">
