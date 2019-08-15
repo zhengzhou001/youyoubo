@@ -2,24 +2,21 @@ package com.youyoubo.wx.access.action;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tcwy.distribute.controller.BaseController;
 import com.tcwy.distribute.result.BaseResult;
-import com.youyoubo.wx.util.CreateMenu;
+import com.youyoubo.wx.config.BaseConfig;
 import com.youyoubo.wx.util.HttpRequestUtil;
 
 @RestController
@@ -27,13 +24,15 @@ import com.youyoubo.wx.util.HttpRequestUtil;
 @Scope("prototype")
 public class OauthAction extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	@Autowired
+	private BaseConfig baseConfig;
+	
 	@RequestMapping(value={"/getUserIfo"}, method={RequestMethod.POST})
 	public BaseResult getUserIfo(@RequestBody Map map){
 		BaseResult result = new BaseResult();
 		try{
-			String access_token_url ="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+CreateMenu.AppID+
-					"&secret="+CreateMenu.AppSecret+"&code="+MapUtils.getString(map, "code")+"&grant_type=authorization_code";
+			String access_token_url ="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+baseConfig.getAppID()+
+					"&secret="+baseConfig.getAppSecret()+"&code="+MapUtils.getString(map, "code")+"&grant_type=authorization_code";
 			String access_token_json = HttpRequestUtil.httpGet(access_token_url);
 			/**
 			 * {

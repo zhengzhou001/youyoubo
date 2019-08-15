@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.youyoubo.wx.access.service.IMessageService;
+import com.youyoubo.wx.config.BaseConfig;
 import com.youyoubo.wx.util.SignUtil;
 
 @Controller
@@ -24,13 +25,15 @@ public class AccessAction {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private IMessageService messageService;
+	@Autowired 
+	private BaseConfig baseConfig;
 	
 
 	@RequestMapping(value={"/access"}, method={RequestMethod.GET})
 	@ResponseBody
 	public String doGet(String signature,String timestamp,String nonce,String echostr){
 		//微信接口验证
- 		if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+ 		if (SignUtil.checkSignature(baseConfig.getToken(),signature, timestamp, nonce)) {
 			return echostr;
 		} 
 		return "";
@@ -50,7 +53,7 @@ public class AccessAction {
 	
 	
 	public static void main(String[] args) {
-		 
+		 System.out.println(1);
 		 
 	}
 

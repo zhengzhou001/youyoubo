@@ -35,7 +35,7 @@
     <label class="layui-form-label">性别</label>
     <div class="layui-input-inline">
       <input type="radio" name="SEX"  title="男"  value="1"  checked="">
-      <input type="radio" name="SEX"   title="女"  value="0"   >
+      <input type="radio" name="SEX"   title="女"  value="2"   >
      </div>
   </div>
   <div class="layui-form-item" pane="">
@@ -163,7 +163,7 @@ var vueApp = new Vue({
 				dataType : 'json',
 				contentType : 'application/json',
 				params : JSON.stringify({
-					OPNEID : openid,
+					OPENID : openid,
 					GZHID : gzhid
 				}),
 				callback : [ function(jsonObj, xhrArgs) {
@@ -200,7 +200,7 @@ var vueApp = new Vue({
 				dataType : 'json',
 				contentType : 'application/json',
 				params : JSON.stringify({
-					OPNEID : openid,
+					OPENID : openid,
 					GZHID : gzhid
 				}),
 				callback : [ function(jsonObj, xhrArgs) {
@@ -221,6 +221,11 @@ var vueApp = new Vue({
 						var userInfo = jsonObj.data[0];
 						//成功
 						formData.SEX = userInfo.SEX;
+						
+						if(userInfo.SEX=='2'){
+ 							$("input[name='SEX'][value=2]").prop("checked", "checked");
+ 							 form.render(); //更新全部  
+						}
 						formData.NAME = userInfo.NICKNAME;
 						formData.LANGUAGE = userInfo.LANGUAGE;
 						formData.CITY = userInfo.CITY;

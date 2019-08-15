@@ -4,8 +4,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.youyoubo.wx.config.BaseConfig;
+
 public class SignUtil {
-	private static String token = "youyoubo";  
+	  
 	/** 
 	 * 验证签名 
 	 *  
@@ -14,7 +18,7 @@ public class SignUtil {
 	 * @param nonce 
 	 * @return 
 	 */  
-	public static boolean checkSignature(String signature, String timestamp, String nonce) {  
+	public static boolean checkSignature(String token,String signature, String timestamp, String nonce) {  
 		String[] arr = new String[] { token, timestamp, nonce };  
 		// 将token、timestamp、nonce三个参数进行字典序排序  
 		Arrays.sort(arr);  

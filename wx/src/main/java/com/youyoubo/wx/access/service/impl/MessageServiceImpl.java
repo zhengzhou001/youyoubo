@@ -21,10 +21,10 @@ import com.base.core.tools.BaseTools;
 import com.youyoubo.wx.access.entity.WxUserListEntity;
 import com.youyoubo.wx.access.mapper.WxUserListMapper;
 import com.youyoubo.wx.access.service.IMessageService;
+import com.youyoubo.wx.config.BaseConfig;
 import com.youyoubo.wx.message.mapper.WX_MESSAGE_LISTMapper;
 import com.youyoubo.wx.user.mapper.WX_USER_INFOMapper;
 import com.youyoubo.wx.util.AccessTokenController;
-import com.youyoubo.wx.util.CreateMenu;
 import com.youyoubo.wx.util.HttpRequestUtil;
 import com.youyoubo.wx.util.MessageUtil;
 import com.youyoubo.wx.util.enu.EventTypeEnum;
@@ -36,7 +36,11 @@ import com.youyoubo.wx.util.vo.TextMessage;
 @Service
 public class MessageServiceImpl implements IMessageService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	@Autowired
+	private BaseConfig baseConfig;
+	@Autowired
+	private AccessTokenController accessTokenController;
+	
 	@Autowired
 	WX_MESSAGE_LISTMapper WX_MESSAGE_LISTMapper;
 
@@ -121,8 +125,8 @@ public class MessageServiceImpl implements IMessageService{
 						
 						@Override
 						public void run() {
-							String token = AccessTokenController.getInstance().getAccess_token();
-							String url = CreateMenu.GetUserInfoUrl;
+							String token = accessTokenController.getInstance().getAccess_token();
+							String url = BaseConfig.GetUserInfoUrl;
 							url = String.format(url,token,fromUserName);
 							String json = HttpRequestUtil.httpGet(url);
 							JSONObject jsonObject = JSONObject.parseObject(json);
@@ -131,7 +135,7 @@ public class MessageServiceImpl implements IMessageService{
 								return ;
 							}
 							map.put("OPENID", jsonObject.getString("openid"));
-							map.put("GZHID", CreateMenu.AppID);
+							map.put("GZHID", baseConfig.getAppID());
 							wx_USER_INFOMapper.deleteWX_USER_INFO(map);
 							
 							map.put("NICKNAME", jsonObject.getString("nickname"));
@@ -149,7 +153,7 @@ public class MessageServiceImpl implements IMessageService{
 							map.put("QR_SCENE", jsonObject.getString("qr_scene"));
 							map.put("QR_SCENE_STR", jsonObject.getString("qr_scene_str"));
 							map.put("UNIONID", jsonObject.getString("unionid"));
-							map.put("GZHID", CreateMenu.AppID);
+							map.put("GZHID", baseConfig.getAppID());
 							
 							map.put("ID", BaseTools.getNextSeq());
 							wx_USER_INFOMapper.insertWX_USER_INFO(map);

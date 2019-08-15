@@ -1,13 +1,17 @@
 package com.youyoubo.wx.util;
-import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.youyoubo.wx.config.BaseConfig;
  
 /**  
  * @Description: 获取access token和刷新的中控服务器 
  */
+@Component
 public class AccessTokenController {
-
+@Autowired
+BaseConfig baseConfig;
 	private static AccessTokenController instance;
 	
 	//access token凭证
@@ -33,7 +37,7 @@ public class AccessTokenController {
 		this.expires_in = expires_in;
 	}
 
-	public synchronized static AccessTokenController getInstance() {
+	public synchronized  AccessTokenController getInstance() {
 		if(instance == null) {
 			instance = getAccessToken();
 		} else {
@@ -50,9 +54,9 @@ public class AccessTokenController {
 	 * @param  @return
 	 * @return AccessTokenController
 	 */
-	public static AccessTokenController getAccessToken() {
-		String url = CreateMenu.AccessTokenUrl ;
-		url = String.format(url,CreateMenu.AppID,CreateMenu.AppSecret);
+	public  AccessTokenController getAccessToken() {
+		String url = BaseConfig.AccessTokenUrl ;
+		url = String.format(url,baseConfig.getAppID(),baseConfig.getAppSecret());
 		String json = HttpRequestUtil.httpGet(url);
 		instance = JSON.parseObject(json, AccessTokenController.class);
 		instance.success_time = System.currentTimeMillis() / 1000;

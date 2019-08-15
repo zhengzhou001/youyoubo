@@ -2,7 +2,6 @@ package com.youyoubo.wx.member.controller;
 import java.net.URLEncoder;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.base.core.tools.BaseTools;
+import com.youyoubo.wx.config.BaseConfig;
 import com.youyoubo.wx.member.service.IWX_MEMBERService;
 import com.youyoubo.wx.user.mapper.WX_USER_INFOMapper;
-import com.youyoubo.wx.util.CreateMenu;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -25,6 +23,9 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 @Controller
 @RequestMapping("/wechat")
 public class WechatController {
+	@Autowired
+	private BaseConfig baseConfig;
+	
 	private Logger logger = LoggerFactory.getLogger(WechatController.class);
 	@Autowired
 	private WxMpService wxMpService;
@@ -37,7 +38,7 @@ public class WechatController {
 
 	@GetMapping("/authorize")
 	public String authorize(@RequestParam("returnUrl") String returnUrl){
-		String url = "http://2h240448c1.51mypc.cn/wechat/userInfo";
+		String url = "http://"+baseConfig.getYm()+"/wechat/userInfo";
 		String redirectURL = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
 		return "redirect:" + redirectURL;
 	}
@@ -57,7 +58,7 @@ public class WechatController {
 		//查询openid是否已经是会员
 		int count = WX_MEMBERService.selectWX_MEMBERCount(ArrayUtils.toMap( new String[][]{
 			{"OPENID",openId},
-			{"GZHID",CreateMenu.AppID}
+			{"GZHID",baseConfig.getAppID()}
 		}));
 
 		if (count==0) {
@@ -65,7 +66,7 @@ public class WechatController {
 			WxMpUser user =  wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, "zh_CN");
 			wx_USER_INFOMapper.updateWX_USER_INFO(ArrayUtils.toMap( new String[][]{
 				{"OPENID",openId},
-				{"GZHID",CreateMenu.AppID},
+				{"GZHID",baseConfig.getAppID()},
 				{"NICKNAME_NEW", user.getNickname()},
 				{"SEX_NEW", user.getSex().toString()},
 				{"LANGUAGE_NEW", user.getLanguage()},
@@ -76,6 +77,6 @@ public class WechatController {
 				{"REMARK_NEW", user.getRemark()}
 			}));
 		} 
-		return "redirect:" + returnUrl + "?openid=" + openId+"&gzhid="+CreateMenu.AppID;
+		return "redirect:" + returnUrl + "?openid=" + openId+"&gzhid="+baseConfig.getAppID();
  	}
 }

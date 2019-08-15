@@ -45,3 +45,9 @@ spring:
       logSlowSql: true
       druid_user: youyoubo
       druid_pwd: youyoubo
+wx:
+  AppID: wxae7179cb0002eee9
+  AppSecret: 90fe45ff46ce55e1f48cf1a0ba0437b3 
+  token: youyoubo  
+ym: 2h240448c1.51mypc.cn  
+ 

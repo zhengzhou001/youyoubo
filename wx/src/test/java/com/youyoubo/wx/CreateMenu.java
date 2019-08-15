@@ -1,24 +1,38 @@
-package com.youyoubo.wx.util;
+package com.youyoubo.wx;
+
 
 import org.apache.http.entity.StringEntity;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.youyoubo.wx.util.enu.SendMsgTypeEnum;
+import com.youyoubo.wx.config.BaseConfig;
+import com.youyoubo.wx.util.AccessTokenController;
+import com.youyoubo.wx.util.HttpRequestUtil;
 import com.youyoubo.wx.util.vo.menu.MenuButton;
 import com.youyoubo.wx.util.vo.menu.MenuSubButton;
 import com.youyoubo.wx.util.vo.menu.MenusVO;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@ActiveProfiles("pro")
 public class CreateMenu {
-	private static String MENU_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s";
-	public static String AccessTokenUrl ="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
-	
-	public static String GetUserInfoUrl ="https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
-	
-	
-	public static String AppID ="wxae7179cb0002eee9";
-	public static String AppSecret="90fe45ff46ce55e1f48cf1a0ba0437b3";
- 	
+	@Autowired
+	private BaseConfig baseConfig;
+	@Autowired
+	AccessTokenController accessTokenController;
+ 
+	@Test
+	public void createMenu(){
+		String token = accessTokenController.getInstance().getAccess_token();
+   		createMenu(token);
+	}
 	
 	public static void main(String[] args) {
+		System.out.println(2);
 		
 		/*String token = AccessTokenController.getInstance().getAccess_token();
 		String url = CreateMenu.GetUserInfoUrl;
@@ -26,8 +40,8 @@ public class CreateMenu {
 		String json = HttpRequestUtil.httpGet(url);
 		System.out.println(json);*/
 		
-		String token = AccessTokenController.getInstance().getAccess_token();
-   		createMenu(token);
+		/*String token = AccessTokenController.getInstance().getAccess_token();
+   		createMenu(token);*/
  	}
 	
 	
@@ -37,11 +51,11 @@ public class CreateMenu {
 	 * @param  @return
 	 * @return String
 	 */
-	private static String createMenu(String token) {
+	private  String createMenu(String token) {
 		String resutlStr = null;
 		try {
 			//格式化url，将获取到的token传入参数
-			String url = String.format(MENU_CREATE_URL, token);
+			String url = String.format(BaseConfig.MENU_CREATE_URL, token);
 			//获取菜单
 			MenusVO menus = getMenus();
 			
@@ -62,7 +76,7 @@ public class CreateMenu {
 	 * @param  @return
 	 * @return MenusVO
 	 */
-	private static MenusVO getMenus() {
+	private  MenusVO getMenus() {
 		MenusVO menusVO = new MenusVO();
 		
 		//==================================活动订阅==================================
@@ -75,13 +89,13 @@ public class CreateMenu {
 		
 		MenuSubButton one_subButton= new MenuSubButton();
 		one_subButton.setName("价格");
-		one_subButton.setUrl("http://2h240448c1.51mypc.cn/html/price/price.html");
+		one_subButton.setUrl("http://"+baseConfig.getYm()+"/html/price/price.html");
 		one_subButton.setType("view");
 		
 		
 		MenuSubButton one_subButton2= new MenuSubButton();
 		one_subButton2.setName("联系我们");
-		one_subButton2.setUrl("http://2h240448c1.51mypc.cn/html/contact/contact.html");
+		one_subButton2.setUrl("http://"+baseConfig.getYm()+"/html/contact/contact.html");
 		one_subButton2.setType("view");
 		one_subButton2.setKey("");
 		
@@ -91,21 +105,21 @@ public class CreateMenu {
 		two.setName("会员");
 		//two.setType("click");
 		//two.setKey("menu2");
-		
+		 
 		MenuSubButton two_subButton= new MenuSubButton();
 		two_subButton.setName("会员介绍");
-		two_subButton.setUrl("http://2h240448c1.51mypc.cn/html/user/info.html");
+		two_subButton.setUrl("http://"+baseConfig.getYm()+"/html/member/info.html");
 		two_subButton.setType("view");
 		
 		
 		MenuSubButton two_subButton2= new MenuSubButton();
 		two_subButton2.setName("会员办理");
-		two_subButton2.setUrl("http://2h240448c1.51mypc.cn/wechat/authorize?returnUrl=http://2h240448c1.51mypc.cn/html/member/register.html");
+		two_subButton2.setUrl("http://"+baseConfig.getYm()+"/wechat/authorize?returnUrl=http://"+baseConfig.getYm()+"/html/member/register.html");
 		two_subButton2.setType("view");
 		
 		MenuSubButton two_subButton3= new MenuSubButton();
 		two_subButton3.setName("会员信息");
-		two_subButton3.setUrl("http://2h240448c1.51mypc.cn/wechat/authorize?returnUrl=http://2h240448c1.51mypc.cn/html/member/memberInfo.html");
+		two_subButton3.setUrl("http://"+baseConfig.getYm()+"/wechat/authorize?returnUrl=http://"+baseConfig.getYm()+"/html/member/memberInfo.html");
 		two_subButton3.setType("view");
 		
 		//openid获取
