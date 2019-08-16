@@ -17,3 +17,17 @@ grant all PRIVILEGES on *.* to 'root'@'%'  identified by 'youyou';
 
 
 service mysqld restart  重启mysql
+
+
+tiantianqingjia@163.com
+2wsx@WSX
+偃师市府店镇非吃不可鱼火锅
+92410381MA44FEP4X9
+
+
+
+
+2wsx@WSX
+chuxiwangluosdfsdfqwewdasdfasfda   api秘钥
+
+chuxiwangluosdfsdfqwewdasdfasfda   apiv3秘钥

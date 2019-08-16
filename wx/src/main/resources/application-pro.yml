@@ -18,7 +18,7 @@ spring:
        # druid 配置：
   datasource:
        #mysql
-      url: jdbc:mysql://139.129.101.61:3306/youyoubo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/youyoubo?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: youyou
       driver-class-name: com.mysql.jdbc.Driver
@@ -49,4 +49,12 @@ wx:
   AppID: wx73308f66b3948ff2
   AppSecret: 7e070b464205f4ba1e10ada423db6a48
   token: chuxiwangluo
+  mchId:  1551190181
+  mchKey: #微信支付商户密钥
+  subAppId: #服务商模式下的子商户公众账号ID
+  subMchId: #服务商模式下的子商户号
+  keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+  notifyUrl: https://www.xxx.com/wx/notify #微信支付回调地址 自己定义但是必须放到外网微信可以访问的到
+  
+  
 ym: www.youyoubo.top
