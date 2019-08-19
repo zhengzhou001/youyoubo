@@ -50,11 +50,11 @@ wx:
   AppSecret: 7e070b464205f4ba1e10ada423db6a48
   token: chuxiwangluo
   mchId:  1551190181
-  mchKey: #微信支付商户密钥
+  mchKey: chuxiwangluosdfsdfqwewdasdfasfda #微信支付商户密钥
   subAppId: #服务商模式下的子商户公众账号ID
   subMchId: #服务商模式下的子商户号
   keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
-  notifyUrl: https://www.xxx.com/wx/notify #微信支付回调地址 自己定义但是必须放到外网微信可以访问的到
+  notifyUrl: https://www.youyoubo.top/wxPay/notify #微信支付回调地址 自己定义但是必须放到外网微信可以访问的到
   
   
 ym: www.youyoubo.top

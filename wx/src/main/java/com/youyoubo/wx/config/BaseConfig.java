@@ -19,8 +19,80 @@ public class BaseConfig {
 	@Value("${wx.token}")
 	private String token;
 	
+	@Value("${wx.mchId}")
+	private String mchId;
+	
+	@Value("${wx.mchKey}")
+	private String mchKey;
+	
+	@Value("${wx.subAppId}")
+	private String subAppId;
+	
+	@Value("${wx.subMchId}")
+	private String subMchId;
+	
+	@Value("${wx.keyPath}")
+	private String keyPath;
+	
+	@Value("${wx.notifyUrl}")
+	private String notifyUrl;
+ 
+	
+	
 	@Value("${ym}")
 	private String ym;
+	
+	
+	
+	
+
+	public String getMchId() {
+		return mchId;
+	}
+
+	public void setMchId(String mchId) {
+		this.mchId = mchId;
+	}
+
+	public String getMchKey() {
+		return mchKey;
+	}
+
+	public void setMchKey(String mchKey) {
+		this.mchKey = mchKey;
+	}
+
+	public String getSubAppId() {
+		return subAppId;
+	}
+
+	public void setSubAppId(String subAppId) {
+		this.subAppId = subAppId;
+	}
+
+	public String getSubMchId() {
+		return subMchId;
+	}
+
+	public void setSubMchId(String subMchId) {
+		this.subMchId = subMchId;
+	}
+
+	public String getKeyPath() {
+		return keyPath;
+	}
+
+	public void setKeyPath(String keyPath) {
+		this.keyPath = keyPath;
+	}
+
+	public String getNotifyUrl() {
+		return notifyUrl;
+	}
+
+	public void setNotifyUrl(String notifyUrl) {
+		this.notifyUrl = notifyUrl;
+	}
 
 	public String getAppID() {
 		return AppID;
