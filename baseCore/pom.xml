@@ -124,13 +124,15 @@
 			<id>releases</id>
 			<name>maven发布仓库 在setting.xml中在server节点添加账户</name>
 			<!-- <url>http://192.168.1.232:8081/nexus/content/repositories/releases/</url> -->
-			<url>http://192.168.1.232:8081/repository/maven-releases/</url>
+			<!-- <url>http://192.168.1.232:8081/repository/maven-releases/</url> -->
+			<url>http://127.0.0.1:8081/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>maven快照仓库 在setting.xml中在server节点添加账户</name>
 			<!-- <url>http://192.168.1.232:8081/nexus/content/repositories/snapshots/</url> -->
-			<url>http://192.168.1.232:8081/repository/maven-snapshots/</url> 
+			<!-- <url>http://192.168.1.232:8081/repository/maven-snapshots/</url> --> 
+			<url>http://127.0.0.1:8081/repository/maven-snapshots/</url> 
 		</snapshotRepository>
 	</distributionManagement>
 </project>
