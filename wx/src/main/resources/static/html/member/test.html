@@ -21,73 +21,64 @@
   </head>
   
   <body> 
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-  <legend>会员办理</legend>
-</fieldset>
- 
-
-<form class="layui-form" action="" id="form">
+ 	<button onclick="createOrder()"> 创建订单</button>
   
-   <div class="layui-form-item" pane="">
-    <label class="layui-form-label">性别</label>
-    <div class="layui-input-block">
-      <input type="radio" name="SEX"  title="男"  v-model="SEX" v-bind:value='1' >
-      <input type="radio" name="SEX"   title="女"  v-model="SEX" v-bind:value='0' >
-     </div>
-  </div>
-   
-  
-  <div class="layui-form-item">
-    <div class="layui-input-block">
-      <button class="layui-btn" type="button" onclick="test()">立即提交</button>
-     </div>
-  </div>
-</form>
   </body>
  
 </html>
 
 <script type="text/javascript">
-	 var countdown = 120;
-	 var formData={
-	 	    NAME:'123',
-	 	    SEX:'1',
-		    PHONE : '13683816984',
-		    SIGN_NAME : '波波工作室',
-		    TPL_NAME : 'SMS_172205823',
-		    EXPIRE_COUNT : '600',
-		    YZM:'1111',
-		    djs_flag:false,
-		  };
-	 var vueApp = new Vue({
-		  el: '#form',
-		  data: formData,
-		  mounted(){
-		  //页面加载完成以后触发
-		  	this.init();
-		  },
-		  updated:function(){//解决单选框问题
-		  alert(1);
-            layui.use(['form'], function(){
-             var form = layui.form;
-                form.render();
-            })
-          },
-		  methods:{
-		  	init:function(){ 
-		  		layui.use(['form','layer'], function(){
-				 	  var form = layui.form;
-				 	  var layer= layui.layer;
-				 	  
-			  	    }
-		      );
-		  	} 
-		  } 
-		});
-	  
-	  
-	  //倒计时
-	  function test(){
-		alert(JSON.stringify(formData));	 
-	  }
+ 
+ 
+
+	 function createOrder(){
+	 	//oDjwDtxrpwrsev1VeyDPp0KOhUy0
+	 	//查看是否已经是会员
+			baseTools.xhrAjax({
+				url : "../../wxPay/order",
+				async : false,
+				dataType : 'json',
+				contentType : 'application/json',
+				params : JSON.stringify({
+					OPENID : "oDjwDtxrpwrsev1VeyDPp0KOhUy0" 
+				}),
+				callback : [ function(jsonObj, xhrArgs) {
+					switch (parseInt(jsonObj.code)) {
+					case -1: //异常
+						layer.alert("异常:" + jsonObj.msg, {
+							'icon' : 5
+						});
+						break;
+					case -3: //cookie 失效请重新登录
+						layer.alert(jsonObj.msg, {
+							'icon' : 5
+						});
+						//去登录
+						baseTools.gotoLogin();
+						break;
+					default:
+						   WeixinJSBridge.invoke(
+      'getBrandWCPayRequest', {
+         "appId":jsonObj.data.appId,     //公众号名称，由商户传入     
+         "timeStamp":jsonObj.data.timeStamp,         //时间戳，自1970年以来的秒数     
+         "nonceStr":jsonObj.data.nonceStr, //随机串     
+         "package":jsonObj.data.packageValue,     
+         "signType":jsonObj.data.signType,         //微信签名方式：     
+         "paySign":jsonObj.data.paySign //微信签名 
+      },
+      function(res){
+      alert(res);
+      if(res.err_msg == "get_brand_wcpay_request:ok" ){
+      // 使用以上方式判断前端返回,微信团队郑重提示：
+            //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+            alert(11);
+      } 
+   }); 
+					}
+				} ],
+				callbackError : [ function(data, xhrArgs) {
+					baseTools.hideMash(); //关闭遮罩
+				} ]
+			});
+	 }
 </script>

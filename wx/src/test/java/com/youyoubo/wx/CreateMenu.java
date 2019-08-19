@@ -131,7 +131,14 @@ public class CreateMenu {
 		three.setType("click");
 		three.setKey("menu3");
 		
+		MenuSubButton three_subButton= new MenuSubButton();
+		three_subButton.setName("测试");
+		three_subButton.setUrl("http://"+baseConfig.getYm()+"/html/member/test.html");
+		three_subButton.setType("view");
 		
+		//openid获取
+		three.setSub_button(new MenuSubButton[]{three_subButton});
+				
 		
 		//将一级菜单添加到菜单中
 		menusVO.setButton(new MenuButton[] {one,two,three});
