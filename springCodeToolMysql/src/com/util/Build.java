@@ -126,9 +126,9 @@ public class Build {
 			dbUtil.getTableAttr(BUILD_TAB_MC[i]);
 			//System.out.println(build.configMap);
 			build.createMapper();
-			build.createMapperJava();
+		/*	build.createMapperJava();
 			build.createService();
-			build.createController();
+			build.createController();*/
 		}
 		System.out.println("生成完毕");
 		

@@ -1,7 +1,11 @@
 package com.youyoubo.wx.member.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -16,8 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.base.core.tools.BaseTools;
+import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
+import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.config.WxPayConfig;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
+import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.tcwy.distribute.controller.BaseController;
 import com.tcwy.distribute.result.BaseResult;
+import com.youyoubo.wx.config.BaseConfig;
 import com.youyoubo.wx.member.service.IWX_MEMBERService;
 import com.youyoubo.wx.sms.service.ISMS_CODEService;
 import com.youyoubo.wx.util.NewSmsUtil;
@@ -43,13 +54,14 @@ public class WX_MEMBERController extends BaseController {
 	IWX_MEMBERService WX_MEMBERService;
 	@Autowired
 	ISMS_CODEService SMS_CODEService;
+	@Autowired
+	private BaseConfig baseConfig; 
 
 	@RequestMapping(value={"/insertWX_MEMBER"}, method={RequestMethod.POST})
-	public BaseResult insertWX_MEMBER(@RequestBody Map map){
+	public BaseResult insertWX_MEMBER(HttpServletRequest request,@RequestBody Map map){
 		BaseResult result = new BaseResult();
 		try{
 			//查看验证码是否正确
-
 			List list = SMS_CODEService.selectSMS_CODE(ArrayUtils.toMap(new String[][]{
 				{"CODE",MapUtils.getString(map, "YZM")},
 				{"PHONE",MapUtils.getString(map, "PHONE")},
@@ -70,11 +82,10 @@ public class WX_MEMBERController extends BaseController {
 					{"STATE_NEW","0"},
 				}));
 			}
-			
 			int count = WX_MEMBERService.selectWX_MEMBERCount(ArrayUtils.toMap(new String[][]{
-					{"OPENID",MapUtils.getString(map, "OPENID")},
-					{"GZHID",MapUtils.getString(map, "GZHID")},
-				}));
+				{"OPENID",MapUtils.getString(map, "OPENID")},
+				{"GZHID",MapUtils.getString(map, "GZHID")},
+			}));
 			if (count>0) {
 				code=-1;
 				msg="已经是会员了，请勿重复办理";
@@ -82,11 +93,7 @@ public class WX_MEMBERController extends BaseController {
 				result.msg=msg;
 				return result;
 			}
-			//微信支付
-			
-			
-			
-			
+			map.put("STATE", "0");//未付款
 			WX_MEMBERService.insertWX_MEMBER(map);
 		} catch (Exception e) {
 			code=-1;
@@ -97,7 +104,20 @@ public class WX_MEMBERController extends BaseController {
 		result.msg=msg;
 		return result;
 	}
-
+	/**
+	 * 加载配置文件，生成微信payservice对象
+	 * @return
+	 */
+	private WxPayService getWxPayService() {
+		WxPayConfig payConfig = new WxPayConfig();
+		payConfig.setAppId(baseConfig.getAppID());
+		payConfig.setMchId(baseConfig.getMchId());
+		payConfig.setMchKey(baseConfig.getMchKey());
+		payConfig.setNotifyUrl(baseConfig.getNotifyUrl());
+		WxPayService wxPayService = new WxPayServiceImpl();
+		wxPayService.setConfig(payConfig);
+		return wxPayService;
+	}
 	@RequestMapping(value={"/deleteWX_MEMBER"}, method={RequestMethod.POST})
 	public BaseResult deleteWX_MEMBER(@RequestBody Map map){
 		BaseResult result = new BaseResult();
