@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youyoubo.wx.order.mapper.WX_ORDERMapper" >
+	 
+	<!--微信订单通用查询条件 -->
+	<sql id="WX_ORDER_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="SIGNTYPE != null and SIGNTYPE != ''">
+				AND T.SIGNTYPE = #{SIGNTYPE}
+			</if>
+			<if test="SIGNTYPE_LIKE != null and SIGNTYPE_LIKE != ''">
+				AND T.SIGNTYPE LIKE concat(concat('%',#{SIGNTYPE_LIKE}),'%')
+			</if>
+			<if test="SIGNTYPE_LLIKE != null and SIGNTYPE_LLIKE != ''">
+				AND T.SIGNTYPE LIKE concat('%',#{SIGNTYPE_LIKE})
+			</if>
+			<if test="SIGNTYPE_RLIKE != null and SIGNTYPE_RLIKE != ''">
+				AND T.SIGNTYPE LIKE concat(#{SIGNTYPE_RIKE},'%')
+			</if>
+				
+			<if test="BODY != null and BODY != ''">
+				AND T.BODY = #{BODY}
+			</if>
+			<if test="BODY_LIKE != null and BODY_LIKE != ''">
+				AND T.BODY LIKE concat(concat('%',#{BODY_LIKE}),'%')
+			</if>
+			<if test="BODY_LLIKE != null and BODY_LLIKE != ''">
+				AND T.BODY LIKE concat('%',#{BODY_LIKE})
+			</if>
+			<if test="BODY_RLIKE != null and BODY_RLIKE != ''">
+				AND T.BODY LIKE concat(#{BODY_RIKE},'%')
+			</if>
+				
+			<if test="OUTTRADENO != null and OUTTRADENO != ''">
+				AND T.OUTTRADENO = #{OUTTRADENO}
+			</if>
+			<if test="OUTTRADENO_LIKE != null and OUTTRADENO_LIKE != ''">
+				AND T.OUTTRADENO LIKE concat(concat('%',#{OUTTRADENO_LIKE}),'%')
+			</if>
+			<if test="OUTTRADENO_LLIKE != null and OUTTRADENO_LLIKE != ''">
+				AND T.OUTTRADENO LIKE concat('%',#{OUTTRADENO_LIKE})
+			</if>
+			<if test="OUTTRADENO_RLIKE != null and OUTTRADENO_RLIKE != ''">
+				AND T.OUTTRADENO LIKE concat(#{OUTTRADENO_RIKE},'%')
+			</if>
+				
+			<if test="TRADETYPE != null and TRADETYPE != ''">
+				AND T.TRADETYPE = #{TRADETYPE}
+			</if>
+			<if test="TRADETYPE_LIKE != null and TRADETYPE_LIKE != ''">
+				AND T.TRADETYPE LIKE concat(concat('%',#{TRADETYPE_LIKE}),'%')
+			</if>
+			<if test="TRADETYPE_LLIKE != null and TRADETYPE_LLIKE != ''">
+				AND T.TRADETYPE LIKE concat('%',#{TRADETYPE_LIKE})
+			</if>
+			<if test="TRADETYPE_RLIKE != null and TRADETYPE_RLIKE != ''">
+				AND T.TRADETYPE LIKE concat(#{TRADETYPE_RIKE},'%')
+			</if>
+				
+			<if test="TOTALFEE != null and TOTALFEE != ''">
+				AND T.TOTALFEE = #{TOTALFEE}
+			</if>
+			<if test="TOTALFEE_LIKE != null and TOTALFEE_LIKE != ''">
+				AND T.TOTALFEE LIKE concat(concat('%',#{TOTALFEE_LIKE}),'%')
+			</if>
+			<if test="TOTALFEE_LLIKE != null and TOTALFEE_LLIKE != ''">
+				AND T.TOTALFEE LIKE concat('%',#{TOTALFEE_LIKE})
+			</if>
+			<if test="TOTALFEE_RLIKE != null and TOTALFEE_RLIKE != ''">
+				AND T.TOTALFEE LIKE concat(#{TOTALFEE_RIKE},'%')
+			</if>
+				
+			<if test="OPENID != null and OPENID != ''">
+				AND T.OPENID = #{OPENID}
+			</if>
+			<if test="OPENID_LIKE != null and OPENID_LIKE != ''">
+				AND T.OPENID LIKE concat(concat('%',#{OPENID_LIKE}),'%')
+			</if>
+			<if test="OPENID_LLIKE != null and OPENID_LLIKE != ''">
+				AND T.OPENID LIKE concat('%',#{OPENID_LIKE})
+			</if>
+			<if test="OPENID_RLIKE != null and OPENID_RLIKE != ''">
+				AND T.OPENID LIKE concat(#{OPENID_RIKE},'%')
+			</if>
+				
+			<if test="SPBILLCREATEIP != null and SPBILLCREATEIP != ''">
+				AND T.SPBILLCREATEIP = #{SPBILLCREATEIP}
+			</if>
+			<if test="SPBILLCREATEIP_LIKE != null and SPBILLCREATEIP_LIKE != ''">
+				AND T.SPBILLCREATEIP LIKE concat(concat('%',#{SPBILLCREATEIP_LIKE}),'%')
+			</if>
+			<if test="SPBILLCREATEIP_LLIKE != null and SPBILLCREATEIP_LLIKE != ''">
+				AND T.SPBILLCREATEIP LIKE concat('%',#{SPBILLCREATEIP_LIKE})
+			</if>
+			<if test="SPBILLCREATEIP_RLIKE != null and SPBILLCREATEIP_RLIKE != ''">
+				AND T.SPBILLCREATEIP LIKE concat(#{SPBILLCREATEIP_RIKE},'%')
+			</if>
+				
+			<if test="TIMESTART != null and TIMESTART != ''">
+				AND T.TIMESTART = #{TIMESTART}
+			</if>
+			<if test="TIMESTART_LIKE != null and TIMESTART_LIKE != ''">
+				AND T.TIMESTART LIKE concat(concat('%',#{TIMESTART_LIKE}),'%')
+			</if>
+			<if test="TIMESTART_LLIKE != null and TIMESTART_LLIKE != ''">
+				AND T.TIMESTART LIKE concat('%',#{TIMESTART_LIKE})
+			</if>
+			<if test="TIMESTART_RLIKE != null and TIMESTART_RLIKE != ''">
+				AND T.TIMESTART LIKE concat(#{TIMESTART_RIKE},'%')
+			</if>
+				
+			<if test="TIMEEXPIRE != null and TIMEEXPIRE != ''">
+				AND T.TIMEEXPIRE = #{TIMEEXPIRE}
+			</if>
+			<if test="TIMEEXPIRE_LIKE != null and TIMEEXPIRE_LIKE != ''">
+				AND T.TIMEEXPIRE LIKE concat(concat('%',#{TIMEEXPIRE_LIKE}),'%')
+			</if>
+			<if test="TIMEEXPIRE_LLIKE != null and TIMEEXPIRE_LLIKE != ''">
+				AND T.TIMEEXPIRE LIKE concat('%',#{TIMEEXPIRE_LIKE})
+			</if>
+			<if test="TIMEEXPIRE_RLIKE != null and TIMEEXPIRE_RLIKE != ''">
+				AND T.TIMEEXPIRE LIKE concat(#{TIMEEXPIRE_RIKE},'%')
+			</if>
+				
+			<if test="GZHID != null and GZHID != ''">
+				AND T.GZHID = #{GZHID}
+			</if>
+			<if test="GZHID_LIKE != null and GZHID_LIKE != ''">
+				AND T.GZHID LIKE concat(concat('%',#{GZHID_LIKE}),'%')
+			</if>
+			<if test="GZHID_LLIKE != null and GZHID_LLIKE != ''">
+				AND T.GZHID LIKE concat('%',#{GZHID_LIKE})
+			</if>
+			<if test="GZHID_RLIKE != null and GZHID_RLIKE != ''">
+				AND T.GZHID LIKE concat(#{GZHID_RIKE},'%')
+			</if>
+				
+			<if test="NOTIFYURL != null and NOTIFYURL != ''">
+				AND T.NOTIFYURL = #{NOTIFYURL}
+			</if>
+			<if test="NOTIFYURL_LIKE != null and NOTIFYURL_LIKE != ''">
+				AND T.NOTIFYURL LIKE concat(concat('%',#{NOTIFYURL_LIKE}),'%')
+			</if>
+			<if test="NOTIFYURL_LLIKE != null and NOTIFYURL_LLIKE != ''">
+				AND T.NOTIFYURL LIKE concat('%',#{NOTIFYURL_LIKE})
+			</if>
+			<if test="NOTIFYURL_RLIKE != null and NOTIFYURL_RLIKE != ''">
+				AND T.NOTIFYURL LIKE concat(#{NOTIFYURL_RIKE},'%')
+			</if>
+				
+			<if test="APPID != null and APPID != ''">
+				AND T.APPID = #{APPID}
+			</if>
+			<if test="APPID_LIKE != null and APPID_LIKE != ''">
+				AND T.APPID LIKE concat(concat('%',#{APPID_LIKE}),'%')
+			</if>
+			<if test="APPID_LLIKE != null and APPID_LLIKE != ''">
+				AND T.APPID LIKE concat('%',#{APPID_LIKE})
+			</if>
+			<if test="APPID_RLIKE != null and APPID_RLIKE != ''">
+				AND T.APPID LIKE concat(#{APPID_RIKE},'%')
+			</if>
+				
+			<if test="TIMESTAMP != null and TIMESTAMP != ''">
+				AND T.TIMESTAMP = #{TIMESTAMP}
+			</if>
+			<if test="TIMESTAMP_LIKE != null and TIMESTAMP_LIKE != ''">
+				AND T.TIMESTAMP LIKE concat(concat('%',#{TIMESTAMP_LIKE}),'%')
+			</if>
+			<if test="TIMESTAMP_LLIKE != null and TIMESTAMP_LLIKE != ''">
+				AND T.TIMESTAMP LIKE concat('%',#{TIMESTAMP_LIKE})
+			</if>
+			<if test="TIMESTAMP_RLIKE != null and TIMESTAMP_RLIKE != ''">
+				AND T.TIMESTAMP LIKE concat(#{TIMESTAMP_RIKE},'%')
+			</if>
+				
+			<if test="NONCESTR != null and NONCESTR != ''">
+				AND T.NONCESTR = #{NONCESTR}
+			</if>
+			<if test="NONCESTR_LIKE != null and NONCESTR_LIKE != ''">
+				AND T.NONCESTR LIKE concat(concat('%',#{NONCESTR_LIKE}),'%')
+			</if>
+			<if test="NONCESTR_LLIKE != null and NONCESTR_LLIKE != ''">
+				AND T.NONCESTR LIKE concat('%',#{NONCESTR_LIKE})
+			</if>
+			<if test="NONCESTR_RLIKE != null and NONCESTR_RLIKE != ''">
+				AND T.NONCESTR LIKE concat(#{NONCESTR_RIKE},'%')
+			</if>
+				
+			<if test="PACKAGEVALUE != null and PACKAGEVALUE != ''">
+				AND T.PACKAGEVALUE = #{PACKAGEVALUE}
+			</if>
+			<if test="PACKAGEVALUE_LIKE != null and PACKAGEVALUE_LIKE != ''">
+				AND T.PACKAGEVALUE LIKE concat(concat('%',#{PACKAGEVALUE_LIKE}),'%')
+			</if>
+			<if test="PACKAGEVALUE_LLIKE != null and PACKAGEVALUE_LLIKE != ''">
+				AND T.PACKAGEVALUE LIKE concat('%',#{PACKAGEVALUE_LIKE})
+			</if>
+			<if test="PACKAGEVALUE_RLIKE != null and PACKAGEVALUE_RLIKE != ''">
+				AND T.PACKAGEVALUE LIKE concat(#{PACKAGEVALUE_RIKE},'%')
+			</if>
+				
+			<if test="SIGNTYPE_RET != null and SIGNTYPE_RET != ''">
+				AND T.SIGNTYPE_RET = #{SIGNTYPE_RET}
+			</if>
+			<if test="SIGNTYPE_RET_LIKE != null and SIGNTYPE_RET_LIKE != ''">
+				AND T.SIGNTYPE_RET LIKE concat(concat('%',#{SIGNTYPE_RET_LIKE}),'%')
+			</if>
+			<if test="SIGNTYPE_RET_LLIKE != null and SIGNTYPE_RET_LLIKE != ''">
+				AND T.SIGNTYPE_RET LIKE concat('%',#{SIGNTYPE_RET_LIKE})
+			</if>
+			<if test="SIGNTYPE_RET_RLIKE != null and SIGNTYPE_RET_RLIKE != ''">
+				AND T.SIGNTYPE_RET LIKE concat(#{SIGNTYPE_RET_RIKE},'%')
+			</if>
+				
+			<if test="PAYSIGN != null and PAYSIGN != ''">
+				AND T.PAYSIGN = #{PAYSIGN}
+			</if>
+			<if test="PAYSIGN_LIKE != null and PAYSIGN_LIKE != ''">
+				AND T.PAYSIGN LIKE concat(concat('%',#{PAYSIGN_LIKE}),'%')
+			</if>
+			<if test="PAYSIGN_LLIKE != null and PAYSIGN_LLIKE != ''">
+				AND T.PAYSIGN LIKE concat('%',#{PAYSIGN_LIKE})
+			</if>
+			<if test="PAYSIGN_RLIKE != null and PAYSIGN_RLIKE != ''">
+				AND T.PAYSIGN LIKE concat(#{PAYSIGN_RIKE},'%')
+			</if>
+				
+			<if test="MSG != null and MSG != ''">
+				AND T.MSG = #{MSG}
+			</if>
+			<if test="MSG_LIKE != null and MSG_LIKE != ''">
+				AND T.MSG LIKE concat(concat('%',#{MSG_LIKE}),'%')
+			</if>
+			<if test="MSG_LLIKE != null and MSG_LLIKE != ''">
+				AND T.MSG LIKE concat('%',#{MSG_LIKE})
+			</if>
+			<if test="MSG_RLIKE != null and MSG_RLIKE != ''">
+				AND T.MSG LIKE concat(#{MSG_RIKE},'%')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 微信订单通用查询 -->
+    <select id="selectWX_ORDER" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM WX_ORDER T <include refid="WX_ORDER_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.SIGNTYPE,T.BODY,T.OUTTRADENO,T.TRADETYPE,
+			T.TOTALFEE,T.OPENID,T.SPBILLCREATEIP,T.TIMESTART,T.TIMEEXPIRE,
+			T.GZHID,T.NOTIFYURL,T.APPID,T.TIMESTAMP,T.NONCESTR,
+			T.PACKAGEVALUE,T.SIGNTYPE_RET,T.PAYSIGN,T.MSG
+         FROM WX_ORDER T
+        <include refid="WX_ORDER_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,WX_ORDER T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 微信订单通用查询个数 -->
+    <select id="selectWX_ORDERCount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_ORDER T <include refid="WX_ORDER_WHERE"/>
+    </select>
+    
+    <!-- 微信订单保存 -->
+    <insert id="insertWX_ORDER" parameterType="java.util.Map" >
+    	insert into WX_ORDER 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="SIGNTYPE != null and SIGNTYPE != ''">
+				  SIGNTYPE ,
+			</if>
+			<if test="BODY != null and BODY != ''">
+				  BODY ,
+			</if>
+			<if test="OUTTRADENO != null and OUTTRADENO != ''">
+				  OUTTRADENO ,
+			</if>
+			<if test="TRADETYPE != null and TRADETYPE != ''">
+				  TRADETYPE ,
+			</if>
+			<if test="TOTALFEE != null and TOTALFEE != ''">
+				  TOTALFEE ,
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				  OPENID ,
+			</if>
+			<if test="SPBILLCREATEIP != null and SPBILLCREATEIP != ''">
+				  SPBILLCREATEIP ,
+			</if>
+			<if test="TIMESTART != null and TIMESTART != ''">
+				  TIMESTART ,
+			</if>
+			<if test="TIMEEXPIRE != null and TIMEEXPIRE != ''">
+				  TIMEEXPIRE ,
+			</if>
+			<if test="GZHID != null and GZHID != ''">
+				  GZHID ,
+			</if>
+			<if test="NOTIFYURL != null and NOTIFYURL != ''">
+				  NOTIFYURL ,
+			</if>
+			<if test="APPID != null and APPID != ''">
+				  APPID ,
+			</if>
+			<if test="TIMESTAMP != null and TIMESTAMP != ''">
+				  TIMESTAMP ,
+			</if>
+			<if test="NONCESTR != null and NONCESTR != ''">
+				  NONCESTR ,
+			</if>
+			<if test="PACKAGEVALUE != null and PACKAGEVALUE != ''">
+				  PACKAGEVALUE ,
+			</if>
+			<if test="SIGNTYPE_RET != null and SIGNTYPE_RET != ''">
+				  SIGNTYPE_RET ,
+			</if>
+			<if test="PAYSIGN != null and PAYSIGN != ''">
+				  PAYSIGN ,
+			</if>
+			<if test="MSG != null and MSG != ''">
+				  MSG ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="SIGNTYPE != null and SIGNTYPE != ''">
+				 #{SIGNTYPE},  
+			</if>
+			<if test="BODY != null and BODY != ''">
+				 #{BODY},  
+			</if>
+			<if test="OUTTRADENO != null and OUTTRADENO != ''">
+				 #{OUTTRADENO},  
+			</if>
+			<if test="TRADETYPE != null and TRADETYPE != ''">
+				 #{TRADETYPE},  
+			</if>
+			<if test="TOTALFEE != null and TOTALFEE != ''">
+				 #{TOTALFEE},  
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				 #{OPENID},  
+			</if>
+			<if test="SPBILLCREATEIP != null and SPBILLCREATEIP != ''">
+				 #{SPBILLCREATEIP},  
+			</if>
+			<if test="TIMESTART != null and TIMESTART != ''">
+				 #{TIMESTART},  
+			</if>
+			<if test="TIMEEXPIRE != null and TIMEEXPIRE != ''">
+				 #{TIMEEXPIRE},  
+			</if>
+			<if test="GZHID != null and GZHID != ''">
+				 #{GZHID},  
+			</if>
+			<if test="NOTIFYURL != null and NOTIFYURL != ''">
+				 #{NOTIFYURL},  
+			</if>
+			<if test="APPID != null and APPID != ''">
+				 #{APPID},  
+			</if>
+			<if test="TIMESTAMP != null and TIMESTAMP != ''">
+				 #{TIMESTAMP},  
+			</if>
+			<if test="NONCESTR != null and NONCESTR != ''">
+				 #{NONCESTR},  
+			</if>
+			<if test="PACKAGEVALUE != null and PACKAGEVALUE != ''">
+				 #{PACKAGEVALUE},  
+			</if>
+			<if test="SIGNTYPE_RET != null and SIGNTYPE_RET != ''">
+				 #{SIGNTYPE_RET},  
+			</if>
+			<if test="PAYSIGN != null and PAYSIGN != ''">
+				 #{PAYSIGN},  
+			</if>
+			<if test="MSG != null and MSG != ''">
+				 #{MSG},  
+			</if>
+		</trim>
+    </insert>
+    
+    <!-- 微信订单修改-->
+    <update id="updateWX_ORDER" parameterType="java.util.Map" >
+    	update   WX_ORDER 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="SIGNTYPE_NEW != null and SIGNTYPE_NEW != ''">
+				  SIGNTYPE=  #{SIGNTYPE_NEW},
+			</if>
+			<if test="BODY_NEW != null and BODY_NEW != ''">
+				  BODY=  #{BODY_NEW},
+			</if>
+			<if test="OUTTRADENO_NEW != null and OUTTRADENO_NEW != ''">
+				  OUTTRADENO=  #{OUTTRADENO_NEW},
+			</if>
+			<if test="TRADETYPE_NEW != null and TRADETYPE_NEW != ''">
+				  TRADETYPE=  #{TRADETYPE_NEW},
+			</if>
+			<if test="TOTALFEE_NEW != null and TOTALFEE_NEW != ''">
+				  TOTALFEE=  #{TOTALFEE_NEW},
+			</if>
+			<if test="OPENID_NEW != null and OPENID_NEW != ''">
+				  OPENID=  #{OPENID_NEW},
+			</if>
+			<if test="SPBILLCREATEIP_NEW != null and SPBILLCREATEIP_NEW != ''">
+				  SPBILLCREATEIP=  #{SPBILLCREATEIP_NEW},
+			</if>
+			<if test="TIMESTART_NEW != null and TIMESTART_NEW != ''">
+				  TIMESTART=  #{TIMESTART_NEW},
+			</if>
+			<if test="TIMEEXPIRE_NEW != null and TIMEEXPIRE_NEW != ''">
+				  TIMEEXPIRE=  #{TIMEEXPIRE_NEW},
+			</if>
+			<if test="GZHID_NEW != null and GZHID_NEW != ''">
+				  GZHID=  #{GZHID_NEW},
+			</if>
+			<if test="NOTIFYURL_NEW != null and NOTIFYURL_NEW != ''">
+				  NOTIFYURL=  #{NOTIFYURL_NEW},
+			</if>
+			<if test="APPID_NEW != null and APPID_NEW != ''">
+				  APPID=  #{APPID_NEW},
+			</if>
+			<if test="TIMESTAMP_NEW != null and TIMESTAMP_NEW != ''">
+				  TIMESTAMP=  #{TIMESTAMP_NEW},
+			</if>
+			<if test="NONCESTR_NEW != null and NONCESTR_NEW != ''">
+				  NONCESTR=  #{NONCESTR_NEW},
+			</if>
+			<if test="PACKAGEVALUE_NEW != null and PACKAGEVALUE_NEW != ''">
+				  PACKAGEVALUE=  #{PACKAGEVALUE_NEW},
+			</if>
+			<if test="SIGNTYPE_RET_NEW != null and SIGNTYPE_RET_NEW != ''">
+				  SIGNTYPE_RET=  #{SIGNTYPE_RET_NEW},
+			</if>
+			<if test="PAYSIGN_NEW != null and PAYSIGN_NEW != ''">
+				  PAYSIGN=  #{PAYSIGN_NEW},
+			</if>
+			<if test="MSG_NEW != null and MSG_NEW != ''">
+				  MSG=  #{MSG_NEW},
+			</if>
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="SIGNTYPE != null and SIGNTYPE != ''">
+				AND SIGNTYPE = #{SIGNTYPE}
+			</if>
+			<if test="BODY != null and BODY != ''">
+				AND BODY = #{BODY}
+			</if>
+			<if test="OUTTRADENO != null and OUTTRADENO != ''">
+				AND OUTTRADENO = #{OUTTRADENO}
+			</if>
+			<if test="TRADETYPE != null and TRADETYPE != ''">
+				AND TRADETYPE = #{TRADETYPE}
+			</if>
+			<if test="TOTALFEE != null and TOTALFEE != ''">
+				AND TOTALFEE = #{TOTALFEE}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="SPBILLCREATEIP != null and SPBILLCREATEIP != ''">
+				AND SPBILLCREATEIP = #{SPBILLCREATEIP}
+			</if>
+			<if test="TIMESTART != null and TIMESTART != ''">
+				AND TIMESTART = #{TIMESTART}
+			</if>
+			<if test="TIMEEXPIRE != null and TIMEEXPIRE != ''">
+				AND TIMEEXPIRE = #{TIMEEXPIRE}
+			</if>
+			<if test="GZHID != null and GZHID != ''">
+				AND GZHID = #{GZHID}
+			</if>
+			<if test="NOTIFYURL != null and NOTIFYURL != ''">
+				AND NOTIFYURL = #{NOTIFYURL}
+			</if>
+			<if test="APPID != null and APPID != ''">
+				AND APPID = #{APPID}
+			</if>
+			<if test="TIMESTAMP != null and TIMESTAMP != ''">
+				AND TIMESTAMP = #{TIMESTAMP}
+			</if>
+			<if test="NONCESTR != null and NONCESTR != ''">
+				AND NONCESTR = #{NONCESTR}
+			</if>
+			<if test="PACKAGEVALUE != null and PACKAGEVALUE != ''">
+				AND PACKAGEVALUE = #{PACKAGEVALUE}
+			</if>
+			<if test="SIGNTYPE_RET != null and SIGNTYPE_RET != ''">
+				AND SIGNTYPE_RET = #{SIGNTYPE_RET}
+			</if>
+			<if test="PAYSIGN != null and PAYSIGN != ''">
+				AND PAYSIGN = #{PAYSIGN}
+			</if>
+			<if test="MSG != null and MSG != ''">
+				AND MSG = #{MSG}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 微信订单删除-->
+    <delete id="deleteWX_ORDER" parameterType="java.util.Map" >
+    	delete  from WX_ORDER  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="SIGNTYPE != null and SIGNTYPE != ''">
+				AND SIGNTYPE = #{SIGNTYPE}
+			</if>
+			<if test="BODY != null and BODY != ''">
+				AND BODY = #{BODY}
+			</if>
+			<if test="OUTTRADENO != null and OUTTRADENO != ''">
+				AND OUTTRADENO = #{OUTTRADENO}
+			</if>
+			<if test="TRADETYPE != null and TRADETYPE != ''">
+				AND TRADETYPE = #{TRADETYPE}
+			</if>
+			<if test="TOTALFEE != null and TOTALFEE != ''">
+				AND TOTALFEE = #{TOTALFEE}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="SPBILLCREATEIP != null and SPBILLCREATEIP != ''">
+				AND SPBILLCREATEIP = #{SPBILLCREATEIP}
+			</if>
+			<if test="TIMESTART != null and TIMESTART != ''">
+				AND TIMESTART = #{TIMESTART}
+			</if>
+			<if test="TIMEEXPIRE != null and TIMEEXPIRE != ''">
+				AND TIMEEXPIRE = #{TIMEEXPIRE}
+			</if>
+			<if test="GZHID != null and GZHID != ''">
+				AND GZHID = #{GZHID}
+			</if>
+			<if test="NOTIFYURL != null and NOTIFYURL != ''">
+				AND NOTIFYURL = #{NOTIFYURL}
+			</if>
+			<if test="APPID != null and APPID != ''">
+				AND APPID = #{APPID}
+			</if>
+			<if test="TIMESTAMP != null and TIMESTAMP != ''">
+				AND TIMESTAMP = #{TIMESTAMP}
+			</if>
+			<if test="NONCESTR != null and NONCESTR != ''">
+				AND NONCESTR = #{NONCESTR}
+			</if>
+			<if test="PACKAGEVALUE != null and PACKAGEVALUE != ''">
+				AND PACKAGEVALUE = #{PACKAGEVALUE}
+			</if>
+			<if test="SIGNTYPE_RET != null and SIGNTYPE_RET != ''">
+				AND SIGNTYPE_RET = #{SIGNTYPE_RET}
+			</if>
+			<if test="PAYSIGN != null and PAYSIGN != ''">
+				AND PAYSIGN = #{PAYSIGN}
+			</if>
+			<if test="MSG != null and MSG != ''">
+				AND MSG = #{MSG}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

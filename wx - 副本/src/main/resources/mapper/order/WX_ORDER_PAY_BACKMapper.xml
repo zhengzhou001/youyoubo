@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youyoubo.wx.order.mapper.WX_ORDER_PAY_BACKMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="WX_ORDER_PAY_BACK_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="RETURN_CODE != null and RETURN_CODE != ''">
+				AND T.RETURN_CODE = #{RETURN_CODE}
+			</if>
+			<if test="RETURN_CODE_LIKE != null and RETURN_CODE_LIKE != ''">
+				AND T.RETURN_CODE LIKE concat(concat('%',#{RETURN_CODE_LIKE}),'%')
+			</if>
+			<if test="RETURN_CODE_LLIKE != null and RETURN_CODE_LLIKE != ''">
+				AND T.RETURN_CODE LIKE concat('%',#{RETURN_CODE_LIKE})
+			</if>
+			<if test="RETURN_CODE_RLIKE != null and RETURN_CODE_RLIKE != ''">
+				AND T.RETURN_CODE LIKE concat(#{RETURN_CODE_RIKE},'%')
+			</if>
+				
+			<if test="RETURN_MSG != null and RETURN_MSG != ''">
+				AND T.RETURN_MSG = #{RETURN_MSG}
+			</if>
+			<if test="RETURN_MSG_LIKE != null and RETURN_MSG_LIKE != ''">
+				AND T.RETURN_MSG LIKE concat(concat('%',#{RETURN_MSG_LIKE}),'%')
+			</if>
+			<if test="RETURN_MSG_LLIKE != null and RETURN_MSG_LLIKE != ''">
+				AND T.RETURN_MSG LIKE concat('%',#{RETURN_MSG_LIKE})
+			</if>
+			<if test="RETURN_MSG_RLIKE != null and RETURN_MSG_RLIKE != ''">
+				AND T.RETURN_MSG LIKE concat(#{RETURN_MSG_RIKE},'%')
+			</if>
+				
+			<if test="APPID != null and APPID != ''">
+				AND T.APPID = #{APPID}
+			</if>
+			<if test="APPID_LIKE != null and APPID_LIKE != ''">
+				AND T.APPID LIKE concat(concat('%',#{APPID_LIKE}),'%')
+			</if>
+			<if test="APPID_LLIKE != null and APPID_LLIKE != ''">
+				AND T.APPID LIKE concat('%',#{APPID_LIKE})
+			</if>
+			<if test="APPID_RLIKE != null and APPID_RLIKE != ''">
+				AND T.APPID LIKE concat(#{APPID_RIKE},'%')
+			</if>
+				
+			<if test="MCH_ID != null and MCH_ID != ''">
+				AND T.MCH_ID = #{MCH_ID}
+			</if>
+			<if test="MCH_ID_LIKE != null and MCH_ID_LIKE != ''">
+				AND T.MCH_ID LIKE concat(concat('%',#{MCH_ID_LIKE}),'%')
+			</if>
+			<if test="MCH_ID_LLIKE != null and MCH_ID_LLIKE != ''">
+				AND T.MCH_ID LIKE concat('%',#{MCH_ID_LIKE})
+			</if>
+			<if test="MCH_ID_RLIKE != null and MCH_ID_RLIKE != ''">
+				AND T.MCH_ID LIKE concat(#{MCH_ID_RIKE},'%')
+			</if>
+				
+			<if test="DEVICE_INFO != null and DEVICE_INFO != ''">
+				AND T.DEVICE_INFO = #{DEVICE_INFO}
+			</if>
+			<if test="DEVICE_INFO_LIKE != null and DEVICE_INFO_LIKE != ''">
+				AND T.DEVICE_INFO LIKE concat(concat('%',#{DEVICE_INFO_LIKE}),'%')
+			</if>
+			<if test="DEVICE_INFO_LLIKE != null and DEVICE_INFO_LLIKE != ''">
+				AND T.DEVICE_INFO LIKE concat('%',#{DEVICE_INFO_LIKE})
+			</if>
+			<if test="DEVICE_INFO_RLIKE != null and DEVICE_INFO_RLIKE != ''">
+				AND T.DEVICE_INFO LIKE concat(#{DEVICE_INFO_RIKE},'%')
+			</if>
+				
+			<if test="NONCE_STR != null and NONCE_STR != ''">
+				AND T.NONCE_STR = #{NONCE_STR}
+			</if>
+			<if test="NONCE_STR_LIKE != null and NONCE_STR_LIKE != ''">
+				AND T.NONCE_STR LIKE concat(concat('%',#{NONCE_STR_LIKE}),'%')
+			</if>
+			<if test="NONCE_STR_LLIKE != null and NONCE_STR_LLIKE != ''">
+				AND T.NONCE_STR LIKE concat('%',#{NONCE_STR_LIKE})
+			</if>
+			<if test="NONCE_STR_RLIKE != null and NONCE_STR_RLIKE != ''">
+				AND T.NONCE_STR LIKE concat(#{NONCE_STR_RIKE},'%')
+			</if>
+				
+			<if test="SIGN != null and SIGN != ''">
+				AND T.SIGN = #{SIGN}
+			</if>
+			<if test="SIGN_LIKE != null and SIGN_LIKE != ''">
+				AND T.SIGN LIKE concat(concat('%',#{SIGN_LIKE}),'%')
+			</if>
+			<if test="SIGN_LLIKE != null and SIGN_LLIKE != ''">
+				AND T.SIGN LIKE concat('%',#{SIGN_LIKE})
+			</if>
+			<if test="SIGN_RLIKE != null and SIGN_RLIKE != ''">
+				AND T.SIGN LIKE concat(#{SIGN_RIKE},'%')
+			</if>
+				
+			<if test="SIGN_TYPE != null and SIGN_TYPE != ''">
+				AND T.SIGN_TYPE = #{SIGN_TYPE}
+			</if>
+			<if test="SIGN_TYPE_LIKE != null and SIGN_TYPE_LIKE != ''">
+				AND T.SIGN_TYPE LIKE concat(concat('%',#{SIGN_TYPE_LIKE}),'%')
+			</if>
+			<if test="SIGN_TYPE_LLIKE != null and SIGN_TYPE_LLIKE != ''">
+				AND T.SIGN_TYPE LIKE concat('%',#{SIGN_TYPE_LIKE})
+			</if>
+			<if test="SIGN_TYPE_RLIKE != null and SIGN_TYPE_RLIKE != ''">
+				AND T.SIGN_TYPE LIKE concat(#{SIGN_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="RESULT_CODE != null and RESULT_CODE != ''">
+				AND T.RESULT_CODE = #{RESULT_CODE}
+			</if>
+			<if test="RESULT_CODE_LIKE != null and RESULT_CODE_LIKE != ''">
+				AND T.RESULT_CODE LIKE concat(concat('%',#{RESULT_CODE_LIKE}),'%')
+			</if>
+			<if test="RESULT_CODE_LLIKE != null and RESULT_CODE_LLIKE != ''">
+				AND T.RESULT_CODE LIKE concat('%',#{RESULT_CODE_LIKE})
+			</if>
+			<if test="RESULT_CODE_RLIKE != null and RESULT_CODE_RLIKE != ''">
+				AND T.RESULT_CODE LIKE concat(#{RESULT_CODE_RIKE},'%')
+			</if>
+				
+			<if test="ERR_CODE != null and ERR_CODE != ''">
+				AND T.ERR_CODE = #{ERR_CODE}
+			</if>
+			<if test="ERR_CODE_LIKE != null and ERR_CODE_LIKE != ''">
+				AND T.ERR_CODE LIKE concat(concat('%',#{ERR_CODE_LIKE}),'%')
+			</if>
+			<if test="ERR_CODE_LLIKE != null and ERR_CODE_LLIKE != ''">
+				AND T.ERR_CODE LIKE concat('%',#{ERR_CODE_LIKE})
+			</if>
+			<if test="ERR_CODE_RLIKE != null and ERR_CODE_RLIKE != ''">
+				AND T.ERR_CODE LIKE concat(#{ERR_CODE_RIKE},'%')
+			</if>
+				
+			<if test="ERR_CODE_DES != null and ERR_CODE_DES != ''">
+				AND T.ERR_CODE_DES = #{ERR_CODE_DES}
+			</if>
+			<if test="ERR_CODE_DES_LIKE != null and ERR_CODE_DES_LIKE != ''">
+				AND T.ERR_CODE_DES LIKE concat(concat('%',#{ERR_CODE_DES_LIKE}),'%')
+			</if>
+			<if test="ERR_CODE_DES_LLIKE != null and ERR_CODE_DES_LLIKE != ''">
+				AND T.ERR_CODE_DES LIKE concat('%',#{ERR_CODE_DES_LIKE})
+			</if>
+			<if test="ERR_CODE_DES_RLIKE != null and ERR_CODE_DES_RLIKE != ''">
+				AND T.ERR_CODE_DES LIKE concat(#{ERR_CODE_DES_RIKE},'%')
+			</if>
+				
+			<if test="OPENID != null and OPENID != ''">
+				AND T.OPENID = #{OPENID}
+			</if>
+			<if test="OPENID_LIKE != null and OPENID_LIKE != ''">
+				AND T.OPENID LIKE concat(concat('%',#{OPENID_LIKE}),'%')
+			</if>
+			<if test="OPENID_LLIKE != null and OPENID_LLIKE != ''">
+				AND T.OPENID LIKE concat('%',#{OPENID_LIKE})
+			</if>
+			<if test="OPENID_RLIKE != null and OPENID_RLIKE != ''">
+				AND T.OPENID LIKE concat(#{OPENID_RIKE},'%')
+			</if>
+				
+			<if test="IS_SUBSCRIBE != null and IS_SUBSCRIBE != ''">
+				AND T.IS_SUBSCRIBE = #{IS_SUBSCRIBE}
+			</if>
+			<if test="IS_SUBSCRIBE_LIKE != null and IS_SUBSCRIBE_LIKE != ''">
+				AND T.IS_SUBSCRIBE LIKE concat(concat('%',#{IS_SUBSCRIBE_LIKE}),'%')
+			</if>
+			<if test="IS_SUBSCRIBE_LLIKE != null and IS_SUBSCRIBE_LLIKE != ''">
+				AND T.IS_SUBSCRIBE LIKE concat('%',#{IS_SUBSCRIBE_LIKE})
+			</if>
+			<if test="IS_SUBSCRIBE_RLIKE != null and IS_SUBSCRIBE_RLIKE != ''">
+				AND T.IS_SUBSCRIBE LIKE concat(#{IS_SUBSCRIBE_RIKE},'%')
+			</if>
+				
+			<if test="TRADE_TYPE != null and TRADE_TYPE != ''">
+				AND T.TRADE_TYPE = #{TRADE_TYPE}
+			</if>
+			<if test="TRADE_TYPE_LIKE != null and TRADE_TYPE_LIKE != ''">
+				AND T.TRADE_TYPE LIKE concat(concat('%',#{TRADE_TYPE_LIKE}),'%')
+			</if>
+			<if test="TRADE_TYPE_LLIKE != null and TRADE_TYPE_LLIKE != ''">
+				AND T.TRADE_TYPE LIKE concat('%',#{TRADE_TYPE_LIKE})
+			</if>
+			<if test="TRADE_TYPE_RLIKE != null and TRADE_TYPE_RLIKE != ''">
+				AND T.TRADE_TYPE LIKE concat(#{TRADE_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="BANK_TYPE != null and BANK_TYPE != ''">
+				AND T.BANK_TYPE = #{BANK_TYPE}
+			</if>
+			<if test="BANK_TYPE_LIKE != null and BANK_TYPE_LIKE != ''">
+				AND T.BANK_TYPE LIKE concat(concat('%',#{BANK_TYPE_LIKE}),'%')
+			</if>
+			<if test="BANK_TYPE_LLIKE != null and BANK_TYPE_LLIKE != ''">
+				AND T.BANK_TYPE LIKE concat('%',#{BANK_TYPE_LIKE})
+			</if>
+			<if test="BANK_TYPE_RLIKE != null and BANK_TYPE_RLIKE != ''">
+				AND T.BANK_TYPE LIKE concat(#{BANK_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="TOTAL_FEE != null and TOTAL_FEE != ''">
+				AND T.TOTAL_FEE = #{TOTAL_FEE}
+			</if>
+			<if test="TOTAL_FEE_LIKE != null and TOTAL_FEE_LIKE != ''">
+				AND T.TOTAL_FEE LIKE concat(concat('%',#{TOTAL_FEE_LIKE}),'%')
+			</if>
+			<if test="TOTAL_FEE_LLIKE != null and TOTAL_FEE_LLIKE != ''">
+				AND T.TOTAL_FEE LIKE concat('%',#{TOTAL_FEE_LIKE})
+			</if>
+			<if test="TOTAL_FEE_RLIKE != null and TOTAL_FEE_RLIKE != ''">
+				AND T.TOTAL_FEE LIKE concat(#{TOTAL_FEE_RIKE},'%')
+			</if>
+				
+			<if test="SETTLEMENT_TOTAL_FEE != null and SETTLEMENT_TOTAL_FEE != ''">
+				AND T.SETTLEMENT_TOTAL_FEE = #{SETTLEMENT_TOTAL_FEE}
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE_LIKE != null and SETTLEMENT_TOTAL_FEE_LIKE != ''">
+				AND T.SETTLEMENT_TOTAL_FEE LIKE concat(concat('%',#{SETTLEMENT_TOTAL_FEE_LIKE}),'%')
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE_LLIKE != null and SETTLEMENT_TOTAL_FEE_LLIKE != ''">
+				AND T.SETTLEMENT_TOTAL_FEE LIKE concat('%',#{SETTLEMENT_TOTAL_FEE_LIKE})
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE_RLIKE != null and SETTLEMENT_TOTAL_FEE_RLIKE != ''">
+				AND T.SETTLEMENT_TOTAL_FEE LIKE concat(#{SETTLEMENT_TOTAL_FEE_RIKE},'%')
+			</if>
+				
+			<if test="FEE_TYPE != null and FEE_TYPE != ''">
+				AND T.FEE_TYPE = #{FEE_TYPE}
+			</if>
+			<if test="FEE_TYPE_LIKE != null and FEE_TYPE_LIKE != ''">
+				AND T.FEE_TYPE LIKE concat(concat('%',#{FEE_TYPE_LIKE}),'%')
+			</if>
+			<if test="FEE_TYPE_LLIKE != null and FEE_TYPE_LLIKE != ''">
+				AND T.FEE_TYPE LIKE concat('%',#{FEE_TYPE_LIKE})
+			</if>
+			<if test="FEE_TYPE_RLIKE != null and FEE_TYPE_RLIKE != ''">
+				AND T.FEE_TYPE LIKE concat(#{FEE_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="CASH_FEE != null and CASH_FEE != ''">
+				AND T.CASH_FEE = #{CASH_FEE}
+			</if>
+			<if test="CASH_FEE_LIKE != null and CASH_FEE_LIKE != ''">
+				AND T.CASH_FEE LIKE concat(concat('%',#{CASH_FEE_LIKE}),'%')
+			</if>
+			<if test="CASH_FEE_LLIKE != null and CASH_FEE_LLIKE != ''">
+				AND T.CASH_FEE LIKE concat('%',#{CASH_FEE_LIKE})
+			</if>
+			<if test="CASH_FEE_RLIKE != null and CASH_FEE_RLIKE != ''">
+				AND T.CASH_FEE LIKE concat(#{CASH_FEE_RIKE},'%')
+			</if>
+				
+			<if test="CASH_FEE_TYPE != null and CASH_FEE_TYPE != ''">
+				AND T.CASH_FEE_TYPE = #{CASH_FEE_TYPE}
+			</if>
+			<if test="CASH_FEE_TYPE_LIKE != null and CASH_FEE_TYPE_LIKE != ''">
+				AND T.CASH_FEE_TYPE LIKE concat(concat('%',#{CASH_FEE_TYPE_LIKE}),'%')
+			</if>
+			<if test="CASH_FEE_TYPE_LLIKE != null and CASH_FEE_TYPE_LLIKE != ''">
+				AND T.CASH_FEE_TYPE LIKE concat('%',#{CASH_FEE_TYPE_LIKE})
+			</if>
+			<if test="CASH_FEE_TYPE_RLIKE != null and CASH_FEE_TYPE_RLIKE != ''">
+				AND T.CASH_FEE_TYPE LIKE concat(#{CASH_FEE_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_FEE != null and COUPON_FEE != ''">
+				AND T.COUPON_FEE = #{COUPON_FEE}
+			</if>
+			<if test="COUPON_FEE_LIKE != null and COUPON_FEE_LIKE != ''">
+				AND T.COUPON_FEE LIKE concat(concat('%',#{COUPON_FEE_LIKE}),'%')
+			</if>
+			<if test="COUPON_FEE_LLIKE != null and COUPON_FEE_LLIKE != ''">
+				AND T.COUPON_FEE LIKE concat('%',#{COUPON_FEE_LIKE})
+			</if>
+			<if test="COUPON_FEE_RLIKE != null and COUPON_FEE_RLIKE != ''">
+				AND T.COUPON_FEE LIKE concat(#{COUPON_FEE_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_COUNT != null and COUPON_COUNT != ''">
+				AND T.COUPON_COUNT = #{COUPON_COUNT}
+			</if>
+			<if test="COUPON_COUNT_LIKE != null and COUPON_COUNT_LIKE != ''">
+				AND T.COUPON_COUNT LIKE concat(concat('%',#{COUPON_COUNT_LIKE}),'%')
+			</if>
+			<if test="COUPON_COUNT_LLIKE != null and COUPON_COUNT_LLIKE != ''">
+				AND T.COUPON_COUNT LIKE concat('%',#{COUPON_COUNT_LIKE})
+			</if>
+			<if test="COUPON_COUNT_RLIKE != null and COUPON_COUNT_RLIKE != ''">
+				AND T.COUPON_COUNT LIKE concat(#{COUPON_COUNT_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_TYPE != null and COUPON_TYPE != ''">
+				AND T.COUPON_TYPE = #{COUPON_TYPE}
+			</if>
+			<if test="COUPON_TYPE_LIKE != null and COUPON_TYPE_LIKE != ''">
+				AND T.COUPON_TYPE LIKE concat(concat('%',#{COUPON_TYPE_LIKE}),'%')
+			</if>
+			<if test="COUPON_TYPE_LLIKE != null and COUPON_TYPE_LLIKE != ''">
+				AND T.COUPON_TYPE LIKE concat('%',#{COUPON_TYPE_LIKE})
+			</if>
+			<if test="COUPON_TYPE_RLIKE != null and COUPON_TYPE_RLIKE != ''">
+				AND T.COUPON_TYPE LIKE concat(#{COUPON_TYPE_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_ID_0 != null and COUPON_ID_0 != ''">
+				AND T.COUPON_ID_0 = #{COUPON_ID_0}
+			</if>
+			<if test="COUPON_ID_0_LIKE != null and COUPON_ID_0_LIKE != ''">
+				AND T.COUPON_ID_0 LIKE concat(concat('%',#{COUPON_ID_0_LIKE}),'%')
+			</if>
+			<if test="COUPON_ID_0_LLIKE != null and COUPON_ID_0_LLIKE != ''">
+				AND T.COUPON_ID_0 LIKE concat('%',#{COUPON_ID_0_LIKE})
+			</if>
+			<if test="COUPON_ID_0_RLIKE != null and COUPON_ID_0_RLIKE != ''">
+				AND T.COUPON_ID_0 LIKE concat(#{COUPON_ID_0_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_TYPE_0 != null and COUPON_TYPE_0 != ''">
+				AND T.COUPON_TYPE_0 = #{COUPON_TYPE_0}
+			</if>
+			<if test="COUPON_TYPE_0_LIKE != null and COUPON_TYPE_0_LIKE != ''">
+				AND T.COUPON_TYPE_0 LIKE concat(concat('%',#{COUPON_TYPE_0_LIKE}),'%')
+			</if>
+			<if test="COUPON_TYPE_0_LLIKE != null and COUPON_TYPE_0_LLIKE != ''">
+				AND T.COUPON_TYPE_0 LIKE concat('%',#{COUPON_TYPE_0_LIKE})
+			</if>
+			<if test="COUPON_TYPE_0_RLIKE != null and COUPON_TYPE_0_RLIKE != ''">
+				AND T.COUPON_TYPE_0 LIKE concat(#{COUPON_TYPE_0_RIKE},'%')
+			</if>
+				
+			<if test="COUPON_FEE_0 != null and COUPON_FEE_0 != ''">
+				AND T.COUPON_FEE_0 = #{COUPON_FEE_0}
+			</if>
+			<if test="COUPON_FEE_0_LIKE != null and COUPON_FEE_0_LIKE != ''">
+				AND T.COUPON_FEE_0 LIKE concat(concat('%',#{COUPON_FEE_0_LIKE}),'%')
+			</if>
+			<if test="COUPON_FEE_0_LLIKE != null and COUPON_FEE_0_LLIKE != ''">
+				AND T.COUPON_FEE_0 LIKE concat('%',#{COUPON_FEE_0_LIKE})
+			</if>
+			<if test="COUPON_FEE_0_RLIKE != null and COUPON_FEE_0_RLIKE != ''">
+				AND T.COUPON_FEE_0 LIKE concat(#{COUPON_FEE_0_RIKE},'%')
+			</if>
+				
+			<if test="TRANSACTION_ID != null and TRANSACTION_ID != ''">
+				AND T.TRANSACTION_ID = #{TRANSACTION_ID}
+			</if>
+			<if test="TRANSACTION_ID_LIKE != null and TRANSACTION_ID_LIKE != ''">
+				AND T.TRANSACTION_ID LIKE concat(concat('%',#{TRANSACTION_ID_LIKE}),'%')
+			</if>
+			<if test="TRANSACTION_ID_LLIKE != null and TRANSACTION_ID_LLIKE != ''">
+				AND T.TRANSACTION_ID LIKE concat('%',#{TRANSACTION_ID_LIKE})
+			</if>
+			<if test="TRANSACTION_ID_RLIKE != null and TRANSACTION_ID_RLIKE != ''">
+				AND T.TRANSACTION_ID LIKE concat(#{TRANSACTION_ID_RIKE},'%')
+			</if>
+				
+			<if test="OUT_TRADE_NO != null and OUT_TRADE_NO != ''">
+				AND T.OUT_TRADE_NO = #{OUT_TRADE_NO}
+			</if>
+			<if test="OUT_TRADE_NO_LIKE != null and OUT_TRADE_NO_LIKE != ''">
+				AND T.OUT_TRADE_NO LIKE concat(concat('%',#{OUT_TRADE_NO_LIKE}),'%')
+			</if>
+			<if test="OUT_TRADE_NO_LLIKE != null and OUT_TRADE_NO_LLIKE != ''">
+				AND T.OUT_TRADE_NO LIKE concat('%',#{OUT_TRADE_NO_LIKE})
+			</if>
+			<if test="OUT_TRADE_NO_RLIKE != null and OUT_TRADE_NO_RLIKE != ''">
+				AND T.OUT_TRADE_NO LIKE concat(#{OUT_TRADE_NO_RIKE},'%')
+			</if>
+				
+			<if test="ATTACH != null and ATTACH != ''">
+				AND T.ATTACH = #{ATTACH}
+			</if>
+			<if test="ATTACH_LIKE != null and ATTACH_LIKE != ''">
+				AND T.ATTACH LIKE concat(concat('%',#{ATTACH_LIKE}),'%')
+			</if>
+			<if test="ATTACH_LLIKE != null and ATTACH_LLIKE != ''">
+				AND T.ATTACH LIKE concat('%',#{ATTACH_LIKE})
+			</if>
+			<if test="ATTACH_RLIKE != null and ATTACH_RLIKE != ''">
+				AND T.ATTACH LIKE concat(#{ATTACH_RIKE},'%')
+			</if>
+				
+			<if test="TIME_END != null and TIME_END != ''">
+				AND T.TIME_END = #{TIME_END}
+			</if>
+			<if test="TIME_END_LIKE != null and TIME_END_LIKE != ''">
+				AND T.TIME_END LIKE concat(concat('%',#{TIME_END_LIKE}),'%')
+			</if>
+			<if test="TIME_END_LLIKE != null and TIME_END_LLIKE != ''">
+				AND T.TIME_END LIKE concat('%',#{TIME_END_LIKE})
+			</if>
+			<if test="TIME_END_RLIKE != null and TIME_END_RLIKE != ''">
+				AND T.TIME_END LIKE concat(#{TIME_END_RIKE},'%')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectWX_ORDER_PAY_BACK" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM WX_ORDER_PAY_BACK T <include refid="WX_ORDER_PAY_BACK_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.RETURN_CODE,T.RETURN_MSG,T.APPID,T.MCH_ID,
+			T.DEVICE_INFO,T.NONCE_STR,T.SIGN,T.SIGN_TYPE,T.RESULT_CODE,
+			T.ERR_CODE,T.ERR_CODE_DES,T.OPENID,T.IS_SUBSCRIBE,T.TRADE_TYPE,
+			T.BANK_TYPE,T.TOTAL_FEE,T.SETTLEMENT_TOTAL_FEE,T.FEE_TYPE,T.CASH_FEE,
+			T.CASH_FEE_TYPE,T.COUPON_FEE,T.COUPON_COUNT,T.COUPON_TYPE,T.COUPON_ID_0,
+			T.COUPON_TYPE_0,T.COUPON_FEE_0,T.TRANSACTION_ID,T.OUT_TRADE_NO,T.ATTACH,
+			T.TIME_END
+         FROM WX_ORDER_PAY_BACK T
+        <include refid="WX_ORDER_PAY_BACK_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,WX_ORDER_PAY_BACK T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectWX_ORDER_PAY_BACKCount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_ORDER_PAY_BACK T <include refid="WX_ORDER_PAY_BACK_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertWX_ORDER_PAY_BACK" parameterType="java.util.Map" >
+    	insert into WX_ORDER_PAY_BACK 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="RETURN_CODE != null and RETURN_CODE != ''">
+				  RETURN_CODE ,
+			</if>
+			<if test="RETURN_MSG != null and RETURN_MSG != ''">
+				  RETURN_MSG ,
+			</if>
+			<if test="APPID != null and APPID != ''">
+				  APPID ,
+			</if>
+			<if test="MCH_ID != null and MCH_ID != ''">
+				  MCH_ID ,
+			</if>
+			<if test="DEVICE_INFO != null and DEVICE_INFO != ''">
+				  DEVICE_INFO ,
+			</if>
+			<if test="NONCE_STR != null and NONCE_STR != ''">
+				  NONCE_STR ,
+			</if>
+			<if test="SIGN != null and SIGN != ''">
+				  SIGN ,
+			</if>
+			<if test="SIGN_TYPE != null and SIGN_TYPE != ''">
+				  SIGN_TYPE ,
+			</if>
+			<if test="RESULT_CODE != null and RESULT_CODE != ''">
+				  RESULT_CODE ,
+			</if>
+			<if test="ERR_CODE != null and ERR_CODE != ''">
+				  ERR_CODE ,
+			</if>
+			<if test="ERR_CODE_DES != null and ERR_CODE_DES != ''">
+				  ERR_CODE_DES ,
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				  OPENID ,
+			</if>
+			<if test="IS_SUBSCRIBE != null and IS_SUBSCRIBE != ''">
+				  IS_SUBSCRIBE ,
+			</if>
+			<if test="TRADE_TYPE != null and TRADE_TYPE != ''">
+				  TRADE_TYPE ,
+			</if>
+			<if test="BANK_TYPE != null and BANK_TYPE != ''">
+				  BANK_TYPE ,
+			</if>
+			<if test="TOTAL_FEE != null and TOTAL_FEE != ''">
+				  TOTAL_FEE ,
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE != null and SETTLEMENT_TOTAL_FEE != ''">
+				  SETTLEMENT_TOTAL_FEE ,
+			</if>
+			<if test="FEE_TYPE != null and FEE_TYPE != ''">
+				  FEE_TYPE ,
+			</if>
+			<if test="CASH_FEE != null and CASH_FEE != ''">
+				  CASH_FEE ,
+			</if>
+			<if test="CASH_FEE_TYPE != null and CASH_FEE_TYPE != ''">
+				  CASH_FEE_TYPE ,
+			</if>
+			<if test="COUPON_FEE != null and COUPON_FEE != ''">
+				  COUPON_FEE ,
+			</if>
+			<if test="COUPON_COUNT != null and COUPON_COUNT != ''">
+				  COUPON_COUNT ,
+			</if>
+			<if test="COUPON_TYPE != null and COUPON_TYPE != ''">
+				  COUPON_TYPE ,
+			</if>
+			<if test="COUPON_ID_0 != null and COUPON_ID_0 != ''">
+				  COUPON_ID_0 ,
+			</if>
+			<if test="COUPON_TYPE_0 != null and COUPON_TYPE_0 != ''">
+				  COUPON_TYPE_0 ,
+			</if>
+			<if test="COUPON_FEE_0 != null and COUPON_FEE_0 != ''">
+				  COUPON_FEE_0 ,
+			</if>
+			<if test="TRANSACTION_ID != null and TRANSACTION_ID != ''">
+				  TRANSACTION_ID ,
+			</if>
+			<if test="OUT_TRADE_NO != null and OUT_TRADE_NO != ''">
+				  OUT_TRADE_NO ,
+			</if>
+			<if test="ATTACH != null and ATTACH != ''">
+				  ATTACH ,
+			</if>
+			<if test="TIME_END != null and TIME_END != ''">
+				  TIME_END ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="RETURN_CODE != null and RETURN_CODE != ''">
+				 #{RETURN_CODE},  
+			</if>
+			<if test="RETURN_MSG != null and RETURN_MSG != ''">
+				 #{RETURN_MSG},  
+			</if>
+			<if test="APPID != null and APPID != ''">
+				 #{APPID},  
+			</if>
+			<if test="MCH_ID != null and MCH_ID != ''">
+				 #{MCH_ID},  
+			</if>
+			<if test="DEVICE_INFO != null and DEVICE_INFO != ''">
+				 #{DEVICE_INFO},  
+			</if>
+			<if test="NONCE_STR != null and NONCE_STR != ''">
+				 #{NONCE_STR},  
+			</if>
+			<if test="SIGN != null and SIGN != ''">
+				 #{SIGN},  
+			</if>
+			<if test="SIGN_TYPE != null and SIGN_TYPE != ''">
+				 #{SIGN_TYPE},  
+			</if>
+			<if test="RESULT_CODE != null and RESULT_CODE != ''">
+				 #{RESULT_CODE},  
+			</if>
+			<if test="ERR_CODE != null and ERR_CODE != ''">
+				 #{ERR_CODE},  
+			</if>
+			<if test="ERR_CODE_DES != null and ERR_CODE_DES != ''">
+				 #{ERR_CODE_DES},  
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				 #{OPENID},  
+			</if>
+			<if test="IS_SUBSCRIBE != null and IS_SUBSCRIBE != ''">
+				 #{IS_SUBSCRIBE},  
+			</if>
+			<if test="TRADE_TYPE != null and TRADE_TYPE != ''">
+				 #{TRADE_TYPE},  
+			</if>
+			<if test="BANK_TYPE != null and BANK_TYPE != ''">
+				 #{BANK_TYPE},  
+			</if>
+			<if test="TOTAL_FEE != null and TOTAL_FEE != ''">
+				 #{TOTAL_FEE},  
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE != null and SETTLEMENT_TOTAL_FEE != ''">
+				 #{SETTLEMENT_TOTAL_FEE},  
+			</if>
+			<if test="FEE_TYPE != null and FEE_TYPE != ''">
+				 #{FEE_TYPE},  
+			</if>
+			<if test="CASH_FEE != null and CASH_FEE != ''">
+				 #{CASH_FEE},  
+			</if>
+			<if test="CASH_FEE_TYPE != null and CASH_FEE_TYPE != ''">
+				 #{CASH_FEE_TYPE},  
+			</if>
+			<if test="COUPON_FEE != null and COUPON_FEE != ''">
+				 #{COUPON_FEE},  
+			</if>
+			<if test="COUPON_COUNT != null and COUPON_COUNT != ''">
+				 #{COUPON_COUNT},  
+			</if>
+			<if test="COUPON_TYPE != null and COUPON_TYPE != ''">
+				 #{COUPON_TYPE},  
+			</if>
+			<if test="COUPON_ID_0 != null and COUPON_ID_0 != ''">
+				 #{COUPON_ID_0},  
+			</if>
+			<if test="COUPON_TYPE_0 != null and COUPON_TYPE_0 != ''">
+				 #{COUPON_TYPE_0},  
+			</if>
+			<if test="COUPON_FEE_0 != null and COUPON_FEE_0 != ''">
+				 #{COUPON_FEE_0},  
+			</if>
+			<if test="TRANSACTION_ID != null and TRANSACTION_ID != ''">
+				 #{TRANSACTION_ID},  
+			</if>
+			<if test="OUT_TRADE_NO != null and OUT_TRADE_NO != ''">
+				 #{OUT_TRADE_NO},  
+			</if>
+			<if test="ATTACH != null and ATTACH != ''">
+				 #{ATTACH},  
+			</if>
+			<if test="TIME_END != null and TIME_END != ''">
+				 #{TIME_END},  
+			</if>
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateWX_ORDER_PAY_BACK" parameterType="java.util.Map" >
+    	update   WX_ORDER_PAY_BACK 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="RETURN_CODE_NEW != null and RETURN_CODE_NEW != ''">
+				  RETURN_CODE=  #{RETURN_CODE_NEW},
+			</if>
+			<if test="RETURN_MSG_NEW != null and RETURN_MSG_NEW != ''">
+				  RETURN_MSG=  #{RETURN_MSG_NEW},
+			</if>
+			<if test="APPID_NEW != null and APPID_NEW != ''">
+				  APPID=  #{APPID_NEW},
+			</if>
+			<if test="MCH_ID_NEW != null and MCH_ID_NEW != ''">
+				  MCH_ID=  #{MCH_ID_NEW},
+			</if>
+			<if test="DEVICE_INFO_NEW != null and DEVICE_INFO_NEW != ''">
+				  DEVICE_INFO=  #{DEVICE_INFO_NEW},
+			</if>
+			<if test="NONCE_STR_NEW != null and NONCE_STR_NEW != ''">
+				  NONCE_STR=  #{NONCE_STR_NEW},
+			</if>
+			<if test="SIGN_NEW != null and SIGN_NEW != ''">
+				  SIGN=  #{SIGN_NEW},
+			</if>
+			<if test="SIGN_TYPE_NEW != null and SIGN_TYPE_NEW != ''">
+				  SIGN_TYPE=  #{SIGN_TYPE_NEW},
+			</if>
+			<if test="RESULT_CODE_NEW != null and RESULT_CODE_NEW != ''">
+				  RESULT_CODE=  #{RESULT_CODE_NEW},
+			</if>
+			<if test="ERR_CODE_NEW != null and ERR_CODE_NEW != ''">
+				  ERR_CODE=  #{ERR_CODE_NEW},
+			</if>
+			<if test="ERR_CODE_DES_NEW != null and ERR_CODE_DES_NEW != ''">
+				  ERR_CODE_DES=  #{ERR_CODE_DES_NEW},
+			</if>
+			<if test="OPENID_NEW != null and OPENID_NEW != ''">
+				  OPENID=  #{OPENID_NEW},
+			</if>
+			<if test="IS_SUBSCRIBE_NEW != null and IS_SUBSCRIBE_NEW != ''">
+				  IS_SUBSCRIBE=  #{IS_SUBSCRIBE_NEW},
+			</if>
+			<if test="TRADE_TYPE_NEW != null and TRADE_TYPE_NEW != ''">
+				  TRADE_TYPE=  #{TRADE_TYPE_NEW},
+			</if>
+			<if test="BANK_TYPE_NEW != null and BANK_TYPE_NEW != ''">
+				  BANK_TYPE=  #{BANK_TYPE_NEW},
+			</if>
+			<if test="TOTAL_FEE_NEW != null and TOTAL_FEE_NEW != ''">
+				  TOTAL_FEE=  #{TOTAL_FEE_NEW},
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE_NEW != null and SETTLEMENT_TOTAL_FEE_NEW != ''">
+				  SETTLEMENT_TOTAL_FEE=  #{SETTLEMENT_TOTAL_FEE_NEW},
+			</if>
+			<if test="FEE_TYPE_NEW != null and FEE_TYPE_NEW != ''">
+				  FEE_TYPE=  #{FEE_TYPE_NEW},
+			</if>
+			<if test="CASH_FEE_NEW != null and CASH_FEE_NEW != ''">
+				  CASH_FEE=  #{CASH_FEE_NEW},
+			</if>
+			<if test="CASH_FEE_TYPE_NEW != null and CASH_FEE_TYPE_NEW != ''">
+				  CASH_FEE_TYPE=  #{CASH_FEE_TYPE_NEW},
+			</if>
+			<if test="COUPON_FEE_NEW != null and COUPON_FEE_NEW != ''">
+				  COUPON_FEE=  #{COUPON_FEE_NEW},
+			</if>
+			<if test="COUPON_COUNT_NEW != null and COUPON_COUNT_NEW != ''">
+				  COUPON_COUNT=  #{COUPON_COUNT_NEW},
+			</if>
+			<if test="COUPON_TYPE_NEW != null and COUPON_TYPE_NEW != ''">
+				  COUPON_TYPE=  #{COUPON_TYPE_NEW},
+			</if>
+			<if test="COUPON_ID_0_NEW != null and COUPON_ID_0_NEW != ''">
+				  COUPON_ID_0=  #{COUPON_ID_0_NEW},
+			</if>
+			<if test="COUPON_TYPE_0_NEW != null and COUPON_TYPE_0_NEW != ''">
+				  COUPON_TYPE_0=  #{COUPON_TYPE_0_NEW},
+			</if>
+			<if test="COUPON_FEE_0_NEW != null and COUPON_FEE_0_NEW != ''">
+				  COUPON_FEE_0=  #{COUPON_FEE_0_NEW},
+			</if>
+			<if test="TRANSACTION_ID_NEW != null and TRANSACTION_ID_NEW != ''">
+				  TRANSACTION_ID=  #{TRANSACTION_ID_NEW},
+			</if>
+			<if test="OUT_TRADE_NO_NEW != null and OUT_TRADE_NO_NEW != ''">
+				  OUT_TRADE_NO=  #{OUT_TRADE_NO_NEW},
+			</if>
+			<if test="ATTACH_NEW != null and ATTACH_NEW != ''">
+				  ATTACH=  #{ATTACH_NEW},
+			</if>
+			<if test="TIME_END_NEW != null and TIME_END_NEW != ''">
+				  TIME_END=  #{TIME_END_NEW},
+			</if>
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="RETURN_CODE != null and RETURN_CODE != ''">
+				AND RETURN_CODE = #{RETURN_CODE}
+			</if>
+			<if test="RETURN_MSG != null and RETURN_MSG != ''">
+				AND RETURN_MSG = #{RETURN_MSG}
+			</if>
+			<if test="APPID != null and APPID != ''">
+				AND APPID = #{APPID}
+			</if>
+			<if test="MCH_ID != null and MCH_ID != ''">
+				AND MCH_ID = #{MCH_ID}
+			</if>
+			<if test="DEVICE_INFO != null and DEVICE_INFO != ''">
+				AND DEVICE_INFO = #{DEVICE_INFO}
+			</if>
+			<if test="NONCE_STR != null and NONCE_STR != ''">
+				AND NONCE_STR = #{NONCE_STR}
+			</if>
+			<if test="SIGN != null and SIGN != ''">
+				AND SIGN = #{SIGN}
+			</if>
+			<if test="SIGN_TYPE != null and SIGN_TYPE != ''">
+				AND SIGN_TYPE = #{SIGN_TYPE}
+			</if>
+			<if test="RESULT_CODE != null and RESULT_CODE != ''">
+				AND RESULT_CODE = #{RESULT_CODE}
+			</if>
+			<if test="ERR_CODE != null and ERR_CODE != ''">
+				AND ERR_CODE = #{ERR_CODE}
+			</if>
+			<if test="ERR_CODE_DES != null and ERR_CODE_DES != ''">
+				AND ERR_CODE_DES = #{ERR_CODE_DES}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="IS_SUBSCRIBE != null and IS_SUBSCRIBE != ''">
+				AND IS_SUBSCRIBE = #{IS_SUBSCRIBE}
+			</if>
+			<if test="TRADE_TYPE != null and TRADE_TYPE != ''">
+				AND TRADE_TYPE = #{TRADE_TYPE}
+			</if>
+			<if test="BANK_TYPE != null and BANK_TYPE != ''">
+				AND BANK_TYPE = #{BANK_TYPE}
+			</if>
+			<if test="TOTAL_FEE != null and TOTAL_FEE != ''">
+				AND TOTAL_FEE = #{TOTAL_FEE}
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE != null and SETTLEMENT_TOTAL_FEE != ''">
+				AND SETTLEMENT_TOTAL_FEE = #{SETTLEMENT_TOTAL_FEE}
+			</if>
+			<if test="FEE_TYPE != null and FEE_TYPE != ''">
+				AND FEE_TYPE = #{FEE_TYPE}
+			</if>
+			<if test="CASH_FEE != null and CASH_FEE != ''">
+				AND CASH_FEE = #{CASH_FEE}
+			</if>
+			<if test="CASH_FEE_TYPE != null and CASH_FEE_TYPE != ''">
+				AND CASH_FEE_TYPE = #{CASH_FEE_TYPE}
+			</if>
+			<if test="COUPON_FEE != null and COUPON_FEE != ''">
+				AND COUPON_FEE = #{COUPON_FEE}
+			</if>
+			<if test="COUPON_COUNT != null and COUPON_COUNT != ''">
+				AND COUPON_COUNT = #{COUPON_COUNT}
+			</if>
+			<if test="COUPON_TYPE != null and COUPON_TYPE != ''">
+				AND COUPON_TYPE = #{COUPON_TYPE}
+			</if>
+			<if test="COUPON_ID_0 != null and COUPON_ID_0 != ''">
+				AND COUPON_ID_0 = #{COUPON_ID_0}
+			</if>
+			<if test="COUPON_TYPE_0 != null and COUPON_TYPE_0 != ''">
+				AND COUPON_TYPE_0 = #{COUPON_TYPE_0}
+			</if>
+			<if test="COUPON_FEE_0 != null and COUPON_FEE_0 != ''">
+				AND COUPON_FEE_0 = #{COUPON_FEE_0}
+			</if>
+			<if test="TRANSACTION_ID != null and TRANSACTION_ID != ''">
+				AND TRANSACTION_ID = #{TRANSACTION_ID}
+			</if>
+			<if test="OUT_TRADE_NO != null and OUT_TRADE_NO != ''">
+				AND OUT_TRADE_NO = #{OUT_TRADE_NO}
+			</if>
+			<if test="ATTACH != null and ATTACH != ''">
+				AND ATTACH = #{ATTACH}
+			</if>
+			<if test="TIME_END != null and TIME_END != ''">
+				AND TIME_END = #{TIME_END}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteWX_ORDER_PAY_BACK" parameterType="java.util.Map" >
+    	delete  from WX_ORDER_PAY_BACK  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="RETURN_CODE != null and RETURN_CODE != ''">
+				AND RETURN_CODE = #{RETURN_CODE}
+			</if>
+			<if test="RETURN_MSG != null and RETURN_MSG != ''">
+				AND RETURN_MSG = #{RETURN_MSG}
+			</if>
+			<if test="APPID != null and APPID != ''">
+				AND APPID = #{APPID}
+			</if>
+			<if test="MCH_ID != null and MCH_ID != ''">
+				AND MCH_ID = #{MCH_ID}
+			</if>
+			<if test="DEVICE_INFO != null and DEVICE_INFO != ''">
+				AND DEVICE_INFO = #{DEVICE_INFO}
+			</if>
+			<if test="NONCE_STR != null and NONCE_STR != ''">
+				AND NONCE_STR = #{NONCE_STR}
+			</if>
+			<if test="SIGN != null and SIGN != ''">
+				AND SIGN = #{SIGN}
+			</if>
+			<if test="SIGN_TYPE != null and SIGN_TYPE != ''">
+				AND SIGN_TYPE = #{SIGN_TYPE}
+			</if>
+			<if test="RESULT_CODE != null and RESULT_CODE != ''">
+				AND RESULT_CODE = #{RESULT_CODE}
+			</if>
+			<if test="ERR_CODE != null and ERR_CODE != ''">
+				AND ERR_CODE = #{ERR_CODE}
+			</if>
+			<if test="ERR_CODE_DES != null and ERR_CODE_DES != ''">
+				AND ERR_CODE_DES = #{ERR_CODE_DES}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="IS_SUBSCRIBE != null and IS_SUBSCRIBE != ''">
+				AND IS_SUBSCRIBE = #{IS_SUBSCRIBE}
+			</if>
+			<if test="TRADE_TYPE != null and TRADE_TYPE != ''">
+				AND TRADE_TYPE = #{TRADE_TYPE}
+			</if>
+			<if test="BANK_TYPE != null and BANK_TYPE != ''">
+				AND BANK_TYPE = #{BANK_TYPE}
+			</if>
+			<if test="TOTAL_FEE != null and TOTAL_FEE != ''">
+				AND TOTAL_FEE = #{TOTAL_FEE}
+			</if>
+			<if test="SETTLEMENT_TOTAL_FEE != null and SETTLEMENT_TOTAL_FEE != ''">
+				AND SETTLEMENT_TOTAL_FEE = #{SETTLEMENT_TOTAL_FEE}
+			</if>
+			<if test="FEE_TYPE != null and FEE_TYPE != ''">
+				AND FEE_TYPE = #{FEE_TYPE}
+			</if>
+			<if test="CASH_FEE != null and CASH_FEE != ''">
+				AND CASH_FEE = #{CASH_FEE}
+			</if>
+			<if test="CASH_FEE_TYPE != null and CASH_FEE_TYPE != ''">
+				AND CASH_FEE_TYPE = #{CASH_FEE_TYPE}
+			</if>
+			<if test="COUPON_FEE != null and COUPON_FEE != ''">
+				AND COUPON_FEE = #{COUPON_FEE}
+			</if>
+			<if test="COUPON_COUNT != null and COUPON_COUNT != ''">
+				AND COUPON_COUNT = #{COUPON_COUNT}
+			</if>
+			<if test="COUPON_TYPE != null and COUPON_TYPE != ''">
+				AND COUPON_TYPE = #{COUPON_TYPE}
+			</if>
+			<if test="COUPON_ID_0 != null and COUPON_ID_0 != ''">
+				AND COUPON_ID_0 = #{COUPON_ID_0}
+			</if>
+			<if test="COUPON_TYPE_0 != null and COUPON_TYPE_0 != ''">
+				AND COUPON_TYPE_0 = #{COUPON_TYPE_0}
+			</if>
+			<if test="COUPON_FEE_0 != null and COUPON_FEE_0 != ''">
+				AND COUPON_FEE_0 = #{COUPON_FEE_0}
+			</if>
+			<if test="TRANSACTION_ID != null and TRANSACTION_ID != ''">
+				AND TRANSACTION_ID = #{TRANSACTION_ID}
+			</if>
+			<if test="OUT_TRADE_NO != null and OUT_TRADE_NO != ''">
+				AND OUT_TRADE_NO = #{OUT_TRADE_NO}
+			</if>
+			<if test="ATTACH != null and ATTACH != ''">
+				AND ATTACH = #{ATTACH}
+			</if>
+			<if test="TIME_END != null and TIME_END != ''">
+				AND TIME_END = #{TIME_END}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

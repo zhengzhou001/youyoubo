@@ -1,0 +1,60 @@
+server:
+  port: 80
+spring:
+  thymeleaf:
+     cache: false  #关闭缓存
+     prefix: classpath:/template/
+     suffix: .html
+     #mode: LEGACYHTML5
+     encoding: UTF-8
+     content-type: text/html
+  application:
+    name: chuxi
+  http:
+    multipart:
+       enabled: true
+       max-file-size: 102400MB
+       max-request-size: 1024000MB  
+       # druid 配置：
+  datasource:
+       #mysql
+      url: jdbc:mysql://139.129.101.61:3306/youyoubo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: youyou
+      driver-class-name: com.mysql.jdbc.Driver
+      platform: mysql
+      
+      type: com.alibaba.druid.pool.DruidDataSource
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始化大小，最小，最大
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙   暂时不用了，通过java代码使用
+      filters: stat,wall,log4j
+      logSlowSql: true
+      druid_user: youyoubo
+      druid_pwd: youyoubo
+wx:
+  AppID: wx73308f66b3948ff2
+  AppSecret: 7e070b464205f4ba1e10ada423db6a48
+  token: chuxiwangluo
+  mchId:  1551190181
+  mchKey: chuxiwangluosdfsdfqwewdasdfasfda #微信支付商户密钥
+  subAppId: #服务商模式下的子商户公众账号ID
+  subMchId: #服务商模式下的子商户号
+  keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+  notifyUrl: https://www.youyoubo.top/wxPay/notify #微信支付回调地址 自己定义但是必须放到外网微信可以访问的到
+  
+  
+ym: www.youyoubo.top
