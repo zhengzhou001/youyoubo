@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chuxi.wx.mapper.WX_SUBSCRIBEMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="WX_SUBSCRIBE_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND T.FROMUSER = #{FROMUSER}
+			</if>
+			<if test="FROMUSER_LIKE != null and FROMUSER_LIKE != ''">
+				AND T.FROMUSER LIKE concat(concat('%',#{FROMUSER_LIKE}),'%')
+			</if>
+			<if test="FROMUSER_LLIKE != null and FROMUSER_LLIKE != ''">
+				AND T.FROMUSER LIKE concat('%',#{FROMUSER_LIKE})
+			</if>
+			<if test="FROMUSER_RLIKE != null and FROMUSER_RLIKE != ''">
+				AND T.FROMUSER LIKE concat(#{FROMUSER_RIKE},'%')
+			</if>
+				
+			<if test="TOUSER != null and TOUSER != ''">
+				AND T.TOUSER = #{TOUSER}
+			</if>
+			<if test="TOUSER_LIKE != null and TOUSER_LIKE != ''">
+				AND T.TOUSER LIKE concat(concat('%',#{TOUSER_LIKE}),'%')
+			</if>
+			<if test="TOUSER_LLIKE != null and TOUSER_LLIKE != ''">
+				AND T.TOUSER LIKE concat('%',#{TOUSER_LIKE})
+			</if>
+			<if test="TOUSER_RLIKE != null and TOUSER_RLIKE != ''">
+				AND T.TOUSER LIKE concat(#{TOUSER_RIKE},'%')
+			</if>
+				
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND T.CREATE_DATE = STR_TO_DATE(#{CREATE_DATE,'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="CREATE_DATE_MIN != null and CREATE_DATE_MIN != ''">
+				AND T.CREATE_DATE &gt;= STR_TO_DATE(#{CREATE_DATE_MIN},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="CREATE_DATE_MAX != null and CREATE_DATE_MAX != ''">
+				AND T.CREATE_DATE &lt;= STR_TO_DATE(#{CREATE_DATE_MAX},'%Y-%m-%d %H:%i:%s')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectWX_SUBSCRIBE" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM WX_SUBSCRIBE T <include refid="WX_SUBSCRIBE_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.FROMUSER,T.TOUSER,
+        DATE_FORMAT(T.CREATE_DATE,'%Y-%m-%d %H:%i:%s') CREATE_DATE
+         FROM WX_SUBSCRIBE T
+        <include refid="WX_SUBSCRIBE_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,WX_SUBSCRIBE T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectWX_SUBSCRIBECount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_SUBSCRIBE T <include refid="WX_SUBSCRIBE_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertWX_SUBSCRIBE" parameterType="java.util.Map" >
+    	insert into WX_SUBSCRIBE 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				  FROMUSER ,
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				  TOUSER ,
+			</if>
+			 CREATE_DATE ,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				 #{FROMUSER},  
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				 #{TOUSER},  
+			</if>
+				NOW(),
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateWX_SUBSCRIBE" parameterType="java.util.Map" >
+    	update   WX_SUBSCRIBE 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="FROMUSER_NEW != null and FROMUSER_NEW != ''">
+				  FROMUSER=  #{FROMUSER_NEW},
+			</if>
+			<if test="TOUSER_NEW != null and TOUSER_NEW != ''">
+				  TOUSER=  #{TOUSER_NEW},
+			</if>
+			<if test="CREATE_DATE_NEW != null and CREATE_DATE_NEW != ''">
+				  CREATE_DATE=  STR_TO_DATE(#{CREATE_DATE_NEW},'%Y-%m-%d %H:%i:%s')
+			</if>
+			 
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND FROMUSER = #{FROMUSER}
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				AND TOUSER = #{TOUSER}
+			</if>
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND CREATE_DATE = #{CREATE_DATE}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteWX_SUBSCRIBE" parameterType="java.util.Map" >
+    	delete  from WX_SUBSCRIBE  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND FROMUSER = #{FROMUSER}
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				AND TOUSER = #{TOUSER}
+			</if>
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND CREATE_DATE = #{CREATE_DATE}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

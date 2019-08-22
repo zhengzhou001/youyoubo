@@ -5,11 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BaseConfig {
-	public static String MENU_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s";
-	public static String AccessTokenUrl ="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
-	
-	public static String GetUserInfoUrl ="https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
-	
+ 
 	@Value("${wx.AppID}")
 	private String AppID;
 

@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chuxi.wx.mapper.WX_USERMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="WX_USER_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="SUBSCRIBE != null and SUBSCRIBE != ''">
+				AND T.SUBSCRIBE = #{SUBSCRIBE}
+			</if>
+			<if test="SUBSCRIBE_LIKE != null and SUBSCRIBE_LIKE != ''">
+				AND T.SUBSCRIBE LIKE concat(concat('%',#{SUBSCRIBE_LIKE}),'%')
+			</if>
+			<if test="SUBSCRIBE_LLIKE != null and SUBSCRIBE_LLIKE != ''">
+				AND T.SUBSCRIBE LIKE concat('%',#{SUBSCRIBE_LIKE})
+			</if>
+			<if test="SUBSCRIBE_RLIKE != null and SUBSCRIBE_RLIKE != ''">
+				AND T.SUBSCRIBE LIKE concat(#{SUBSCRIBE_RIKE},'%')
+			</if>
+				
+			<if test="OPENID != null and OPENID != ''">
+				AND T.OPENID = #{OPENID}
+			</if>
+			<if test="OPENID_LIKE != null and OPENID_LIKE != ''">
+				AND T.OPENID LIKE concat(concat('%',#{OPENID_LIKE}),'%')
+			</if>
+			<if test="OPENID_LLIKE != null and OPENID_LLIKE != ''">
+				AND T.OPENID LIKE concat('%',#{OPENID_LIKE})
+			</if>
+			<if test="OPENID_RLIKE != null and OPENID_RLIKE != ''">
+				AND T.OPENID LIKE concat(#{OPENID_RIKE},'%')
+			</if>
+				
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND T.NICKNAME = #{NICKNAME}
+			</if>
+			<if test="NICKNAME_LIKE != null and NICKNAME_LIKE != ''">
+				AND T.NICKNAME LIKE concat(concat('%',#{NICKNAME_LIKE}),'%')
+			</if>
+			<if test="NICKNAME_LLIKE != null and NICKNAME_LLIKE != ''">
+				AND T.NICKNAME LIKE concat('%',#{NICKNAME_LIKE})
+			</if>
+			<if test="NICKNAME_RLIKE != null and NICKNAME_RLIKE != ''">
+				AND T.NICKNAME LIKE concat(#{NICKNAME_RIKE},'%')
+			</if>
+				
+			<if test="SEXDESC != null and SEXDESC != ''">
+				AND T.SEXDESC = #{SEXDESC}
+			</if>
+			<if test="SEXDESC_LIKE != null and SEXDESC_LIKE != ''">
+				AND T.SEXDESC LIKE concat(concat('%',#{SEXDESC_LIKE}),'%')
+			</if>
+			<if test="SEXDESC_LLIKE != null and SEXDESC_LLIKE != ''">
+				AND T.SEXDESC LIKE concat('%',#{SEXDESC_LIKE})
+			</if>
+			<if test="SEXDESC_RLIKE != null and SEXDESC_RLIKE != ''">
+				AND T.SEXDESC LIKE concat(#{SEXDESC_RIKE},'%')
+			</if>
+				
+			<if test="SEX != null and SEX != ''">
+				AND T.SEX = #{SEX}
+			</if>
+			<if test="SEX_LIKE != null and SEX_LIKE != ''">
+				AND T.SEX LIKE concat(concat('%',#{SEX_LIKE}),'%')
+			</if>
+			<if test="SEX_LLIKE != null and SEX_LLIKE != ''">
+				AND T.SEX LIKE concat('%',#{SEX_LIKE})
+			</if>
+			<if test="SEX_RLIKE != null and SEX_RLIKE != ''">
+				AND T.SEX LIKE concat(#{SEX_RIKE},'%')
+			</if>
+				
+			<if test="LANGUAGE != null and LANGUAGE != ''">
+				AND T.LANGUAGE = #{LANGUAGE}
+			</if>
+			<if test="LANGUAGE_LIKE != null and LANGUAGE_LIKE != ''">
+				AND T.LANGUAGE LIKE concat(concat('%',#{LANGUAGE_LIKE}),'%')
+			</if>
+			<if test="LANGUAGE_LLIKE != null and LANGUAGE_LLIKE != ''">
+				AND T.LANGUAGE LIKE concat('%',#{LANGUAGE_LIKE})
+			</if>
+			<if test="LANGUAGE_RLIKE != null and LANGUAGE_RLIKE != ''">
+				AND T.LANGUAGE LIKE concat(#{LANGUAGE_RIKE},'%')
+			</if>
+				
+			<if test="CITY != null and CITY != ''">
+				AND T.CITY = #{CITY}
+			</if>
+			<if test="CITY_LIKE != null and CITY_LIKE != ''">
+				AND T.CITY LIKE concat(concat('%',#{CITY_LIKE}),'%')
+			</if>
+			<if test="CITY_LLIKE != null and CITY_LLIKE != ''">
+				AND T.CITY LIKE concat('%',#{CITY_LIKE})
+			</if>
+			<if test="CITY_RLIKE != null and CITY_RLIKE != ''">
+				AND T.CITY LIKE concat(#{CITY_RIKE},'%')
+			</if>
+				
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND T.PROVINCE = #{PROVINCE}
+			</if>
+			<if test="PROVINCE_LIKE != null and PROVINCE_LIKE != ''">
+				AND T.PROVINCE LIKE concat(concat('%',#{PROVINCE_LIKE}),'%')
+			</if>
+			<if test="PROVINCE_LLIKE != null and PROVINCE_LLIKE != ''">
+				AND T.PROVINCE LIKE concat('%',#{PROVINCE_LIKE})
+			</if>
+			<if test="PROVINCE_RLIKE != null and PROVINCE_RLIKE != ''">
+				AND T.PROVINCE LIKE concat(#{PROVINCE_RIKE},'%')
+			</if>
+				
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND T.COUNTRY = #{COUNTRY}
+			</if>
+			<if test="COUNTRY_LIKE != null and COUNTRY_LIKE != ''">
+				AND T.COUNTRY LIKE concat(concat('%',#{COUNTRY_LIKE}),'%')
+			</if>
+			<if test="COUNTRY_LLIKE != null and COUNTRY_LLIKE != ''">
+				AND T.COUNTRY LIKE concat('%',#{COUNTRY_LIKE})
+			</if>
+			<if test="COUNTRY_RLIKE != null and COUNTRY_RLIKE != ''">
+				AND T.COUNTRY LIKE concat(#{COUNTRY_RIKE},'%')
+			</if>
+				
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND T.HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="HEADIMGURL_LIKE != null and HEADIMGURL_LIKE != ''">
+				AND T.HEADIMGURL LIKE concat(concat('%',#{HEADIMGURL_LIKE}),'%')
+			</if>
+			<if test="HEADIMGURL_LLIKE != null and HEADIMGURL_LLIKE != ''">
+				AND T.HEADIMGURL LIKE concat('%',#{HEADIMGURL_LIKE})
+			</if>
+			<if test="HEADIMGURL_RLIKE != null and HEADIMGURL_RLIKE != ''">
+				AND T.HEADIMGURL LIKE concat(#{HEADIMGURL_RIKE},'%')
+			</if>
+				
+			<if test="SUBSCRIBETIME != null and SUBSCRIBETIME != ''">
+				AND T.SUBSCRIBETIME = #{SUBSCRIBETIME}
+			</if>
+			<if test="SUBSCRIBETIME_LIKE != null and SUBSCRIBETIME_LIKE != ''">
+				AND T.SUBSCRIBETIME LIKE concat(concat('%',#{SUBSCRIBETIME_LIKE}),'%')
+			</if>
+			<if test="SUBSCRIBETIME_LLIKE != null and SUBSCRIBETIME_LLIKE != ''">
+				AND T.SUBSCRIBETIME LIKE concat('%',#{SUBSCRIBETIME_LIKE})
+			</if>
+			<if test="SUBSCRIBETIME_RLIKE != null and SUBSCRIBETIME_RLIKE != ''">
+				AND T.SUBSCRIBETIME LIKE concat(#{SUBSCRIBETIME_RIKE},'%')
+			</if>
+				
+			<if test="UNIONID != null and UNIONID != ''">
+				AND T.UNIONID = #{UNIONID}
+			</if>
+			<if test="UNIONID_LIKE != null and UNIONID_LIKE != ''">
+				AND T.UNIONID LIKE concat(concat('%',#{UNIONID_LIKE}),'%')
+			</if>
+			<if test="UNIONID_LLIKE != null and UNIONID_LLIKE != ''">
+				AND T.UNIONID LIKE concat('%',#{UNIONID_LIKE})
+			</if>
+			<if test="UNIONID_RLIKE != null and UNIONID_RLIKE != ''">
+				AND T.UNIONID LIKE concat(#{UNIONID_RIKE},'%')
+			</if>
+				
+			<if test="REMARK != null and REMARK != ''">
+				AND T.REMARK = #{REMARK}
+			</if>
+			<if test="REMARK_LIKE != null and REMARK_LIKE != ''">
+				AND T.REMARK LIKE concat(concat('%',#{REMARK_LIKE}),'%')
+			</if>
+			<if test="REMARK_LLIKE != null and REMARK_LLIKE != ''">
+				AND T.REMARK LIKE concat('%',#{REMARK_LIKE})
+			</if>
+			<if test="REMARK_RLIKE != null and REMARK_RLIKE != ''">
+				AND T.REMARK LIKE concat(#{REMARK_RIKE},'%')
+			</if>
+				
+			<if test="GROUPID != null and GROUPID != ''">
+				AND T.GROUPID = #{GROUPID}
+			</if>
+			<if test="GROUPID_LIKE != null and GROUPID_LIKE != ''">
+				AND T.GROUPID LIKE concat(concat('%',#{GROUPID_LIKE}),'%')
+			</if>
+			<if test="GROUPID_LLIKE != null and GROUPID_LLIKE != ''">
+				AND T.GROUPID LIKE concat('%',#{GROUPID_LIKE})
+			</if>
+			<if test="GROUPID_RLIKE != null and GROUPID_RLIKE != ''">
+				AND T.GROUPID LIKE concat(#{GROUPID_RIKE},'%')
+			</if>
+				
+			<if test="TAGIDS != null and TAGIDS != ''">
+				AND T.TAGIDS = #{TAGIDS}
+			</if>
+			<if test="TAGIDS_LIKE != null and TAGIDS_LIKE != ''">
+				AND T.TAGIDS LIKE concat(concat('%',#{TAGIDS_LIKE}),'%')
+			</if>
+			<if test="TAGIDS_LLIKE != null and TAGIDS_LLIKE != ''">
+				AND T.TAGIDS LIKE concat('%',#{TAGIDS_LIKE})
+			</if>
+			<if test="TAGIDS_RLIKE != null and TAGIDS_RLIKE != ''">
+				AND T.TAGIDS LIKE concat(#{TAGIDS_RIKE},'%')
+			</if>
+				
+			<if test="PRIVILEGES != null and PRIVILEGES != ''">
+				AND T.PRIVILEGES = #{PRIVILEGES}
+			</if>
+			<if test="PRIVILEGES_LIKE != null and PRIVILEGES_LIKE != ''">
+				AND T.PRIVILEGES LIKE concat(concat('%',#{PRIVILEGES_LIKE}),'%')
+			</if>
+			<if test="PRIVILEGES_LLIKE != null and PRIVILEGES_LLIKE != ''">
+				AND T.PRIVILEGES LIKE concat('%',#{PRIVILEGES_LIKE})
+			</if>
+			<if test="PRIVILEGES_RLIKE != null and PRIVILEGES_RLIKE != ''">
+				AND T.PRIVILEGES LIKE concat(#{PRIVILEGES_RIKE},'%')
+			</if>
+				
+			<if test="SUBSCRIBESCENE != null and SUBSCRIBESCENE != ''">
+				AND T.SUBSCRIBESCENE = #{SUBSCRIBESCENE}
+			</if>
+			<if test="SUBSCRIBESCENE_LIKE != null and SUBSCRIBESCENE_LIKE != ''">
+				AND T.SUBSCRIBESCENE LIKE concat(concat('%',#{SUBSCRIBESCENE_LIKE}),'%')
+			</if>
+			<if test="SUBSCRIBESCENE_LLIKE != null and SUBSCRIBESCENE_LLIKE != ''">
+				AND T.SUBSCRIBESCENE LIKE concat('%',#{SUBSCRIBESCENE_LIKE})
+			</if>
+			<if test="SUBSCRIBESCENE_RLIKE != null and SUBSCRIBESCENE_RLIKE != ''">
+				AND T.SUBSCRIBESCENE LIKE concat(#{SUBSCRIBESCENE_RIKE},'%')
+			</if>
+				
+			<if test="QRSCENE != null and QRSCENE != ''">
+				AND T.QRSCENE = #{QRSCENE}
+			</if>
+			<if test="QRSCENE_LIKE != null and QRSCENE_LIKE != ''">
+				AND T.QRSCENE LIKE concat(concat('%',#{QRSCENE_LIKE}),'%')
+			</if>
+			<if test="QRSCENE_LLIKE != null and QRSCENE_LLIKE != ''">
+				AND T.QRSCENE LIKE concat('%',#{QRSCENE_LIKE})
+			</if>
+			<if test="QRSCENE_RLIKE != null and QRSCENE_RLIKE != ''">
+				AND T.QRSCENE LIKE concat(#{QRSCENE_RIKE},'%')
+			</if>
+				
+			<if test="QRSCENESTR != null and QRSCENESTR != ''">
+				AND T.QRSCENESTR = #{QRSCENESTR}
+			</if>
+			<if test="QRSCENESTR_LIKE != null and QRSCENESTR_LIKE != ''">
+				AND T.QRSCENESTR LIKE concat(concat('%',#{QRSCENESTR_LIKE}),'%')
+			</if>
+			<if test="QRSCENESTR_LLIKE != null and QRSCENESTR_LLIKE != ''">
+				AND T.QRSCENESTR LIKE concat('%',#{QRSCENESTR_LIKE})
+			</if>
+			<if test="QRSCENESTR_RLIKE != null and QRSCENESTR_RLIKE != ''">
+				AND T.QRSCENESTR LIKE concat(#{QRSCENESTR_RIKE},'%')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectWX_USER" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM WX_USER T <include refid="WX_USER_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.SUBSCRIBE,T.OPENID,T.NICKNAME,T.SEXDESC,
+			T.SEX,T.LANGUAGE,T.CITY,T.PROVINCE,T.COUNTRY,
+			T.HEADIMGURL,T.SUBSCRIBETIME,T.UNIONID,T.REMARK,T.GROUPID,
+			T.TAGIDS,T.PRIVILEGES,T.SUBSCRIBESCENE,T.QRSCENE,T.QRSCENESTR
+			
+         FROM WX_USER T
+        <include refid="WX_USER_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,WX_USER T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectWX_USERCount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_USER T <include refid="WX_USER_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertWX_USER" parameterType="java.util.Map" >
+    	insert into WX_USER 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="SUBSCRIBE != null and SUBSCRIBE != ''">
+				  SUBSCRIBE ,
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				  OPENID ,
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				  NICKNAME ,
+			</if>
+			<if test="SEXDESC != null and SEXDESC != ''">
+				  SEXDESC ,
+			</if>
+			<if test="SEX != null and SEX != ''">
+				  SEX ,
+			</if>
+			<if test="LANGUAGE != null and LANGUAGE != ''">
+				  LANGUAGE ,
+			</if>
+			<if test="CITY != null and CITY != ''">
+				  CITY ,
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				  PROVINCE ,
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				  COUNTRY ,
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				  HEADIMGURL ,
+			</if>
+			<if test="SUBSCRIBETIME != null and SUBSCRIBETIME != ''">
+				  SUBSCRIBETIME ,
+			</if>
+			<if test="UNIONID != null and UNIONID != ''">
+				  UNIONID ,
+			</if>
+			<if test="REMARK != null and REMARK != ''">
+				  REMARK ,
+			</if>
+			<if test="GROUPID != null and GROUPID != ''">
+				  GROUPID ,
+			</if>
+			<if test="TAGIDS != null and TAGIDS != ''">
+				  TAGIDS ,
+			</if>
+			<if test="PRIVILEGES != null and PRIVILEGES != ''">
+				  PRIVILEGES ,
+			</if>
+			<if test="SUBSCRIBESCENE != null and SUBSCRIBESCENE != ''">
+				  SUBSCRIBESCENE ,
+			</if>
+			<if test="QRSCENE != null and QRSCENE != ''">
+				  QRSCENE ,
+			</if>
+			<if test="QRSCENESTR != null and QRSCENESTR != ''">
+				  QRSCENESTR ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="SUBSCRIBE != null and SUBSCRIBE != ''">
+				 #{SUBSCRIBE},  
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				 #{OPENID},  
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				 #{NICKNAME},  
+			</if>
+			<if test="SEXDESC != null and SEXDESC != ''">
+				 #{SEXDESC},  
+			</if>
+			<if test="SEX != null and SEX != ''">
+				 #{SEX},  
+			</if>
+			<if test="LANGUAGE != null and LANGUAGE != ''">
+				 #{LANGUAGE},  
+			</if>
+			<if test="CITY != null and CITY != ''">
+				 #{CITY},  
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				 #{PROVINCE},  
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				 #{COUNTRY},  
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				 #{HEADIMGURL},  
+			</if>
+			<if test="SUBSCRIBETIME != null and SUBSCRIBETIME != ''">
+				 #{SUBSCRIBETIME},  
+			</if>
+			<if test="UNIONID != null and UNIONID != ''">
+				 #{UNIONID},  
+			</if>
+			<if test="REMARK != null and REMARK != ''">
+				 #{REMARK},  
+			</if>
+			<if test="GROUPID != null and GROUPID != ''">
+				 #{GROUPID},  
+			</if>
+			<if test="TAGIDS != null and TAGIDS != ''">
+				 #{TAGIDS},  
+			</if>
+			<if test="PRIVILEGES != null and PRIVILEGES != ''">
+				 #{PRIVILEGES},  
+			</if>
+			<if test="SUBSCRIBESCENE != null and SUBSCRIBESCENE != ''">
+				 #{SUBSCRIBESCENE},  
+			</if>
+			<if test="QRSCENE != null and QRSCENE != ''">
+				 #{QRSCENE},  
+			</if>
+			<if test="QRSCENESTR != null and QRSCENESTR != ''">
+				 #{QRSCENESTR},  
+			</if>
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateWX_USER" parameterType="java.util.Map" >
+    	update   WX_USER 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="SUBSCRIBE_NEW != null and SUBSCRIBE_NEW != ''">
+				  SUBSCRIBE=  #{SUBSCRIBE_NEW},
+			</if>
+			<if test="OPENID_NEW != null and OPENID_NEW != ''">
+				  OPENID=  #{OPENID_NEW},
+			</if>
+			<if test="NICKNAME_NEW != null and NICKNAME_NEW != ''">
+				  NICKNAME=  #{NICKNAME_NEW},
+			</if>
+			<if test="SEXDESC_NEW != null and SEXDESC_NEW != ''">
+				  SEXDESC=  #{SEXDESC_NEW},
+			</if>
+			<if test="SEX_NEW != null and SEX_NEW != ''">
+				  SEX=  #{SEX_NEW},
+			</if>
+			<if test="LANGUAGE_NEW != null and LANGUAGE_NEW != ''">
+				  LANGUAGE=  #{LANGUAGE_NEW},
+			</if>
+			<if test="CITY_NEW != null and CITY_NEW != ''">
+				  CITY=  #{CITY_NEW},
+			</if>
+			<if test="PROVINCE_NEW != null and PROVINCE_NEW != ''">
+				  PROVINCE=  #{PROVINCE_NEW},
+			</if>
+			<if test="COUNTRY_NEW != null and COUNTRY_NEW != ''">
+				  COUNTRY=  #{COUNTRY_NEW},
+			</if>
+			<if test="HEADIMGURL_NEW != null and HEADIMGURL_NEW != ''">
+				  HEADIMGURL=  #{HEADIMGURL_NEW},
+			</if>
+			<if test="SUBSCRIBETIME_NEW != null and SUBSCRIBETIME_NEW != ''">
+				  SUBSCRIBETIME=  #{SUBSCRIBETIME_NEW},
+			</if>
+			<if test="UNIONID_NEW != null and UNIONID_NEW != ''">
+				  UNIONID=  #{UNIONID_NEW},
+			</if>
+			<if test="REMARK_NEW != null and REMARK_NEW != ''">
+				  REMARK=  #{REMARK_NEW},
+			</if>
+			<if test="GROUPID_NEW != null and GROUPID_NEW != ''">
+				  GROUPID=  #{GROUPID_NEW},
+			</if>
+			<if test="TAGIDS_NEW != null and TAGIDS_NEW != ''">
+				  TAGIDS=  #{TAGIDS_NEW},
+			</if>
+			<if test="PRIVILEGES_NEW != null and PRIVILEGES_NEW != ''">
+				  PRIVILEGES=  #{PRIVILEGES_NEW},
+			</if>
+			<if test="SUBSCRIBESCENE_NEW != null and SUBSCRIBESCENE_NEW != ''">
+				  SUBSCRIBESCENE=  #{SUBSCRIBESCENE_NEW},
+			</if>
+			<if test="QRSCENE_NEW != null and QRSCENE_NEW != ''">
+				  QRSCENE=  #{QRSCENE_NEW},
+			</if>
+			<if test="QRSCENESTR_NEW != null and QRSCENESTR_NEW != ''">
+				  QRSCENESTR=  #{QRSCENESTR_NEW},
+			</if>
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="SUBSCRIBE != null and SUBSCRIBE != ''">
+				AND SUBSCRIBE = #{SUBSCRIBE}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND NICKNAME = #{NICKNAME}
+			</if>
+			<if test="SEXDESC != null and SEXDESC != ''">
+				AND SEXDESC = #{SEXDESC}
+			</if>
+			<if test="SEX != null and SEX != ''">
+				AND SEX = #{SEX}
+			</if>
+			<if test="LANGUAGE != null and LANGUAGE != ''">
+				AND LANGUAGE = #{LANGUAGE}
+			</if>
+			<if test="CITY != null and CITY != ''">
+				AND CITY = #{CITY}
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND PROVINCE = #{PROVINCE}
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND COUNTRY = #{COUNTRY}
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="SUBSCRIBETIME != null and SUBSCRIBETIME != ''">
+				AND SUBSCRIBETIME = #{SUBSCRIBETIME}
+			</if>
+			<if test="UNIONID != null and UNIONID != ''">
+				AND UNIONID = #{UNIONID}
+			</if>
+			<if test="REMARK != null and REMARK != ''">
+				AND REMARK = #{REMARK}
+			</if>
+			<if test="GROUPID != null and GROUPID != ''">
+				AND GROUPID = #{GROUPID}
+			</if>
+			<if test="TAGIDS != null and TAGIDS != ''">
+				AND TAGIDS = #{TAGIDS}
+			</if>
+			<if test="PRIVILEGES != null and PRIVILEGES != ''">
+				AND PRIVILEGES = #{PRIVILEGES}
+			</if>
+			<if test="SUBSCRIBESCENE != null and SUBSCRIBESCENE != ''">
+				AND SUBSCRIBESCENE = #{SUBSCRIBESCENE}
+			</if>
+			<if test="QRSCENE != null and QRSCENE != ''">
+				AND QRSCENE = #{QRSCENE}
+			</if>
+			<if test="QRSCENESTR != null and QRSCENESTR != ''">
+				AND QRSCENESTR = #{QRSCENESTR}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteWX_USER" parameterType="java.util.Map" >
+    	delete  from WX_USER  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="SUBSCRIBE != null and SUBSCRIBE != ''">
+				AND SUBSCRIBE = #{SUBSCRIBE}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND NICKNAME = #{NICKNAME}
+			</if>
+			<if test="SEXDESC != null and SEXDESC != ''">
+				AND SEXDESC = #{SEXDESC}
+			</if>
+			<if test="SEX != null and SEX != ''">
+				AND SEX = #{SEX}
+			</if>
+			<if test="LANGUAGE != null and LANGUAGE != ''">
+				AND LANGUAGE = #{LANGUAGE}
+			</if>
+			<if test="CITY != null and CITY != ''">
+				AND CITY = #{CITY}
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND PROVINCE = #{PROVINCE}
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND COUNTRY = #{COUNTRY}
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="SUBSCRIBETIME != null and SUBSCRIBETIME != ''">
+				AND SUBSCRIBETIME = #{SUBSCRIBETIME}
+			</if>
+			<if test="UNIONID != null and UNIONID != ''">
+				AND UNIONID = #{UNIONID}
+			</if>
+			<if test="REMARK != null and REMARK != ''">
+				AND REMARK = #{REMARK}
+			</if>
+			<if test="GROUPID != null and GROUPID != ''">
+				AND GROUPID = #{GROUPID}
+			</if>
+			<if test="TAGIDS != null and TAGIDS != ''">
+				AND TAGIDS = #{TAGIDS}
+			</if>
+			<if test="PRIVILEGES != null and PRIVILEGES != ''">
+				AND PRIVILEGES = #{PRIVILEGES}
+			</if>
+			<if test="SUBSCRIBESCENE != null and SUBSCRIBESCENE != ''">
+				AND SUBSCRIBESCENE = #{SUBSCRIBESCENE}
+			</if>
+			<if test="QRSCENE != null and QRSCENE != ''">
+				AND QRSCENE = #{QRSCENE}
+			</if>
+			<if test="QRSCENESTR != null and QRSCENESTR != ''">
+				AND QRSCENESTR = #{QRSCENESTR}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

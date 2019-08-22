@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chuxi.wx.mapper.WX_MSGMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="WX_MSG_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="TOUSER != null and TOUSER != ''">
+				AND T.TOUSER = #{TOUSER}
+			</if>
+			<if test="TOUSER_LIKE != null and TOUSER_LIKE != ''">
+				AND T.TOUSER LIKE concat(concat('%',#{TOUSER_LIKE}),'%')
+			</if>
+			<if test="TOUSER_LLIKE != null and TOUSER_LLIKE != ''">
+				AND T.TOUSER LIKE concat('%',#{TOUSER_LIKE})
+			</if>
+			<if test="TOUSER_RLIKE != null and TOUSER_RLIKE != ''">
+				AND T.TOUSER LIKE concat(#{TOUSER_RIKE},'%')
+			</if>
+				
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND T.FROMUSER = #{FROMUSER}
+			</if>
+			<if test="FROMUSER_LIKE != null and FROMUSER_LIKE != ''">
+				AND T.FROMUSER LIKE concat(concat('%',#{FROMUSER_LIKE}),'%')
+			</if>
+			<if test="FROMUSER_LLIKE != null and FROMUSER_LLIKE != ''">
+				AND T.FROMUSER LIKE concat('%',#{FROMUSER_LIKE})
+			</if>
+			<if test="FROMUSER_RLIKE != null and FROMUSER_RLIKE != ''">
+				AND T.FROMUSER LIKE concat(#{FROMUSER_RIKE},'%')
+			</if>
+				
+			<if test="CREATETIME != null and CREATETIME != ''">
+				AND T.CREATETIME = #{CREATETIME}
+			</if>
+			<if test="CREATETIME_LIKE != null and CREATETIME_LIKE != ''">
+				AND T.CREATETIME LIKE concat(concat('%',#{CREATETIME_LIKE}),'%')
+			</if>
+			<if test="CREATETIME_LLIKE != null and CREATETIME_LLIKE != ''">
+				AND T.CREATETIME LIKE concat('%',#{CREATETIME_LIKE})
+			</if>
+			<if test="CREATETIME_RLIKE != null and CREATETIME_RLIKE != ''">
+				AND T.CREATETIME LIKE concat(#{CREATETIME_RIKE},'%')
+			</if>
+				
+			<if test="MSGTYPE != null and MSGTYPE != ''">
+				AND T.MSGTYPE = #{MSGTYPE}
+			</if>
+			<if test="MSGTYPE_LIKE != null and MSGTYPE_LIKE != ''">
+				AND T.MSGTYPE LIKE concat(concat('%',#{MSGTYPE_LIKE}),'%')
+			</if>
+			<if test="MSGTYPE_LLIKE != null and MSGTYPE_LLIKE != ''">
+				AND T.MSGTYPE LIKE concat('%',#{MSGTYPE_LIKE})
+			</if>
+			<if test="MSGTYPE_RLIKE != null and MSGTYPE_RLIKE != ''">
+				AND T.MSGTYPE LIKE concat(#{MSGTYPE_RIKE},'%')
+			</if>
+				
+			<if test="CONTENT != null and CONTENT != ''">
+				AND T.CONTENT = #{CONTENT}
+			</if>
+			<if test="CONTENT_LIKE != null and CONTENT_LIKE != ''">
+				AND T.CONTENT LIKE concat(concat('%',#{CONTENT_LIKE}),'%')
+			</if>
+			<if test="CONTENT_LLIKE != null and CONTENT_LLIKE != ''">
+				AND T.CONTENT LIKE concat('%',#{CONTENT_LIKE})
+			</if>
+			<if test="CONTENT_RLIKE != null and CONTENT_RLIKE != ''">
+				AND T.CONTENT LIKE concat(#{CONTENT_RIKE},'%')
+			</if>
+				
+			<if test="MENUID != null and MENUID != ''">
+				AND T.MENUID = #{MENUID}
+			</if>
+			<if test="MENUID_LIKE != null and MENUID_LIKE != ''">
+				AND T.MENUID LIKE concat(concat('%',#{MENUID_LIKE}),'%')
+			</if>
+			<if test="MENUID_LLIKE != null and MENUID_LLIKE != ''">
+				AND T.MENUID LIKE concat('%',#{MENUID_LIKE})
+			</if>
+			<if test="MENUID_RLIKE != null and MENUID_RLIKE != ''">
+				AND T.MENUID LIKE concat(#{MENUID_RIKE},'%')
+			</if>
+				
+			<if test="MSGID != null and MSGID != ''">
+				AND T.MSGID = #{MSGID}
+			</if>
+			<if test="MSGID_LIKE != null and MSGID_LIKE != ''">
+				AND T.MSGID LIKE concat(concat('%',#{MSGID_LIKE}),'%')
+			</if>
+			<if test="MSGID_LLIKE != null and MSGID_LLIKE != ''">
+				AND T.MSGID LIKE concat('%',#{MSGID_LIKE})
+			</if>
+			<if test="MSGID_RLIKE != null and MSGID_RLIKE != ''">
+				AND T.MSGID LIKE concat(#{MSGID_RIKE},'%')
+			</if>
+				
+			<if test="PICURL != null and PICURL != ''">
+				AND T.PICURL = #{PICURL}
+			</if>
+			<if test="PICURL_LIKE != null and PICURL_LIKE != ''">
+				AND T.PICURL LIKE concat(concat('%',#{PICURL_LIKE}),'%')
+			</if>
+			<if test="PICURL_LLIKE != null and PICURL_LLIKE != ''">
+				AND T.PICURL LIKE concat('%',#{PICURL_LIKE})
+			</if>
+			<if test="PICURL_RLIKE != null and PICURL_RLIKE != ''">
+				AND T.PICURL LIKE concat(#{PICURL_RIKE},'%')
+			</if>
+				
+			<if test="MEDIAID != null and MEDIAID != ''">
+				AND T.MEDIAID = #{MEDIAID}
+			</if>
+			<if test="MEDIAID_LIKE != null and MEDIAID_LIKE != ''">
+				AND T.MEDIAID LIKE concat(concat('%',#{MEDIAID_LIKE}),'%')
+			</if>
+			<if test="MEDIAID_LLIKE != null and MEDIAID_LLIKE != ''">
+				AND T.MEDIAID LIKE concat('%',#{MEDIAID_LIKE})
+			</if>
+			<if test="MEDIAID_RLIKE != null and MEDIAID_RLIKE != ''">
+				AND T.MEDIAID LIKE concat(#{MEDIAID_RIKE},'%')
+			</if>
+				
+			<if test="FORMAT != null and FORMAT != ''">
+				AND T.FORMAT = #{FORMAT}
+			</if>
+			<if test="FORMAT_LIKE != null and FORMAT_LIKE != ''">
+				AND T.FORMAT LIKE concat(concat('%',#{FORMAT_LIKE}),'%')
+			</if>
+			<if test="FORMAT_LLIKE != null and FORMAT_LLIKE != ''">
+				AND T.FORMAT LIKE concat('%',#{FORMAT_LIKE})
+			</if>
+			<if test="FORMAT_RLIKE != null and FORMAT_RLIKE != ''">
+				AND T.FORMAT LIKE concat(#{FORMAT_RIKE},'%')
+			</if>
+				
+			<if test="THUMBMEDIAID != null and THUMBMEDIAID != ''">
+				AND T.THUMBMEDIAID = #{THUMBMEDIAID}
+			</if>
+			<if test="THUMBMEDIAID_LIKE != null and THUMBMEDIAID_LIKE != ''">
+				AND T.THUMBMEDIAID LIKE concat(concat('%',#{THUMBMEDIAID_LIKE}),'%')
+			</if>
+			<if test="THUMBMEDIAID_LLIKE != null and THUMBMEDIAID_LLIKE != ''">
+				AND T.THUMBMEDIAID LIKE concat('%',#{THUMBMEDIAID_LIKE})
+			</if>
+			<if test="THUMBMEDIAID_RLIKE != null and THUMBMEDIAID_RLIKE != ''">
+				AND T.THUMBMEDIAID LIKE concat(#{THUMBMEDIAID_RIKE},'%')
+			</if>
+				
+			<if test="LOCATIONX != null and LOCATIONX != ''">
+				AND T.LOCATIONX = #{LOCATIONX}
+			</if>
+			<if test="LOCATIONX_LIKE != null and LOCATIONX_LIKE != ''">
+				AND T.LOCATIONX LIKE concat(concat('%',#{LOCATIONX_LIKE}),'%')
+			</if>
+			<if test="LOCATIONX_LLIKE != null and LOCATIONX_LLIKE != ''">
+				AND T.LOCATIONX LIKE concat('%',#{LOCATIONX_LIKE})
+			</if>
+			<if test="LOCATIONX_RLIKE != null and LOCATIONX_RLIKE != ''">
+				AND T.LOCATIONX LIKE concat(#{LOCATIONX_RIKE},'%')
+			</if>
+				
+			<if test="LOCATIONY != null and LOCATIONY != ''">
+				AND T.LOCATIONY = #{LOCATIONY}
+			</if>
+			<if test="LOCATIONY_LIKE != null and LOCATIONY_LIKE != ''">
+				AND T.LOCATIONY LIKE concat(concat('%',#{LOCATIONY_LIKE}),'%')
+			</if>
+			<if test="LOCATIONY_LLIKE != null and LOCATIONY_LLIKE != ''">
+				AND T.LOCATIONY LIKE concat('%',#{LOCATIONY_LIKE})
+			</if>
+			<if test="LOCATIONY_RLIKE != null and LOCATIONY_RLIKE != ''">
+				AND T.LOCATIONY LIKE concat(#{LOCATIONY_RIKE},'%')
+			</if>
+				
+			<if test="SCALE != null and SCALE != ''">
+				AND T.SCALE = #{SCALE}
+			</if>
+			<if test="SCALE_LIKE != null and SCALE_LIKE != ''">
+				AND T.SCALE LIKE concat(concat('%',#{SCALE_LIKE}),'%')
+			</if>
+			<if test="SCALE_LLIKE != null and SCALE_LLIKE != ''">
+				AND T.SCALE LIKE concat('%',#{SCALE_LIKE})
+			</if>
+			<if test="SCALE_RLIKE != null and SCALE_RLIKE != ''">
+				AND T.SCALE LIKE concat(#{SCALE_RIKE},'%')
+			</if>
+				
+			<if test="LABEL != null and LABEL != ''">
+				AND T.LABEL = #{LABEL}
+			</if>
+			<if test="LABEL_LIKE != null and LABEL_LIKE != ''">
+				AND T.LABEL LIKE concat(concat('%',#{LABEL_LIKE}),'%')
+			</if>
+			<if test="LABEL_LLIKE != null and LABEL_LLIKE != ''">
+				AND T.LABEL LIKE concat('%',#{LABEL_LIKE})
+			</if>
+			<if test="LABEL_RLIKE != null and LABEL_RLIKE != ''">
+				AND T.LABEL LIKE concat(#{LABEL_RIKE},'%')
+			</if>
+				
+			<if test="TITLE != null and TITLE != ''">
+				AND T.TITLE = #{TITLE}
+			</if>
+			<if test="TITLE_LIKE != null and TITLE_LIKE != ''">
+				AND T.TITLE LIKE concat(concat('%',#{TITLE_LIKE}),'%')
+			</if>
+			<if test="TITLE_LLIKE != null and TITLE_LLIKE != ''">
+				AND T.TITLE LIKE concat('%',#{TITLE_LIKE})
+			</if>
+			<if test="TITLE_RLIKE != null and TITLE_RLIKE != ''">
+				AND T.TITLE LIKE concat(#{TITLE_RIKE},'%')
+			</if>
+				
+			<if test="DESCRIPTION != null and DESCRIPTION != ''">
+				AND T.DESCRIPTION = #{DESCRIPTION}
+			</if>
+			<if test="DESCRIPTION_LIKE != null and DESCRIPTION_LIKE != ''">
+				AND T.DESCRIPTION LIKE concat(concat('%',#{DESCRIPTION_LIKE}),'%')
+			</if>
+			<if test="DESCRIPTION_LLIKE != null and DESCRIPTION_LLIKE != ''">
+				AND T.DESCRIPTION LIKE concat('%',#{DESCRIPTION_LIKE})
+			</if>
+			<if test="DESCRIPTION_RLIKE != null and DESCRIPTION_RLIKE != ''">
+				AND T.DESCRIPTION LIKE concat(#{DESCRIPTION_RIKE},'%')
+			</if>
+				
+			<if test="URL != null and URL != ''">
+				AND T.URL = #{URL}
+			</if>
+			<if test="URL_LIKE != null and URL_LIKE != ''">
+				AND T.URL LIKE concat(concat('%',#{URL_LIKE}),'%')
+			</if>
+			<if test="URL_LLIKE != null and URL_LLIKE != ''">
+				AND T.URL LIKE concat('%',#{URL_LIKE})
+			</if>
+			<if test="URL_RLIKE != null and URL_RLIKE != ''">
+				AND T.URL LIKE concat(#{URL_RIKE},'%')
+			</if>
+				
+			<if test="EVENT != null and EVENT != ''">
+				AND T.EVENT = #{EVENT}
+			</if>
+			<if test="EVENT_LIKE != null and EVENT_LIKE != ''">
+				AND T.EVENT LIKE concat(concat('%',#{EVENT_LIKE}),'%')
+			</if>
+			<if test="EVENT_LLIKE != null and EVENT_LLIKE != ''">
+				AND T.EVENT LIKE concat('%',#{EVENT_LIKE})
+			</if>
+			<if test="EVENT_RLIKE != null and EVENT_RLIKE != ''">
+				AND T.EVENT LIKE concat(#{EVENT_RIKE},'%')
+			</if>
+				
+			<if test="EVENTKEY != null and EVENTKEY != ''">
+				AND T.EVENTKEY = #{EVENTKEY}
+			</if>
+			<if test="EVENTKEY_LIKE != null and EVENTKEY_LIKE != ''">
+				AND T.EVENTKEY LIKE concat(concat('%',#{EVENTKEY_LIKE}),'%')
+			</if>
+			<if test="EVENTKEY_LLIKE != null and EVENTKEY_LLIKE != ''">
+				AND T.EVENTKEY LIKE concat('%',#{EVENTKEY_LIKE})
+			</if>
+			<if test="EVENTKEY_RLIKE != null and EVENTKEY_RLIKE != ''">
+				AND T.EVENTKEY LIKE concat(#{EVENTKEY_RIKE},'%')
+			</if>
+				
+			<if test="TICKET != null and TICKET != ''">
+				AND T.TICKET = #{TICKET}
+			</if>
+			<if test="TICKET_LIKE != null and TICKET_LIKE != ''">
+				AND T.TICKET LIKE concat(concat('%',#{TICKET_LIKE}),'%')
+			</if>
+			<if test="TICKET_LLIKE != null and TICKET_LLIKE != ''">
+				AND T.TICKET LIKE concat('%',#{TICKET_LIKE})
+			</if>
+			<if test="TICKET_RLIKE != null and TICKET_RLIKE != ''">
+				AND T.TICKET LIKE concat(#{TICKET_RIKE},'%')
+			</if>
+				
+			<if test="LATITUDE != null and LATITUDE != ''">
+				AND T.LATITUDE = #{LATITUDE}
+			</if>
+			<if test="LATITUDE_LIKE != null and LATITUDE_LIKE != ''">
+				AND T.LATITUDE LIKE concat(concat('%',#{LATITUDE_LIKE}),'%')
+			</if>
+			<if test="LATITUDE_LLIKE != null and LATITUDE_LLIKE != ''">
+				AND T.LATITUDE LIKE concat('%',#{LATITUDE_LIKE})
+			</if>
+			<if test="LATITUDE_RLIKE != null and LATITUDE_RLIKE != ''">
+				AND T.LATITUDE LIKE concat(#{LATITUDE_RIKE},'%')
+			</if>
+				
+			<if test="LONGITUDE != null and LONGITUDE != ''">
+				AND T.LONGITUDE = #{LONGITUDE}
+			</if>
+			<if test="LONGITUDE_LIKE != null and LONGITUDE_LIKE != ''">
+				AND T.LONGITUDE LIKE concat(concat('%',#{LONGITUDE_LIKE}),'%')
+			</if>
+			<if test="LONGITUDE_LLIKE != null and LONGITUDE_LLIKE != ''">
+				AND T.LONGITUDE LIKE concat('%',#{LONGITUDE_LIKE})
+			</if>
+			<if test="LONGITUDE_RLIKE != null and LONGITUDE_RLIKE != ''">
+				AND T.LONGITUDE LIKE concat(#{LONGITUDE_RIKE},'%')
+			</if>
+				
+			<if test="PRECISION != null and PRECISION != ''">
+				AND T.PRECISION = #{PRECISION}
+			</if>
+			<if test="PRECISION_LIKE != null and PRECISION_LIKE != ''">
+				AND T.PRECISION LIKE concat(concat('%',#{PRECISION_LIKE}),'%')
+			</if>
+			<if test="PRECISION_LLIKE != null and PRECISION_LLIKE != ''">
+				AND T.PRECISION LIKE concat('%',#{PRECISION_LIKE})
+			</if>
+			<if test="PRECISION_RLIKE != null and PRECISION_RLIKE != ''">
+				AND T.PRECISION LIKE concat(#{PRECISION_RIKE},'%')
+			</if>
+				
+			<if test="RECOGNITION != null and RECOGNITION != ''">
+				AND T.RECOGNITION = #{RECOGNITION}
+			</if>
+			<if test="RECOGNITION_LIKE != null and RECOGNITION_LIKE != ''">
+				AND T.RECOGNITION LIKE concat(concat('%',#{RECOGNITION_LIKE}),'%')
+			</if>
+			<if test="RECOGNITION_LLIKE != null and RECOGNITION_LLIKE != ''">
+				AND T.RECOGNITION LIKE concat('%',#{RECOGNITION_LIKE})
+			</if>
+			<if test="RECOGNITION_RLIKE != null and RECOGNITION_RLIKE != ''">
+				AND T.RECOGNITION LIKE concat(#{RECOGNITION_RIKE},'%')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectWX_MSG" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM WX_MSG T <include refid="WX_MSG_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.TOUSER,T.FROMUSER,T.CREATETIME,T.MSGTYPE,
+			T.CONTENT,T.MENUID,T.MSGID,T.PICURL,T.MEDIAID,
+			T.FORMAT,T.THUMBMEDIAID,T.LOCATIONX,T.LOCATIONY,T.SCALE,
+			T.LABEL,T.TITLE,T.DESCRIPTION,T.URL,T.EVENT,
+			T.EVENTKEY,T.TICKET,T.LATITUDE,T.LONGITUDE,T.PRECISION,
+			T.RECOGNITION
+         FROM WX_MSG T
+        <include refid="WX_MSG_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,WX_MSG T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectWX_MSGCount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM WX_MSG T <include refid="WX_MSG_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertWX_MSG" parameterType="java.util.Map" >
+    	insert into WX_MSG 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				  TOUSER ,
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				  FROMUSER ,
+			</if>
+			<if test="CREATETIME != null and CREATETIME != ''">
+				  CREATETIME ,
+			</if>
+			<if test="MSGTYPE != null and MSGTYPE != ''">
+				  MSGTYPE ,
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				  CONTENT ,
+			</if>
+			<if test="MENUID != null and MENUID != ''">
+				  MENUID ,
+			</if>
+			<if test="MSGID != null and MSGID != ''">
+				  MSGID ,
+			</if>
+			<if test="PICURL != null and PICURL != ''">
+				  PICURL ,
+			</if>
+			<if test="MEDIAID != null and MEDIAID != ''">
+				  MEDIAID ,
+			</if>
+			<if test="FORMAT != null and FORMAT != ''">
+				  FORMAT ,
+			</if>
+			<if test="THUMBMEDIAID != null and THUMBMEDIAID != ''">
+				  THUMBMEDIAID ,
+			</if>
+			<if test="LOCATIONX != null and LOCATIONX != ''">
+				  LOCATIONX ,
+			</if>
+			<if test="LOCATIONY != null and LOCATIONY != ''">
+				  LOCATIONY ,
+			</if>
+			<if test="SCALE != null and SCALE != ''">
+				  SCALE ,
+			</if>
+			<if test="LABEL != null and LABEL != ''">
+				  LABEL ,
+			</if>
+			<if test="TITLE != null and TITLE != ''">
+				  TITLE ,
+			</if>
+			<if test="DESCRIPTION != null and DESCRIPTION != ''">
+				  DESCRIPTION ,
+			</if>
+			<if test="URL != null and URL != ''">
+				  URL ,
+			</if>
+			<if test="EVENT != null and EVENT != ''">
+				  EVENT ,
+			</if>
+			<if test="EVENTKEY != null and EVENTKEY != ''">
+				  EVENTKEY ,
+			</if>
+			<if test="TICKET != null and TICKET != ''">
+				  TICKET ,
+			</if>
+			<if test="LATITUDE != null and LATITUDE != ''">
+				  LATITUDE ,
+			</if>
+			<if test="LONGITUDE != null and LONGITUDE != ''">
+				  LONGITUDE ,
+			</if>
+			<if test="PRECISION != null and PRECISION != ''">
+				  PRECISION ,
+			</if>
+			<if test="RECOGNITION != null and RECOGNITION != ''">
+				  RECOGNITION ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				 #{TOUSER},  
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				 #{FROMUSER},  
+			</if>
+			<if test="CREATETIME != null and CREATETIME != ''">
+				 #{CREATETIME},  
+			</if>
+			<if test="MSGTYPE != null and MSGTYPE != ''">
+				 #{MSGTYPE},  
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				 #{CONTENT},  
+			</if>
+			<if test="MENUID != null and MENUID != ''">
+				 #{MENUID},  
+			</if>
+			<if test="MSGID != null and MSGID != ''">
+				 #{MSGID},  
+			</if>
+			<if test="PICURL != null and PICURL != ''">
+				 #{PICURL},  
+			</if>
+			<if test="MEDIAID != null and MEDIAID != ''">
+				 #{MEDIAID},  
+			</if>
+			<if test="FORMAT != null and FORMAT != ''">
+				 #{FORMAT},  
+			</if>
+			<if test="THUMBMEDIAID != null and THUMBMEDIAID != ''">
+				 #{THUMBMEDIAID},  
+			</if>
+			<if test="LOCATIONX != null and LOCATIONX != ''">
+				 #{LOCATIONX},  
+			</if>
+			<if test="LOCATIONY != null and LOCATIONY != ''">
+				 #{LOCATIONY},  
+			</if>
+			<if test="SCALE != null and SCALE != ''">
+				 #{SCALE},  
+			</if>
+			<if test="LABEL != null and LABEL != ''">
+				 #{LABEL},  
+			</if>
+			<if test="TITLE != null and TITLE != ''">
+				 #{TITLE},  
+			</if>
+			<if test="DESCRIPTION != null and DESCRIPTION != ''">
+				 #{DESCRIPTION},  
+			</if>
+			<if test="URL != null and URL != ''">
+				 #{URL},  
+			</if>
+			<if test="EVENT != null and EVENT != ''">
+				 #{EVENT},  
+			</if>
+			<if test="EVENTKEY != null and EVENTKEY != ''">
+				 #{EVENTKEY},  
+			</if>
+			<if test="TICKET != null and TICKET != ''">
+				 #{TICKET},  
+			</if>
+			<if test="LATITUDE != null and LATITUDE != ''">
+				 #{LATITUDE},  
+			</if>
+			<if test="LONGITUDE != null and LONGITUDE != ''">
+				 #{LONGITUDE},  
+			</if>
+			<if test="PRECISION != null and PRECISION != ''">
+				 #{PRECISION},  
+			</if>
+			<if test="RECOGNITION != null and RECOGNITION != ''">
+				 #{RECOGNITION},  
+			</if>
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateWX_MSG" parameterType="java.util.Map" >
+    	update   WX_MSG 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="TOUSER_NEW != null and TOUSER_NEW != ''">
+				  TOUSER=  #{TOUSER_NEW},
+			</if>
+			<if test="FROMUSER_NEW != null and FROMUSER_NEW != ''">
+				  FROMUSER=  #{FROMUSER_NEW},
+			</if>
+			<if test="CREATETIME_NEW != null and CREATETIME_NEW != ''">
+				  CREATETIME=  #{CREATETIME_NEW},
+			</if>
+			<if test="MSGTYPE_NEW != null and MSGTYPE_NEW != ''">
+				  MSGTYPE=  #{MSGTYPE_NEW},
+			</if>
+			<if test="CONTENT_NEW != null and CONTENT_NEW != ''">
+				  CONTENT=  #{CONTENT_NEW},
+			</if>
+			<if test="MENUID_NEW != null and MENUID_NEW != ''">
+				  MENUID=  #{MENUID_NEW},
+			</if>
+			<if test="MSGID_NEW != null and MSGID_NEW != ''">
+				  MSGID=  #{MSGID_NEW},
+			</if>
+			<if test="PICURL_NEW != null and PICURL_NEW != ''">
+				  PICURL=  #{PICURL_NEW},
+			</if>
+			<if test="MEDIAID_NEW != null and MEDIAID_NEW != ''">
+				  MEDIAID=  #{MEDIAID_NEW},
+			</if>
+			<if test="FORMAT_NEW != null and FORMAT_NEW != ''">
+				  FORMAT=  #{FORMAT_NEW},
+			</if>
+			<if test="THUMBMEDIAID_NEW != null and THUMBMEDIAID_NEW != ''">
+				  THUMBMEDIAID=  #{THUMBMEDIAID_NEW},
+			</if>
+			<if test="LOCATIONX_NEW != null and LOCATIONX_NEW != ''">
+				  LOCATIONX=  #{LOCATIONX_NEW},
+			</if>
+			<if test="LOCATIONY_NEW != null and LOCATIONY_NEW != ''">
+				  LOCATIONY=  #{LOCATIONY_NEW},
+			</if>
+			<if test="SCALE_NEW != null and SCALE_NEW != ''">
+				  SCALE=  #{SCALE_NEW},
+			</if>
+			<if test="LABEL_NEW != null and LABEL_NEW != ''">
+				  LABEL=  #{LABEL_NEW},
+			</if>
+			<if test="TITLE_NEW != null and TITLE_NEW != ''">
+				  TITLE=  #{TITLE_NEW},
+			</if>
+			<if test="DESCRIPTION_NEW != null and DESCRIPTION_NEW != ''">
+				  DESCRIPTION=  #{DESCRIPTION_NEW},
+			</if>
+			<if test="URL_NEW != null and URL_NEW != ''">
+				  URL=  #{URL_NEW},
+			</if>
+			<if test="EVENT_NEW != null and EVENT_NEW != ''">
+				  EVENT=  #{EVENT_NEW},
+			</if>
+			<if test="EVENTKEY_NEW != null and EVENTKEY_NEW != ''">
+				  EVENTKEY=  #{EVENTKEY_NEW},
+			</if>
+			<if test="TICKET_NEW != null and TICKET_NEW != ''">
+				  TICKET=  #{TICKET_NEW},
+			</if>
+			<if test="LATITUDE_NEW != null and LATITUDE_NEW != ''">
+				  LATITUDE=  #{LATITUDE_NEW},
+			</if>
+			<if test="LONGITUDE_NEW != null and LONGITUDE_NEW != ''">
+				  LONGITUDE=  #{LONGITUDE_NEW},
+			</if>
+			<if test="PRECISION_NEW != null and PRECISION_NEW != ''">
+				  PRECISION=  #{PRECISION_NEW},
+			</if>
+			<if test="RECOGNITION_NEW != null and RECOGNITION_NEW != ''">
+				  RECOGNITION=  #{RECOGNITION_NEW},
+			</if>
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				AND TOUSER = #{TOUSER}
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND FROMUSER = #{FROMUSER}
+			</if>
+			<if test="CREATETIME != null and CREATETIME != ''">
+				AND CREATETIME = #{CREATETIME}
+			</if>
+			<if test="MSGTYPE != null and MSGTYPE != ''">
+				AND MSGTYPE = #{MSGTYPE}
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				AND CONTENT = #{CONTENT}
+			</if>
+			<if test="MENUID != null and MENUID != ''">
+				AND MENUID = #{MENUID}
+			</if>
+			<if test="MSGID != null and MSGID != ''">
+				AND MSGID = #{MSGID}
+			</if>
+			<if test="PICURL != null and PICURL != ''">
+				AND PICURL = #{PICURL}
+			</if>
+			<if test="MEDIAID != null and MEDIAID != ''">
+				AND MEDIAID = #{MEDIAID}
+			</if>
+			<if test="FORMAT != null and FORMAT != ''">
+				AND FORMAT = #{FORMAT}
+			</if>
+			<if test="THUMBMEDIAID != null and THUMBMEDIAID != ''">
+				AND THUMBMEDIAID = #{THUMBMEDIAID}
+			</if>
+			<if test="LOCATIONX != null and LOCATIONX != ''">
+				AND LOCATIONX = #{LOCATIONX}
+			</if>
+			<if test="LOCATIONY != null and LOCATIONY != ''">
+				AND LOCATIONY = #{LOCATIONY}
+			</if>
+			<if test="SCALE != null and SCALE != ''">
+				AND SCALE = #{SCALE}
+			</if>
+			<if test="LABEL != null and LABEL != ''">
+				AND LABEL = #{LABEL}
+			</if>
+			<if test="TITLE != null and TITLE != ''">
+				AND TITLE = #{TITLE}
+			</if>
+			<if test="DESCRIPTION != null and DESCRIPTION != ''">
+				AND DESCRIPTION = #{DESCRIPTION}
+			</if>
+			<if test="URL != null and URL != ''">
+				AND URL = #{URL}
+			</if>
+			<if test="EVENT != null and EVENT != ''">
+				AND EVENT = #{EVENT}
+			</if>
+			<if test="EVENTKEY != null and EVENTKEY != ''">
+				AND EVENTKEY = #{EVENTKEY}
+			</if>
+			<if test="TICKET != null and TICKET != ''">
+				AND TICKET = #{TICKET}
+			</if>
+			<if test="LATITUDE != null and LATITUDE != ''">
+				AND LATITUDE = #{LATITUDE}
+			</if>
+			<if test="LONGITUDE != null and LONGITUDE != ''">
+				AND LONGITUDE = #{LONGITUDE}
+			</if>
+			<if test="PRECISION != null and PRECISION != ''">
+				AND PRECISION = #{PRECISION}
+			</if>
+			<if test="RECOGNITION != null and RECOGNITION != ''">
+				AND RECOGNITION = #{RECOGNITION}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteWX_MSG" parameterType="java.util.Map" >
+    	delete  from WX_MSG  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="TOUSER != null and TOUSER != ''">
+				AND TOUSER = #{TOUSER}
+			</if>
+			<if test="FROMUSER != null and FROMUSER != ''">
+				AND FROMUSER = #{FROMUSER}
+			</if>
+			<if test="CREATETIME != null and CREATETIME != ''">
+				AND CREATETIME = #{CREATETIME}
+			</if>
+			<if test="MSGTYPE != null and MSGTYPE != ''">
+				AND MSGTYPE = #{MSGTYPE}
+			</if>
+			<if test="CONTENT != null and CONTENT != ''">
+				AND CONTENT = #{CONTENT}
+			</if>
+			<if test="MENUID != null and MENUID != ''">
+				AND MENUID = #{MENUID}
+			</if>
+			<if test="MSGID != null and MSGID != ''">
+				AND MSGID = #{MSGID}
+			</if>
+			<if test="PICURL != null and PICURL != ''">
+				AND PICURL = #{PICURL}
+			</if>
+			<if test="MEDIAID != null and MEDIAID != ''">
+				AND MEDIAID = #{MEDIAID}
+			</if>
+			<if test="FORMAT != null and FORMAT != ''">
+				AND FORMAT = #{FORMAT}
+			</if>
+			<if test="THUMBMEDIAID != null and THUMBMEDIAID != ''">
+				AND THUMBMEDIAID = #{THUMBMEDIAID}
+			</if>
+			<if test="LOCATIONX != null and LOCATIONX != ''">
+				AND LOCATIONX = #{LOCATIONX}
+			</if>
+			<if test="LOCATIONY != null and LOCATIONY != ''">
+				AND LOCATIONY = #{LOCATIONY}
+			</if>
+			<if test="SCALE != null and SCALE != ''">
+				AND SCALE = #{SCALE}
+			</if>
+			<if test="LABEL != null and LABEL != ''">
+				AND LABEL = #{LABEL}
+			</if>
+			<if test="TITLE != null and TITLE != ''">
+				AND TITLE = #{TITLE}
+			</if>
+			<if test="DESCRIPTION != null and DESCRIPTION != ''">
+				AND DESCRIPTION = #{DESCRIPTION}
+			</if>
+			<if test="URL != null and URL != ''">
+				AND URL = #{URL}
+			</if>
+			<if test="EVENT != null and EVENT != ''">
+				AND EVENT = #{EVENT}
+			</if>
+			<if test="EVENTKEY != null and EVENTKEY != ''">
+				AND EVENTKEY = #{EVENTKEY}
+			</if>
+			<if test="TICKET != null and TICKET != ''">
+				AND TICKET = #{TICKET}
+			</if>
+			<if test="LATITUDE != null and LATITUDE != ''">
+				AND LATITUDE = #{LATITUDE}
+			</if>
+			<if test="LONGITUDE != null and LONGITUDE != ''">
+				AND LONGITUDE = #{LONGITUDE}
+			</if>
+			<if test="PRECISION != null and PRECISION != ''">
+				AND PRECISION = #{PRECISION}
+			</if>
+			<if test="RECOGNITION != null and RECOGNITION != ''">
+				AND RECOGNITION = #{RECOGNITION}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>
