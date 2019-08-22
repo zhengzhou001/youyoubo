@@ -105,7 +105,7 @@
         </filter>
     </appender>
     <!-- mybatis日志打印 -->
-	<logger name="com.tcwy.distribute.*.*.mapper" level="DEBUG" />
+	<logger name="com.chuxi.*.mapper" level="DEBUG" />
     <root level="${logback.level}">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE_INFO" />
