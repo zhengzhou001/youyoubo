@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chuxi.user.mapper.USER_INFOMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="USER_INFO_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND T.NICKNAME = #{NICKNAME}
+			</if>
+			<if test="NICKNAME_LIKE != null and NICKNAME_LIKE != ''">
+				AND T.NICKNAME LIKE concat(concat('%',#{NICKNAME_LIKE}),'%')
+			</if>
+			<if test="NICKNAME_LLIKE != null and NICKNAME_LLIKE != ''">
+				AND T.NICKNAME LIKE concat('%',#{NICKNAME_LIKE})
+			</if>
+			<if test="NICKNAME_RLIKE != null and NICKNAME_RLIKE != ''">
+				AND T.NICKNAME LIKE concat(#{NICKNAME_RIKE},'%')
+			</if>
+				
+			<if test="SEX != null and SEX != ''">
+				AND T.SEX = #{SEX}
+			</if>
+			<if test="SEX_LIKE != null and SEX_LIKE != ''">
+				AND T.SEX LIKE concat(concat('%',#{SEX_LIKE}),'%')
+			</if>
+			<if test="SEX_LLIKE != null and SEX_LLIKE != ''">
+				AND T.SEX LIKE concat('%',#{SEX_LIKE})
+			</if>
+			<if test="SEX_RLIKE != null and SEX_RLIKE != ''">
+				AND T.SEX LIKE concat(#{SEX_RIKE},'%')
+			</if>
+				
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND T.HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="HEADIMGURL_LIKE != null and HEADIMGURL_LIKE != ''">
+				AND T.HEADIMGURL LIKE concat(concat('%',#{HEADIMGURL_LIKE}),'%')
+			</if>
+			<if test="HEADIMGURL_LLIKE != null and HEADIMGURL_LLIKE != ''">
+				AND T.HEADIMGURL LIKE concat('%',#{HEADIMGURL_LIKE})
+			</if>
+			<if test="HEADIMGURL_RLIKE != null and HEADIMGURL_RLIKE != ''">
+				AND T.HEADIMGURL LIKE concat(#{HEADIMGURL_RIKE},'%')
+			</if>
+				
+			<if test="OPENID != null and OPENID != ''">
+				AND T.OPENID = #{OPENID}
+			</if>
+			<if test="OPENID_LIKE != null and OPENID_LIKE != ''">
+				AND T.OPENID LIKE concat(concat('%',#{OPENID_LIKE}),'%')
+			</if>
+			<if test="OPENID_LLIKE != null and OPENID_LLIKE != ''">
+				AND T.OPENID LIKE concat('%',#{OPENID_LIKE})
+			</if>
+			<if test="OPENID_RLIKE != null and OPENID_RLIKE != ''">
+				AND T.OPENID LIKE concat(#{OPENID_RIKE},'%')
+			</if>
+				
+			<if test="PHONE != null and PHONE != ''">
+				AND T.PHONE = #{PHONE}
+			</if>
+			<if test="PHONE_LIKE != null and PHONE_LIKE != ''">
+				AND T.PHONE LIKE concat(concat('%',#{PHONE_LIKE}),'%')
+			</if>
+			<if test="PHONE_LLIKE != null and PHONE_LLIKE != ''">
+				AND T.PHONE LIKE concat('%',#{PHONE_LIKE})
+			</if>
+			<if test="PHONE_RLIKE != null and PHONE_RLIKE != ''">
+				AND T.PHONE LIKE concat(#{PHONE_RIKE},'%')
+			</if>
+				
+			<if test="CITY != null and CITY != ''">
+				AND T.CITY = #{CITY}
+			</if>
+			<if test="CITY_LIKE != null and CITY_LIKE != ''">
+				AND T.CITY LIKE concat(concat('%',#{CITY_LIKE}),'%')
+			</if>
+			<if test="CITY_LLIKE != null and CITY_LLIKE != ''">
+				AND T.CITY LIKE concat('%',#{CITY_LIKE})
+			</if>
+			<if test="CITY_RLIKE != null and CITY_RLIKE != ''">
+				AND T.CITY LIKE concat(#{CITY_RIKE},'%')
+			</if>
+				
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND T.PROVINCE = #{PROVINCE}
+			</if>
+			<if test="PROVINCE_LIKE != null and PROVINCE_LIKE != ''">
+				AND T.PROVINCE LIKE concat(concat('%',#{PROVINCE_LIKE}),'%')
+			</if>
+			<if test="PROVINCE_LLIKE != null and PROVINCE_LLIKE != ''">
+				AND T.PROVINCE LIKE concat('%',#{PROVINCE_LIKE})
+			</if>
+			<if test="PROVINCE_RLIKE != null and PROVINCE_RLIKE != ''">
+				AND T.PROVINCE LIKE concat(#{PROVINCE_RIKE},'%')
+			</if>
+				
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND T.COUNTRY = #{COUNTRY}
+			</if>
+			<if test="COUNTRY_LIKE != null and COUNTRY_LIKE != ''">
+				AND T.COUNTRY LIKE concat(concat('%',#{COUNTRY_LIKE}),'%')
+			</if>
+			<if test="COUNTRY_LLIKE != null and COUNTRY_LLIKE != ''">
+				AND T.COUNTRY LIKE concat('%',#{COUNTRY_LIKE})
+			</if>
+			<if test="COUNTRY_RLIKE != null and COUNTRY_RLIKE != ''">
+				AND T.COUNTRY LIKE concat(#{COUNTRY_RIKE},'%')
+			</if>
+				
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND T.CREATE_DATE = STR_TO_DATE(#{CREATE_DATE,'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="CREATE_DATE_MIN != null and CREATE_DATE_MIN != ''">
+				AND T.CREATE_DATE &gt;= STR_TO_DATE(#{CREATE_DATE_MIN},'%Y-%m-%d %H:%i:%s')
+			</if>
+			<if test="CREATE_DATE_MAX != null and CREATE_DATE_MAX != ''">
+				AND T.CREATE_DATE &lt;= STR_TO_DATE(#{CREATE_DATE_MAX},'%Y-%m-%d %H:%i:%s')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectUSER_INFO" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM USER_INFO T <include refid="USER_INFO_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.NICKNAME,T.SEX,T.HEADIMGURL,T.OPENID,
+			T.PHONE,T.CITY,T.PROVINCE,T.COUNTRY,
+        DATE_FORMAT(T.CREATE_DATE,'%Y-%m-%d %H:%i:%s') CREATE_DATE
+			
+         FROM USER_INFO T
+        <include refid="USER_INFO_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,USER_INFO T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectUSER_INFOCount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM USER_INFO T <include refid="USER_INFO_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertUSER_INFO" parameterType="java.util.Map" >
+    	insert into USER_INFO 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				  NICKNAME ,
+			</if>
+			<if test="SEX != null and SEX != ''">
+				  SEX ,
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				  HEADIMGURL ,
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				  OPENID ,
+			</if>
+			<if test="PHONE != null and PHONE != ''">
+				  PHONE ,
+			</if>
+			<if test="CITY != null and CITY != ''">
+				  CITY ,
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				  PROVINCE ,
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				  COUNTRY ,
+			</if>
+			 CREATE_DATE ,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				 #{NICKNAME},  
+			</if>
+			<if test="SEX != null and SEX != ''">
+				 #{SEX},  
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				 #{HEADIMGURL},  
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				 #{OPENID},  
+			</if>
+			<if test="PHONE != null and PHONE != ''">
+				 #{PHONE},  
+			</if>
+			<if test="CITY != null and CITY != ''">
+				 #{CITY},  
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				 #{PROVINCE},  
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				 #{COUNTRY},  
+			</if>
+				NOW(),
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateUSER_INFO" parameterType="java.util.Map" >
+    	update   USER_INFO 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="NICKNAME_NEW != null and NICKNAME_NEW != ''">
+				  NICKNAME=  #{NICKNAME_NEW},
+			</if>
+			<if test="SEX_NEW != null and SEX_NEW != ''">
+				  SEX=  #{SEX_NEW},
+			</if>
+			<if test="HEADIMGURL_NEW != null and HEADIMGURL_NEW != ''">
+				  HEADIMGURL=  #{HEADIMGURL_NEW},
+			</if>
+			<if test="OPENID_NEW != null and OPENID_NEW != ''">
+				  OPENID=  #{OPENID_NEW},
+			</if>
+			<if test="PHONE_NEW != null and PHONE_NEW != ''">
+				  PHONE=  #{PHONE_NEW},
+			</if>
+			<if test="CITY_NEW != null and CITY_NEW != ''">
+				  CITY=  #{CITY_NEW},
+			</if>
+			<if test="PROVINCE_NEW != null and PROVINCE_NEW != ''">
+				  PROVINCE=  #{PROVINCE_NEW},
+			</if>
+			<if test="COUNTRY_NEW != null and COUNTRY_NEW != ''">
+				  COUNTRY=  #{COUNTRY_NEW},
+			</if>
+			<if test="CREATE_DATE_NEW != null and CREATE_DATE_NEW != ''">
+				  CREATE_DATE=  STR_TO_DATE(#{CREATE_DATE_NEW},'%Y-%m-%d %H:%i:%s')
+			</if>
+			 
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND NICKNAME = #{NICKNAME}
+			</if>
+			<if test="SEX != null and SEX != ''">
+				AND SEX = #{SEX}
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="PHONE != null and PHONE != ''">
+				AND PHONE = #{PHONE}
+			</if>
+			<if test="CITY != null and CITY != ''">
+				AND CITY = #{CITY}
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND PROVINCE = #{PROVINCE}
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND COUNTRY = #{COUNTRY}
+			</if>
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND CREATE_DATE = #{CREATE_DATE}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteUSER_INFO" parameterType="java.util.Map" >
+    	delete  from USER_INFO  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="NICKNAME != null and NICKNAME != ''">
+				AND NICKNAME = #{NICKNAME}
+			</if>
+			<if test="SEX != null and SEX != ''">
+				AND SEX = #{SEX}
+			</if>
+			<if test="HEADIMGURL != null and HEADIMGURL != ''">
+				AND HEADIMGURL = #{HEADIMGURL}
+			</if>
+			<if test="OPENID != null and OPENID != ''">
+				AND OPENID = #{OPENID}
+			</if>
+			<if test="PHONE != null and PHONE != ''">
+				AND PHONE = #{PHONE}
+			</if>
+			<if test="CITY != null and CITY != ''">
+				AND CITY = #{CITY}
+			</if>
+			<if test="PROVINCE != null and PROVINCE != ''">
+				AND PROVINCE = #{PROVINCE}
+			</if>
+			<if test="COUNTRY != null and COUNTRY != ''">
+				AND COUNTRY = #{COUNTRY}
+			</if>
+			<if test="CREATE_DATE != null and CREATE_DATE != ''">
+				AND CREATE_DATE = #{CREATE_DATE}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

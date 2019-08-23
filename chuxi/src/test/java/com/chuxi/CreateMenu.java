@@ -70,8 +70,17 @@ public class CreateMenu {
 		button2.setSubButtons(Arrays.asList(button1_2,button1_1));
 		
 		WxMenuButton button3 =new WxMenuButton();
-		button3.setName("衣服鞋帽");
-		button3.setSubButtons(Arrays.asList(button1_2,button1_1));
+		button3.setName("会员事宜");
+		
+		
+		
+		WxMenuButton button3_1 =new WxMenuButton();
+		button3_1.setName("会员信息");
+		button3_1.setType(WxConsts.MenuButtonType.VIEW);
+		button3_1.setUrl("http://"+baseConfig.getYm()+"/oauth/authorize?returnUrl=http://"+baseConfig.getYm()+"/html/user/preInfo.html");
+		
+		
+		button3.setSubButtons(Arrays.asList(button3_1));
 		
 		
 		/*MenusVO menusVO = new MenusVO();

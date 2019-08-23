@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>会员信息</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <script type="text/javascript"  src="../../js/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript"  src="../../js/jquery/jquery.blockUI.js"></script>
+	<script type="text/javascript"  src="../../js/cookie/jquery.cookie.js"></script>
+	<script type="text/javascript"  src="../../js/json/json2.js"></script>
+	<script type="text/javascript"  src="../../js/base/base.tools.js"></script>
+	
+	<script type="text/javascript"  src="../../js/layui/layui.js"></script>
+ 	<link rel="stylesheet" href="../../js/layui/css/layui.css" media="all">
+
+  </head>
+  
+  <body>
+   
+  </body>
+</html>
+<script type="text/javascript">
+	layui.use([ 'element', 'form', 'layer' ], function() {
+		var form = layui.form;
+		var layer = layui.layer;
+		init();//初始化
+	});
+	function init(){//初始化
+		var OPENID = baseTools.getUrlParam("OPENID");
+		if(OPENID==null){
+				$("body").html("请在微信内打开网页");
+				return ;
+		}
+		//查看是否已经是会员
+		baseTools.xhrAjax({
+			url : "../../../user/selectUSER_INFOCount",
+			async : false,
+			dataType : 'json',
+			contentType : 'application/json',
+			params : JSON.stringify({
+				OPENID : OPENID
+			}),
+			callback : [ function(jsonObj, xhrArgs) {
+				switch (parseInt(jsonObj.code)) {
+				case -1: //异常
+					layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
+					break;
+				case -3: //cookie 失效请重新登录
+					layer.alert(jsonObj.msg, {'icon' : 5});
+					baseTools.gotoLogin();//去登录
+					break;
+				default:
+					  if(parseInt(jsonObj.data)>0){
+					  	//已经注册过
+					  	window.location.href="info.html?OPENID="+OPENID;
+					  }else{
+					  	//没有注册过
+					  	window.location.href="register.html?OPENID="+OPENID;
+					  }
+				}
+			} ],
+			callbackError : [ function(data, xhrArgs) {
+				baseTools.hideMash(); //关闭遮罩
+			} ]
+		});
+	}
+//页面初
+</script>

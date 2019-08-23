@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chuxi.dm.mapper.DM_PROVINCEMapper" >
+	 
+	<!--通用查询条件 -->
+	<sql id="DM_PROVINCE_WHERE">
+		<where>
+			<if test="ID != null and ID != ''">
+				AND T.ID = #{ID}
+			</if>
+			<if test="ID_LIKE != null and ID_LIKE != ''">
+				AND T.ID LIKE concat(concat('%',#{ID_LIKE}),'%')
+			</if>
+			<if test="ID_LLIKE != null and ID_LLIKE != ''">
+				AND T.ID LIKE concat('%',#{ID_LIKE})
+			</if>
+			<if test="ID_RLIKE != null and ID_RLIKE != ''">
+				AND T.ID LIKE concat(#{ID_RIKE},'%')
+			</if>
+				
+			<if test="NAME != null and NAME != ''">
+				AND T.NAME = #{NAME}
+			</if>
+			<if test="NAME_LIKE != null and NAME_LIKE != ''">
+				AND T.NAME LIKE concat(concat('%',#{NAME_LIKE}),'%')
+			</if>
+			<if test="NAME_LLIKE != null and NAME_LLIKE != ''">
+				AND T.NAME LIKE concat('%',#{NAME_LIKE})
+			</if>
+			<if test="NAME_RLIKE != null and NAME_RLIKE != ''">
+				AND T.NAME LIKE concat(#{NAME_RIKE},'%')
+			</if>
+				
+		</where>
+	</sql>
+	<!-- 通用查询 -->
+    <select id="selectDM_PROVINCE" parameterType="java.util.Map" resultType="java.util.Map" >
+     	 SELECT (@rowNum:=@rowNum+1) AS ROWNO,
+        (SELECT COUNT(1) FROM DM_PROVINCE T <include refid="DM_PROVINCE_WHERE"/>) AS TOTAL,
+        E.* FROM (
+        SELECT T.ID,T.NAME
+         FROM DM_PROVINCE T
+        <include refid="DM_PROVINCE_WHERE"/>
+         <if test="SORTNAME != null and SORTNAME != ''">
+            	 ORDER BY  ${SORTNAME}
+            	 <if test="SORTORDER != null and SORTORDER != ''">
+            	 	 ${SORTORDER}
+            	 </if>
+         </if>
+         
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	limit ${ROWS},${PAGESIZE}
+         </if> 
+        
+         )E,DM_PROVINCE T
+         <if test="PAGESIZE != null and PAGESIZE != ''">
+            	,(SELECT(@rowNum :=${ROWS}))TEM_TB
+         </if>
+         <if test="PAGESIZE == null or PAGESIZE == ''">
+            	,(SELECT(@rowNum :=0))TEM_TB
+         </if>
+        WHERE E.ID=T.ID
+    </select>
+    
+    <!-- 通用查询个数 -->
+    <select id="selectDM_PROVINCECount" parameterType="java.util.Map" resultType="java.lang.Integer" >
+     	 SELECT COUNT(1) FROM DM_PROVINCE T <include refid="DM_PROVINCE_WHERE"/>
+    </select>
+    
+    <!-- 保存 -->
+    <insert id="insertDM_PROVINCE" parameterType="java.util.Map" >
+    	insert into DM_PROVINCE 
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				  ID ,
+			</if>
+			<if test="NAME != null and NAME != ''">
+				  NAME ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="ID != null and ID != ''">
+				 #{ID},  
+			</if>
+			<if test="NAME != null and NAME != ''">
+				 #{NAME},  
+			</if>
+		</trim>
+    </insert>
+    
+    <!-- 修改-->
+    <update id="updateDM_PROVINCE" parameterType="java.util.Map" >
+    	update   DM_PROVINCE 
+    	<set>
+			<if test="ID_NEW != null and ID_NEW != ''">
+				  ID=  #{ID_NEW},
+			</if>
+			<if test="NAME_NEW != null and NAME_NEW != ''">
+				  NAME=  #{NAME_NEW},
+			</if>
+		</set>
+		<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="NAME != null and NAME != ''">
+				AND NAME = #{NAME}
+			</if>
+		</where>
+    </update>
+    
+    <!-- 删除-->
+    <delete id="deleteDM_PROVINCE" parameterType="java.util.Map" >
+    	delete  from DM_PROVINCE  
+    	<where>
+			<if test="ID != null and ID != ''">
+				AND ID = #{ID}
+			</if>
+			<if test="NAME != null and NAME != ''">
+				AND NAME = #{NAME}
+			</if>
+		</where>
+    </delete>
+    
+</mapper>

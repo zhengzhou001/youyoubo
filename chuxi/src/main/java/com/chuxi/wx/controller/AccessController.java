@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.base.core.tools.BaseTools;
 import com.chuxi.config.BaseConfig;
 import com.chuxi.wx.service.IWX_MSGService;
 import com.chuxi.wx.service.IWX_SUBSCRIBEService;
 import com.chuxi.wx.service.IWX_USERService;
 
 import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
@@ -221,10 +220,11 @@ public class AccessController {
 		return out;
 	}
 
-
-	public static void main(String[] args) {
-		System.out.println(1);
-
+	@RequestMapping(value={"/config"}, method={RequestMethod.POST})
+	@ResponseBody
+	public WxJsapiSignature getConfig(@RequestBody String url) throws Exception{
+		WxJsapiSignature a = wxMpService.createJsapiSignature(url);
+		return a;
 	}
 
 }
