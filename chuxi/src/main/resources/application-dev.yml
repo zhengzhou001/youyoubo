@@ -56,4 +56,6 @@ wx:
   keyPath: classpath:cert/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
   notifyUrl: http://www.youyoubo.top/wxPay/notify #微信支付回调地址 自己定义但是必须放到外网微信可以访问的到
 ym: 2h240448c1.51mypc.cn  
+tmpFilePath: E://CHUXI//FILE//TMP//
+filePath: E://CHUXI//FILE//
  

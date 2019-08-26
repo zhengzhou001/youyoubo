@@ -32,7 +32,7 @@ import ${basePackage}.service.I${tableName}Service;
  public class ${tableName}Controller extends BaseController {
  	private Logger logger = LoggerFactory.getLogger(${tableName}Controller.class);
  	@Autowired
-	I${tableName}Service ${tableName}Service;
+	private I${tableName}Service ${tableName}Service;
 	
  
 	@RequestMapping(value={"/insert${tableName}"}, method={RequestMethod.POST})

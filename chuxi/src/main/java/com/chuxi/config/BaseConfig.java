@@ -36,6 +36,45 @@ public class BaseConfig {
 	@Value("${ym}")
 	private String ym;
 	
+	@Value("${tmpFilePath}")
+	private String tmpFilePath;
+	 
+	@Value("${filePath}")
+	private String filePath;
+
+	
+	public String getTmpFilePath() {
+		return tmpFilePath;
+	}
+
+	public void setTmpFilePath(String tmpFilePath) {
+		this.tmpFilePath = tmpFilePath;
+	}
+
+	public String getAppID() {
+		return AppID;
+	}
+
+	public void setAppID(String appID) {
+		AppID = appID;
+	}
+
+	public String getAppSecret() {
+		return AppSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		AppSecret = appSecret;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public String getMchId() {
 		return mchId;
 	}
@@ -84,30 +123,6 @@ public class BaseConfig {
 		this.notifyUrl = notifyUrl;
 	}
 
-	public String getAppID() {
-		return AppID;
-	}
-
-	public void setAppID(String appID) {
-		AppID = appID;
-	}
-
-	public String getAppSecret() {
-		return AppSecret;
-	}
-
-	public void setAppSecret(String appSecret) {
-		AppSecret = appSecret;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 	public String getYm() {
 		return ym;
 	}
@@ -115,7 +130,14 @@ public class BaseConfig {
 	public void setYm(String ym) {
 		this.ym = ym;
 	}
-	
-	
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	
 }

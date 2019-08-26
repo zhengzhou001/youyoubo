@@ -26,7 +26,7 @@ import ${basePackage}.mapper.${tableName}Mapper;
 @Service
 public class ${tableName}ServiceImpl extends BaseServiceImpl implements I${tableName}Service {
 	@Autowired
-	${tableName}Mapper ${tableName}Mapper;
+	private ${tableName}Mapper ${tableName}Mapper;
 	
 	public void insert${tableName}(Map map) throws Exception{
 		map.put("ID",BaseTools.getNextSeq());

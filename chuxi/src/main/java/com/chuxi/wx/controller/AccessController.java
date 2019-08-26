@@ -1,5 +1,8 @@
 package com.chuxi.wx.controller;
 
+import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -222,9 +225,9 @@ public class AccessController {
 
 	@RequestMapping(value={"/config"}, method={RequestMethod.POST})
 	@ResponseBody
-	public WxJsapiSignature getConfig(@RequestBody String url) throws Exception{
-		WxJsapiSignature a = wxMpService.createJsapiSignature(url);
+	public WxJsapiSignature getConfig(@RequestBody Map map) throws Exception{
+		WxJsapiSignature a = wxMpService.createJsapiSignature(MapUtils.getString(map, "url"));
 		return a;
 	}
-
+	 
 }

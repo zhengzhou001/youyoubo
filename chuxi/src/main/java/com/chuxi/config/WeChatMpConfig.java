@@ -1,4 +1,6 @@
 package com.chuxi.config;
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,7 @@ public class WeChatMpConfig {
         wxMpConfigStorage.setAppId(baseConfig.getAppID());
         wxMpConfigStorage.setSecret(baseConfig.getAppSecret());
         wxMpConfigStorage.setToken(baseConfig.getToken());
+        wxMpConfigStorage.setTmpDirFile(new File(baseConfig.getTmpFilePath()));
         return wxMpConfigStorage;
     }
 }

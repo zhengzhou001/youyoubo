@@ -27,10 +27,11 @@
 </fieldset>
  
 <form class="layui-form" action=""  lay-filter="userInfoForm">
+<input type="hidden" id="SERVERID">
   <div class="layui-form-item">
     <label class="layui-form-label">昵称</label>
     <div class="layui-input-block" style="width:210px">
-      <input type="text" name="NAME" lay-verify="NAME"  placeholder="请输入昵称" autocomplete="off" class="layui-input"/>
+      <input type="text" id="NICKNAME" lay-verify="NICKNAME"  maxlength="10"  placeholder="请输入昵称" autocomplete="off" class="layui-input"/>
     </div>
   </div>
    <div class="layui-form-item" pane="">
@@ -43,6 +44,7 @@
    <div class="layui-form-item" pane="">
     <label class="layui-form-label">头像</label>
     <div class="layui-input-inline">
+     <span class="layui-badge-dot layui-bg-orange"></span><span class="layui-bg-gray">点击图片更换头像</span>
     	<a href="javascript:void(0);" onclick="changeImg()">
        		<img name="HEADIMGURL" id="HEADIMGURL"  style="width:210px;height:210px"/>
        </a>
@@ -51,17 +53,19 @@
   
   <div class="layui-form-item">
     <label class="layui-form-label">地区</label>
+    <!-- 
     <div class="layui-input-inline" style="width:210px;">
       <select name="COUNTRY" >
          <option value="中国" selected="">中国</option>
       </select>
     </div>
+     -->
     <div class="layui-input-inline" style="width:210px;">
-      <select name="PROVINCE" id="PROVINCE"  lay-filter="PROVINCE" >
+      <select id="PROVINCE"  lay-filter="PROVINCE" >
       </select>
     </div>
     <div class="layui-input-inline" style="width:210px;">
-      <select name="CITY" id="CITY" >
+      <select id="CITY" >
       </select>
     </div>
   </div>
@@ -71,18 +75,18 @@
   <div class="layui-form-item" pane="">
     <label class="layui-form-label">手机号</label>
     <div class="layui-input-block" style="width:210px">
-      <input type="number"  pattern="\d*" name="PHONE"  lay-verify="PHONE"  placeholder="请输入手机号" autocomplete="off" class="layui-input"/>
+      <input type="number" value=""  pattern="\d*"  id="PHONE" lay-verify="PHONE"  placeholder="请输入手机号" autocomplete="off" class="layui-input"/>
      </div>
   </div>
   
   <div style="margin-bottom: 15px;" >
     <label class="layui-form-label">短信验证码</label>
      <div class="layui-input-inline" style="width:100px" >
-      <input type="number"  pattern="\d*"  name="YZM"    lay-verify="YZM" v-model="YZM"  placeholder="验证码" autocomplete="off" class="layui-input"/>
+      <input type="number"  value=""  pattern="\d*"   id="YZM" lay-verify="YZM"  placeholder="验证码" autocomplete="off" class="layui-input"/>
   </div>
     
     <div class="layui-input-inline" > 
-    	<button class="layui-btn"     type="button" >获取验证码</button>
+    	<button class="layui-btn" id="YZMBUTTON"    type="button" onclick="getCode()" >获取验证码</button>
     </div>
   </div>
    

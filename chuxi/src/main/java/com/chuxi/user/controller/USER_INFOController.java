@@ -1,18 +1,31 @@
 package com.chuxi.user.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.base.core.tools.BaseTools;
+import com.chuxi.config.BaseConfig;
+import com.chuxi.sms.service.ISMS_CODEService;
+import com.chuxi.user.service.IUSER_INFOService;
+import com.chuxi.util.HttpClientUtil;
 import com.tcwy.distribute.controller.BaseController;
 import com.tcwy.distribute.result.BaseResult;
-import com.chuxi.user.service.IUSER_INFOService;
+
+import me.chanjar.weixin.mp.api.WxMpService;
 
 /**
  * <ol>
@@ -33,6 +46,12 @@ import com.chuxi.user.service.IUSER_INFOService;
  	private Logger logger = LoggerFactory.getLogger(USER_INFOController.class);
  	@Autowired
 	IUSER_INFOService USER_INFOService;
+ 	@Autowired
+ 	private WxMpService wxMpService;
+ 	@Autowired
+ 	private BaseConfig baseConfig;
+ 	@Autowired
+ 	private ISMS_CODEService SMS_CODEService;
 	
  
 	@RequestMapping(value={"/insertUSER_INFO"}, method={RequestMethod.POST})
@@ -111,4 +130,86 @@ import com.chuxi.user.service.IUSER_INFOService;
 		result.msg=msg;
 		return result;
 	}
+	
+	
+	
+	@RequestMapping(value={"/doSave"}, method={RequestMethod.POST})
+	public BaseResult doSave(@RequestBody Map map){
+		BaseResult result = new BaseResult();
+		try{
+			
+			int count = USER_INFOService.selectUSER_INFOCount(ArrayUtils.toMap(new String[][]{
+				{"OPENID",MapUtils.getString(map, "OPENID")},
+			}));
+			if (count>0) {
+				code=-1;
+				msg="已经是会员了，请勿重复办理";
+				result.code=code;
+				result.msg=msg;
+				return result;
+			}
+			//判断验证码是否正确
+			List list = SMS_CODEService.selectSMS_CODE(ArrayUtils.toMap(new String[][]{
+				{"CODE",MapUtils.getString(map, "YZM")},
+				{"PHONE",MapUtils.getString(map, "PHONE")},
+				{"STATE","1"},
+				{"FLAG","1"},
+			}));
+			if (list==null||list.size()==0) {
+				code=-1;
+				msg="验证码已过期或不正确";
+				result.code=code;
+				result.msg=msg;
+				return result;
+			}
+			
+			 String SERVERID=MapUtils.getString(map, "SERVERID");
+			 File headImg=null;
+			 if (StringUtils.isNotBlank(SERVERID)) {
+				//用户换头像了 
+				 File tmpFile = new File(baseConfig.getTmpFilePath());
+				 if (!tmpFile.exists()) {
+					 tmpFile.mkdirs();
+				}
+				File file =  wxMpService.getMaterialService().mediaDownload(SERVERID); //下载新头像
+				headImg = new File(baseConfig.getFilePath()+"HEAD"+File.separator+BaseTools.getCurStrDate(2)+File.separator+file.getName());
+				FileUtils.moveFile(file, headImg);//移动到头像目录
+			}else{
+				//用户用的微信头像
+				//下载用户微信头像
+				//有0、46、64、96、132数值可选，0代表640*640正方形头像
+				String HEADIMGURL=MapUtils.getString(map, "HEADIMGURL");
+				HEADIMGURL=StringUtils.replace(HEADIMGURL, "/46", "/0");
+				HEADIMGURL=StringUtils.replace(HEADIMGURL, "/64", "/0");
+				HEADIMGURL=StringUtils.replace(HEADIMGURL, "/96", "/0");
+				HEADIMGURL=StringUtils.replace(HEADIMGURL, "/132", "/0");
+
+				headImg = new File(baseConfig.getFilePath()+"HEAD"+File.separator+BaseTools.getCurStrDate(2)+File.separator+BaseTools.getNextSeq()+".jpg");
+				if (headImg.getParentFile()!= null) {
+					headImg.getParentFile().mkdirs();
+				}
+				HttpClientUtil.downFile(HEADIMGURL, headImg);
+			}
+			map.put("HEADIMGURL", headImg.getAbsolutePath());
+			for (int i = 0; i < list.size(); i++) {
+				Map tmap = (Map) list.get(i);
+				SMS_CODEService.updateSMS_CODE(ArrayUtils.toMap(new String[][]{
+					{"ID",MapUtils.getString(tmap, "ID")},
+					{"STATE_NEW","0"},
+				}));
+			}
+			USER_INFOService.insertUSER_INFO(map);
+		} catch (Exception e) {
+			code=-1;
+			msg=e.getMessage();
+			logger.error(msg);
+		}
+		result.code=code;
+		result.msg=msg;
+		return result;
+	}
+	
+	
+	
+	
 }

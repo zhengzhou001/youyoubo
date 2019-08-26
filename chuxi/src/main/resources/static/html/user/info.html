@@ -21,7 +21,7 @@
   </head>
   
   <body>
-   
+   注册会员信息
   </body>
 </html>
 <script type="text/javascript">
@@ -36,38 +36,7 @@
 				$("body").html("请在微信内打开网页");
 				return ;
 		}
-		//查看是否已经是会员
-		baseTools.xhrAjax({
-			url : "../../../user/selectUSER_INFOCount",
-			async : false,
-			dataType : 'json',
-			contentType : 'application/json',
-			params : JSON.stringify({
-				OPENID : OPENID
-			}),
-			callback : [ function(jsonObj, xhrArgs) {
-				switch (parseInt(jsonObj.code)) {
-				case -1: //异常
-					layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
-					break;
-				case -3: //cookie 失效请重新登录
-					layer.alert(jsonObj.msg, {'icon' : 5});
-					baseTools.gotoLogin();//去登录
-					break;
-				default:
-					  if(parseInt(jsonObj.data)>0){
-					  	//已经注册过
-					  	window.location.href="info.html?OPENID="+OPENID;
-					  }else{
-					  	//没有注册过
-					  	window.location.href="register.html?OPENID="+OPENID;
-					  }
-				}
-			} ],
-			callbackError : [ function(data, xhrArgs) {
-				baseTools.hideMash(); //关闭遮罩
-			} ]
-		});
+		 
 	}
 //页面初
 </script>
