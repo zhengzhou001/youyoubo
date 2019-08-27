@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>会员信息</title>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <script type="text/javascript"  src="../../js/jquery/jquery-1.10.2.js"></script>
-    <script type="text/javascript"  src="../../js/jquery/jquery.blockUI.js"></script>
-	<script type="text/javascript"  src="../../js/cookie/jquery.cookie.js"></script>
-	<script type="text/javascript"  src="../../js/json/json2.js"></script>
-	<script type="text/javascript"  src="../../js/base/base.tools.js"></script>
-	
-	<script type="text/javascript"  src="../../js/layui/layui.js"></script>
- 	<link rel="stylesheet" href="../../js/layui/css/layui.css" media="all">
+<head>
+<title>会员信息</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
 
-  </head>
-  
-  <body>
-   注册会员信息
-  </body>
+<script type="text/javascript" src="../../../js/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../../../js/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../../js/cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../js/json/json2.js"></script>
+<script type="text/javascript" src="../../../js/base/base.tools.js"></script>
+<script type="text/javascript" src="../../../js/mui/js/mui.min.js"></script>
+<script type="text/javascript" src="./info.js"></script>
+<link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
+		<h1 class="mui-title">会员信息</h1>
+	</header>
+	<div class="mui-content">
+		<ul id="list" class="mui-table-view mui-table-view-chevron">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" onclick="updateName()">昵称
+					<span id="NICKNAME" class="mui-pull-right" style="margin-right:-25px"></span>
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" onclick="updateSex()">性别
+					<span id="SEX" class="mui-pull-right" style="margin-right:-25px"></span>
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="javascript:void(0)" onclick="updatePhone()">手机
+					<span id="PHONE" class="mui-pull-right" style="margin-right:-25px"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</body>
 </html>
-<script type="text/javascript">
-	layui.use([ 'element', 'form', 'layer' ], function() {
-		var form = layui.form;
-		var layer = layui.layer;
-		init();//初始化
-	});
-	function init(){//初始化
-		var OPENID = baseTools.getUrlParam("OPENID");
-		if(OPENID==null){
-				$("body").html("请在微信内打开网页");
-				return ;
-		}
-		 
-	}
-//页面初
-</script>

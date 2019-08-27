@@ -296,7 +296,7 @@ function getCode(){
 //倒计时
 function settime() {
 	if (countdown == 0) {
-		$("#YZMBUTTON").prop('disabled',"false");
+		$("#YZMBUTTON").removeAttr("disabled");
 		$("#YZMBUTTON").removeClass("layui-btn-disabled");
 		$("#YZMBUTTON").html("获取验证码");
 		countdown = 120;

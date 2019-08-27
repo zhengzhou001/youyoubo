@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>昵称修改</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../../../js/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../../../js/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../../js/cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../js/json/json2.js"></script>
+<script type="text/javascript" src="../../../js/base/base.tools.js"></script>
+<script type="text/javascript" src="../../../js/mui/js/mui.min.js"></script>
+<link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+
+</head>
+
+<body>
+	 <header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <span class="mui-pull-left" style="padding-top: 10px;" >昵称修改</span>
+		    <button type="button" id="saveButton" class="mui-btn mui-btn-success mui-pull-right"  onclick="saveNickName()">保存</button>
+ 	</header>
+ 	<div class="mui-content">
+ 		<div class="mui-input-row">
+        <label>昵称</label>
+        <input type="text" id="NICKNAME" onkeyup="nickNameChangeEvent()" class="mui-input-clear" maxlength="10" placeholder="请输入用户名">
+         </div>
+    </div>
+</body>
+<script>
+var OPENID="";
+var NICKNAME;
+$(function() {
+	init();
+});
+function init(){
+	OPENID = baseTools.getUrlParam("OPENID");
+	if(OPENID==null){
+			$("body").html("请在微信内打开网页");
+			return ;
+	}
+	NICKNAME=baseTools.getUrlParam("NICKNAME");
+	$("#NICKNAME").val(NICKNAME);
+	$("#saveButton").prop('disabled',"true");
+}
+function nickNameChangeEvent(){
+	var NICKNAME_NEW=$("#NICKNAME").val();
+	if(NICKNAME_NEW!=null&&NICKNAME_NEW!=""&&NICKNAME_NEW!=NICKNAME){
+		$("#saveButton").removeAttr("disabled");
+	}else{
+		$("#saveButton").prop('disabled',"true");
+	}
+}
+function saveNickName(){
+	var NICKNAME_NEW=$("#NICKNAME").val();
+	if(NICKNAME_NEW.length>10||NICKNAME_NEW.length==0){
+		mui.alert('昵称必须是1-10个字符', '提示');
+                return false;
+	}
+	baseTools.xhrAjax({
+		url : "../../user/updateUSER_INFO",
+		async : false,
+		dataType : 'json',
+		contentType : 'application/json',
+		params : JSON.stringify({
+			OPENID : OPENID,
+			NICKNAME_NEW : NICKNAME_NEW
+		}),
+		callback : [ function(jsonObj, xhrArgs) {
+			switch (parseInt(jsonObj.code)) {
+			case -1: //异常
+				mui.alert('失败'+jsonObj.msg, '提示');
+				break;
+			case -3: //cookie 失效请重新登录
+				mui.alert('失败'+jsonObj.msg, '提示', function() {
+                     baseTools.gotoLogin();//去登录
+                });
+				break;
+			default:
+				 mui.alert('昵称修改成功', '提示', function() {
+                     window.location.href="info.html?OPENID="+OPENID;
+                });
+			}
+		} ],
+		callbackError : [ function(data, xhrArgs) {
+			baseTools.hideMash(); //关闭遮罩
+		} ]
+	});
+}
+</script>
+</html>
