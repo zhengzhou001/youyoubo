@@ -3,8 +3,11 @@ package com.chuxi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.alibaba.fastjson.JSON;
 import com.chuxi.config.BaseConfig;
+import com.chuxi.dm.service.IDM_CITYService;
+import com.chuxi.dm.service.IDM_PROVINCEService;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
@@ -22,8 +28,12 @@ import me.chanjar.weixin.mp.api.WxMpService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("pro")
+@ActiveProfiles("dev")
 public class CreateMenu {
+	@Autowired
+	private IDM_PROVINCEService DM_PROVINCEService;
+	@Autowired
+	private IDM_CITYService DM_CITYService;
 	@Autowired
 	private BaseConfig baseConfig;
 	@Autowired
@@ -82,72 +92,37 @@ public class CreateMenu {
 		
 		button3.setSubButtons(Arrays.asList(button3_1));
 		
-		
-		/*MenusVO menusVO = new MenusVO();
-
-		//==================================活动订阅==================================
-		// 
-		MenuButton one = new MenuButton();
-		one.setName("美容美发");
-		//one.setType("click");
-		//one.setKey("menu1");
-
-
-		MenuSubButton one_subButton= new MenuSubButton();
-		one_subButton.setName("价格");
-		one_subButton.setUrl("http://"+baseConfig.getYm()+"/html/price/price.html");
-		one_subButton.setType("view");
-
-
-		MenuSubButton one_subButton2= new MenuSubButton();
-		one_subButton2.setName("联系我们");
-		one_subButton2.setUrl("http://"+baseConfig.getYm()+"/html/contact/contact.html");
-		one_subButton2.setType("view");
-		one_subButton2.setKey("");
-
-		one.setSub_button(new MenuSubButton[]{one_subButton,one_subButton2});
-		// 
-		MenuButton two = new MenuButton();
-		two.setName("会员");
-		//two.setType("click");
-		//two.setKey("menu2");
-
-		MenuSubButton two_subButton= new MenuSubButton();
-		two_subButton.setName("会员介绍");
-		two_subButton.setUrl("http://"+baseConfig.getYm()+"/html/member/info.html");
-		two_subButton.setType("view");
-
-
-		MenuSubButton two_subButton2= new MenuSubButton();
-		two_subButton2.setName("会员办理");
-		two_subButton2.setUrl("http://"+baseConfig.getYm()+"/wechat/authorize?returnUrl=http://"+baseConfig.getYm()+"/html/member/register.html");
-		two_subButton2.setType("view");
-
-		MenuSubButton two_subButton3= new MenuSubButton();
-		two_subButton3.setName("会员信息");
-		two_subButton3.setUrl("http://"+baseConfig.getYm()+"/wechat/authorize?returnUrl=http://"+baseConfig.getYm()+"/html/member/memberInfo.html");
-		two_subButton3.setType("view");
-
-		//openid获取
-		two.setSub_button(new MenuSubButton[]{two_subButton,two_subButton2,two_subButton3});
-
-		//
-		MenuButton three = new MenuButton();
-		three.setName("现场直播");
-		three.setType("click");
-		three.setKey("menu3");
-		 */
-		/*	MenuSubButton three_subButton= new MenuSubButton();
-		three_subButton.setName("测试");
-		three_subButton.setUrl("http://"+baseConfig.getYm()+"/html/member/test.html");
-		three_subButton.setType("view");
-
-
-		three.setSub_button(new MenuSubButton[]{three_subButton});
-		 */
-	 
 		menu.setButtons(Arrays.asList(button1,button2,button3));
 
 		return menu;
+	}
+	
+	
+	@Test
+	public void createCity() throws Exception{
+		 List<Map> provinceList = DM_PROVINCEService.selectDM_PROVINCE(new HashMap());
+		 List<Map> provinceList2 = new ArrayList<>();
+		 for (int i = 0; i < provinceList.size(); i++) {
+			Map map = provinceList.get(i);
+			Map map2 = new HashMap<>();
+			map2.put("value", MapUtils.getString(map, "ID"));
+			map2.put("text", MapUtils.getString(map, "NAME"));
+			List citylist = 	 DM_CITYService.selectDM_CITY(ArrayUtils.toMap(new String[][]{
+				{"PROVINCE_ID",MapUtils.getString(map, "ID")}
+			}));	
+			List citylist2 = new ArrayList<>();
+			for (int j = 0; j < citylist.size(); j++) {
+				Map map3 = (Map) citylist.get(j);
+				Map map4 = new HashMap<>();
+				map4.put("value", MapUtils.getString(map3, "ID"));
+				map4.put("text", MapUtils.getString(map3, "NAME"));
+				citylist2.add(map4);
+			}
+			map2.put("children", citylist2);
+			provinceList2.add(map2);
+		}
+		 
+		 System.out.println(JSON.toJSONString(provinceList2));
+		 
 	}
 }

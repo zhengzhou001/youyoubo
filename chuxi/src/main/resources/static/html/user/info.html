@@ -16,7 +16,11 @@
 <script type="text/javascript" src="../../../js/base/base.tools.js"></script>
 <script type="text/javascript" src="../../../js/mui/js/mui.min.js"></script>
 <script type="text/javascript" src="./info.js"></script>
-<link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+<script type="text/javascript" src="../../../js/mui/js/picker/mui.picker.all.js"></script>
+<link rel="stylesheet" href="../../../js/mui/js/picker/mui.picker.all.css">
+ <link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+ <script type="text/javascript"  src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+ <script type="text/javascript" src="../../../js/city/city.js"></script>
 
 </head>
 
@@ -26,6 +30,7 @@
 		<h1 class="mui-title">会员信息</h1>
 	</header>
 	<div class="mui-content">
+	<input type="hidden" id="SERVERID">
 		<ul id="list" class="mui-table-view mui-table-view-chevron">
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0)" onclick="updateName()">昵称
@@ -40,6 +45,17 @@
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="javascript:void(0)" onclick="updatePhone()">手机
 					<span id="PHONE" class="mui-pull-right" style="margin-right:-25px"></span>
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a  id='showCityPicker' class="mui-navigate-right" href="javascript:void(0)" >地区
+					<span id="AREA" class="mui-pull-right" style="margin-right:-25px"></span>
+				</a>
+			</li>
+			<li align="center" >
+				<p style="padding-top:11px;">点击图片修改头像</p>
+				<a onclick="changeImg()" href="javascript:void(0)">
+					<img id="HEADIMGURL" style="margin-top:-10px;padding-bottom:11px;width:200px;height:200px;"  src="">
 				</a>
 			</li>
 		</ul>

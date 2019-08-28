@@ -81,15 +81,15 @@ function saveNickName(){
 		callback : [ function(jsonObj, xhrArgs) {
 			switch (parseInt(jsonObj.code)) {
 			case -1: //异常
-				mui.alert('失败'+jsonObj.msg, '提示');
+				mui.alert(jsonObj.msg);
 				break;
 			case -3: //cookie 失效请重新登录
-				mui.alert('失败'+jsonObj.msg, '提示', function() {
+				mui.alert(jsonObj.msg, function() {
                      baseTools.gotoLogin();//去登录
                 });
 				break;
 			default:
-				 mui.alert('性别修改成功', '提示', function() {
+				 mui.alert('性别修改成功', function() {
                      window.location.href="info.html?OPENID="+OPENID;
                 });
 			}
