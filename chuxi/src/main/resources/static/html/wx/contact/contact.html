@@ -84,10 +84,11 @@ body, html, #allmap {
 		height : 105, //高度
 		panel : "panel", //检索结果面板
 		enableAutoPan : true, //自动平移
+		  enableMessage:false,//设置允许信息窗发送短息
 		searchTypes : [
-			BMAPLIB_TAB_TO_HERE, //到这里去
-			BMAPLIB_TAB_FROM_HERE, //从这里出发
-			BMAPLIB_TAB_SEARCH, //周边检索
+			//BMAPLIB_TAB_TO_HERE, //到这里去
+			//BMAPLIB_TAB_FROM_HERE, //从这里出发
+			//BMAPLIB_TAB_SEARCH, //周边检索
 		]
 	});
 	var marker = new BMap.Marker(point);
