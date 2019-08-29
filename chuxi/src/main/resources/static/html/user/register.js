@@ -2,89 +2,16 @@ var form;
 var layer;
 var countdown = 120;
 var OPENID="";
-layui.use([ 'element', 'form', 'layer' ], function() {
-	form = layui.form;
-	layer = layui.layer;
-	//自定义验证规则
-	form.verify({
-		NICKNAME : function(value) {
-			if (value.length < 1) {
-				return '昵称不能为空';
-			}
-			if (value.length > 10) {
-				return '昵称最多10个字符';
-			}
-		},
-		PHONE : function(value) {
-			if (value.length < 1) {
-				return '手机号不能为空';
-			}
-			var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-			if (!reg.test(value)) {
-				return "请输入正确的手机号";
-			}
-		},
-		YZM : function(value) {
-			if (value.length < 1) {
-				return '请输入验证码';
-			}
-			var reg = /^\d{4,4}$/;
-			if (!reg.test(value)) {
-				return '请输入4位数字验证码';
-			}
-		}
-	});
-	//监听提交
-	form.on('submit(saveform)', function() {
- 		doSave();
-		return false;
-	});
-	form.on('select(PROVINCE)', function(data){   
-		  getCity(data.value);
-	});
+$(function() {
 	init();
 });
-
 //初始化
 function init() {
-	
 	OPENID = baseTools.getUrlParam("OPENID");
 	if(OPENID==null){
 			$("body").html("请在微信内打开网页");
 			return ;
 	}
-	//查询省级数据
-	baseTools.xhrAjax({
-		url : "../../dm/selectDM_PROVINCE",
-		async : false,
-		dataType : 'json',
-		contentType : 'application/json',
-		params : JSON.stringify({
-		}),
-		callback : [ function(jsonObj, xhrArgs) {
-			switch (parseInt(jsonObj.code)) {
-			case -1: //异常
-				layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
-				break;
-			case -3: //cookie 失效请重新登录
-				layer.alert(jsonObj.msg, {'icon' : 5});
-				baseTools.gotoLogin();//去登录
-				break;
-			default:
-				//表单初始赋值
-				var html="";
-				for(var i=0;i<jsonObj.data.length;i++){
-					html+="<option value=\""+jsonObj.data[i].NAME+"\">"+jsonObj.data[i].NAME+"</option>";
-				}
-				$("#PROVINCE").html(html);
-				form.render();
-			}
-		} ],
-		callbackError : [ function(data, xhrArgs) {
-			baseTools.hideMash(); //关闭遮罩
-		} ]
-	});
-	
 	//查询用户基础信息
 	baseTools.xhrAjax({
 		url : "../../wx/selectWX_USER",
@@ -97,21 +24,44 @@ function init() {
 		callback : [ function(jsonObj, xhrArgs) {
 			switch (parseInt(jsonObj.code)) {
 			case -1: //异常
-				layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
+				mui.alert(jsonObj.msg);
 				break;
 			case -3: //cookie 失效请重新登录
-				layer.alert(jsonObj.msg, {'icon' : 5});
-				baseTools.gotoLogin();//去登录
+				mui.alert(jsonObj.msg, function() {
+                    baseTools.gotoLogin();//去登录
+                });
 				break;
 			default:
-				  getCity(jsonObj.data[0].PROVINCE);
 				  //表单初始赋值
 				  $("#NICKNAME").val(jsonObj.data[0].NICKNAME);
  				  $("input[name='SEX'][value="+jsonObj.data[0].SEX+"]").prop("checked", "checked");
  				 $("#HEADIMGURL").prop("src",jsonObj.data[0].HEADIMGURL);
- 				  $("#PROVINCE").val(jsonObj.data[0].PROVINCE);
- 				  $("#CITY").val(jsonObj.data[0].CITY);
-				  form.render();
+ 				  $("#AREA").html(jsonObj.data[0].PROVINCE+"&nbsp;"+jsonObj.data[0].CITY);
+ 				 $("#PROVINCE").val(jsonObj.data[0].PROVINCE);
+ 				 $("#CITY").val(jsonObj.data[0].CITY);
+ 				    //地区
+ 					var userPicker = new mui.PopPicker({
+ 						layer: 2
+ 					});
+ 					userPicker.setData(cityData);
+ 					userPicker.pickers[0].setSelectedValue(jsonObj.data[0].PROVINCE_ID);
+ 					 var shi=userPicker.getSelectedItems()[0].children;
+ 					//userPicker.pickers[1].setSelectedValue(userInfo.CITY_ID);//不起作用
+				   for(var i=0;i<shi.length;i++){
+					   if(shi[i].value==jsonObj.data[0].CITY_ID)
+                       {
+						   userPicker.pickers[1].setSelectedIndex(i);
+                       }
+					   
+				   }
+				   $('#showCityPicker').click(function(){
+						  userPicker.show(function(items) {
+							  $('#AREA').html(items[0].text+"&nbsp;"+items[1].text);
+							  $("#PROVINCE").val(items[0].text);
+				 				 $("#CITY").val(items[1].text);
+						  });
+				  });
+ 				  
 			}
 		} ],
 		callbackError : [ function(data, xhrArgs) {
@@ -119,44 +69,6 @@ function init() {
 		} ]
 	});
 	
-}
-//获取市数据
-function getCity(PROVINCE){
-	if(PROVINCE==null||PROVINCE==""){
-		return;
-	}
-	//查询市级数据
-	baseTools.xhrAjax({
-		url : "../../dm/selectDM_CITY",
-		async : false,
-		dataType : 'json',
-		contentType : 'application/json',
-		params : JSON.stringify({
-			PROVINCE_NAME:PROVINCE
-		}),
-		callback : [ function(jsonObj, xhrArgs) {
-			switch (parseInt(jsonObj.code)) {
-			case -1: //异常
-				layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
-				break;
-			case -3: //cookie 失效请重新登录
-				layer.alert(jsonObj.msg, {'icon' : 5});
-				baseTools.gotoLogin();//去登录
-				break;
-			default:
-				//表单初始赋值
-				var html="";
-				for(var i=0;i<jsonObj.data.length;i++){
-					html+="<option value=\""+jsonObj.data[i].NAME+"\">"+jsonObj.data[i].NAME+"</option>";
-				}
-				$("#CITY").html(html);
-				form.render();
-			}
-		} ],
-		callbackError : [ function(data, xhrArgs) {
-			baseTools.hideMash(); //关闭遮罩
-		} ]
-	});
 }
 //换头像
 function changeImg(){
@@ -203,7 +115,7 @@ function changeImg(){
             wx.error(function(res){
                 // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，
                 //也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                layer.msg(res);
+            	mui.alert(res);
             });
 		} ],
 		callbackError : [ function(data, xhrArgs) {
@@ -213,6 +125,23 @@ function changeImg(){
 }
 //保存
 function doSave(){
+	var NICKNAME=$("#NICKNAME").val();
+	if(NICKNAME.length<1||NICKNAME.length>10){
+		mui.alert("昵称必须是1-10个字符");
+		return;
+	}
+	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+	var PHONE=$("#PHONE").val();
+	if (!reg.test(PHONE)) {
+		mui.alert("请输入正确手机号");
+		return;
+	}
+	var yzm = $("#YZM").val();
+	if(yzm.length!=4){
+		mui.alert("请输入4位验证码");
+		return;
+	} 
+	 
 	baseTools.xhrAjax({
 		url : "../../user/doSave",
 		async : false,
@@ -220,33 +149,30 @@ function doSave(){
 		contentType : 'application/json',
 		params : JSON.stringify({
 			SERVERID:$("#SERVERID").val(),
-			NICKNAME:$("#NICKNAME").val(),
+			NICKNAME:NICKNAME,
  			SEX:$("input[name='SEX']:checked").val(),
  			HEADIMGURL:$("#HEADIMGURL")[0].src,
 			OPENID:OPENID,
-			PHONE:$("#PHONE").val(),
-			YZM:$("#YZM").val(),
-			CITY:$("#CITY option:selected").val(),
+			PHONE:PHONE,
+			YZM:yzm,
+			CITY:$("#CITY").val(),
 			COUNTRY:"中国",
-			PROVINCE:$("#PROVINCE option:selected").val()
+			PROVINCE:$("#PROVINCE").val()
 			
 		}),
 		callback : [ function(jsonObj, xhrArgs) {
 			switch (parseInt(jsonObj.code)) {
 			case -1: //异常
-				layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
+				mui.alert(jsonObj.msg);
 				break;
 			case -3: //cookie 失效请重新登录
-				layer.alert(jsonObj.msg, {'icon' : 5});
-				baseTools.gotoLogin();//去登录
+				mui.alert(jsonObj.msg, function() {
+                    baseTools.gotoLogin();//去登录
+                });
 				break;
 			default:
-				layer.alert('会员办理成功', {'icon' : 6, closeBtn: 0 }, function (index) { 
-				    layer.close(index);	//关闭弹窗	 	
-				    setTimeout(function () { 
-				    	window.location.href="info.html?OPENID="+OPENID;
-				    }, 500) 
-					 
+				mui.alert('会员办理成功', function () { 
+					window.location.href="info.html?OPENID="+OPENID;
 				});
 				 
 			}
@@ -261,7 +187,7 @@ function getCode(){
 	var phone = $("#PHONE").val()
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if (!reg.test(phone)) {
-		layer.alert("请输入正确的手机号", {'icon' : 5});
+		mui.alert("请输入正确的手机号");
 		return;
 	}
 	settime();//按钮倒计时
@@ -275,16 +201,16 @@ function getCode(){
 		callback : [ function(jsonObj, xhrArgs) {
 			switch (parseInt(jsonObj.code)) {
 			case -1: //异常
-				layer.alert("异常:" + jsonObj.msg, {'icon' : 5});
+				mui.alert(jsonObj.msg);
 				break;
 			case -3: //cookie 失效请重新登录
-				layer.alert(jsonObj.msg, {'icon' : 5});
-				//去登录
-				baseTools.gotoLogin();
+				mui.alert(jsonObj.msg, function() {
+                    baseTools.gotoLogin();//去登录
+                });
 				break;
 			default:
 				//成功
-				layer.alert('验证码已经发送到手机，请注意查收', {'icon' : 6});
+				mui.alert('验证码已经发送到手机，请注意查收');
 
 			}
 		} ],
@@ -297,14 +223,12 @@ function getCode(){
 function settime() {
 	if (countdown == 0) {
 		$("#YZMBUTTON").removeAttr("disabled");
-		$("#YZMBUTTON").removeClass("layui-btn-disabled");
 		$("#YZMBUTTON").html("获取验证码");
 		countdown = 120;
 		return;
 	} else {
 		$("#YZMBUTTON").prop('disabled',"true");
-		$("#YZMBUTTON").addClass("layui-btn-disabled");
-		$("#YZMBUTTON").html(countdown+"秒后重新发送");
+		$("#YZMBUTTON").html(countdown+"秒后重发");
 		countdown--;
 	}
 	setTimeout(function() {

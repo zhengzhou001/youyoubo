@@ -27,7 +27,7 @@ function init() {
 			case -3: //cookie 失效请重新登录
 				mui.alert(jsonObj.msg, function() {
                     baseTools.gotoLogin();//去登录
-               });
+                });
 				break;
 			default:
 				userInfo=jsonObj.data[0];

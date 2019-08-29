@@ -124,6 +124,7 @@ import com.tcwy.distribute.result.BaseResult;
 	@RequestMapping(value={"/getCode"}, method={RequestMethod.POST})
 	public	BaseResult getCode(@RequestBody Map map){
 		BaseResult result = new BaseResult<>();
+		
 		try{
 			//发送验证码
 			String valid_code = BaseTools.getRandomNumber(4);
