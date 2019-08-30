@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>除夕网络</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" href="/images/head.ico" type="image/x-icon" />
+
+<script type="text/javascript" src="../../js/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../../js/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../js/cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../js/json/json2.js"></script>
+<script type="text/javascript" src="../../js/base/base.tools.js"></script>
+<script type="text/javascript" src="../../js/layui/layui.js"></script>
+<link rel="stylesheet" href="../../js/layui/css/layui.css">
+
+<script type="text/javascript" src="./index.js"></script>
+
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=lGXqjaxGLnDzSEQ73CN69v6lkXd2siyy"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
+</head>
+
+<body style="max-width:1200px;margin:0 auto;overflow:scroll;">
+	<div class="layui-carousel" id="test1" lay-filter="test1">
+		<div carousel-item="">
+			<div>
+				<img style="width:100%;height:100%;" src="../../images/index/img-1200-500.jpg">
+			</div>
+			<div>
+				<img style="width:100%;height:100%;" src="../../images/index/img-1200-500-2.jpg">
+			</div>
+		</div>
+	</div>
+
+	<ul class="layui-nav">
+		<li class="layui-nav-item">
+			<a href="">网站素材</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="">支付示例</a>
+		</li>
+		<li class="layui-nav-item ">
+			<a href="javascript:;">短信示例</a>
+			<dl class="layui-nav-child">
+				<dd>
+					<a href="">验证码短信</a>
+				</dd>
+				<dd>
+					<a href="">提醒短信</a>
+				</dd>
+			</dl>
+		</li>
+
+		<li class="layui-nav-item">
+			<!-- <a href="../pc/contact/contact.html" target="_blank">联系我们</a> -->
+			<a href="#contact">联系我们</a>
+		</li>
+	</ul>
+
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>验证码短信</legend>
+	</fieldset>
+
+
+
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>联系我们</legend>
+	</fieldset>
+	<div id="contact">
+		<div class="layui-form">
+			<table class="layui-table">
+				<colgroup>
+					<col width="150">
+					<col width="150">
+					<col>
+				</colgroup>
+
+				<tbody>
+					<tr>
+						<td>联系人</td>
+						<td>又又</td>
+					</tr>
+					<tr>
+						<td>联系方式</td>
+						<td>13683816984</td>
+					</tr>
+					<tr>
+						<td>地址</td>
+						<td>河南省郑州市中原区金水西路电厂路世纪香熙园9号楼1单元2506</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="allmap" style="width:100%;height:700px"></div>
+	</div>
+
+	<p style="margin-bottom:0px;align:center;text-align:center"">豫ICP备19028931号</p>
+</body>
+</html>
