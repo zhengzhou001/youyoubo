@@ -36,12 +36,12 @@ import com.tcwy.distribute.result.BaseResult;
 @RestController
 @Scope("prototype")
 @RequestMapping(value="/sms")
- public class SMS_CODEController extends BaseController {
- 	private Logger logger = LoggerFactory.getLogger(SMS_CODEController.class);
- 	@Autowired
+public class SMS_CODEController extends BaseController {
+	private Logger logger = LoggerFactory.getLogger(SMS_CODEController.class);
+	@Autowired
 	ISMS_CODEService SMS_CODEService;
-	
- 
+
+
 	@RequestMapping(value={"/insertSMS_CODE"}, method={RequestMethod.POST})
 	public BaseResult insertSMS_CODE(@RequestBody Map map){
 		BaseResult result = new BaseResult();
@@ -56,7 +56,7 @@ import com.tcwy.distribute.result.BaseResult;
 		result.msg=msg;
 		return result;
 	}
-	
+
 	@RequestMapping(value={"/deleteSMS_CODE"}, method={RequestMethod.POST})
 	public BaseResult deleteSMS_CODE(@RequestBody Map map){
 		BaseResult result = new BaseResult();
@@ -71,12 +71,12 @@ import com.tcwy.distribute.result.BaseResult;
 		result.msg=msg;
 		return result;
 	}
-	
-	 
+
+
 	@RequestMapping(value={"/updateSMS_CODE"}, method={RequestMethod.POST})
 	public BaseResult updateSMS_CODE(@RequestBody Map map){
 		BaseResult result = new BaseResult();
- 		try{
+		try{
 			SMS_CODEService.updateSMS_CODE(map);
 		} catch (Exception e) {
 			code=-1;
@@ -87,13 +87,13 @@ import com.tcwy.distribute.result.BaseResult;
 		result.msg=msg;
 		return result;
 	}
-	
+
 	@RequestMapping(value={"/selectSMS_CODE"}, method={RequestMethod.POST})
 	public	BaseResult<List<Map>> selectSMS_CODE(@RequestBody Map map){
 		BaseResult<List<Map>> result = new BaseResult<>();
 		try{
 			result.data= SMS_CODEService.selectSMS_CODE(map);
- 		} catch (Exception e) {
+		} catch (Exception e) {
 			code=-1;
 			msg=e.getMessage();
 			logger.error(msg);
@@ -102,14 +102,14 @@ import com.tcwy.distribute.result.BaseResult;
 		result.msg=msg;
 		return result;
 	}
-	
-	 
+
+
 	@RequestMapping(value={"/selectSMS_CODECount"}, method={RequestMethod.POST})
 	public	BaseResult<Integer> selectSMS_CODECount(@RequestBody Map map){
 		BaseResult<Integer> result = new BaseResult<>();
 		try{
 			result.data= SMS_CODEService.selectSMS_CODECount(map);
- 		} catch (Exception e) {
+		} catch (Exception e) {
 			code=-1;
 			msg=e.getMessage();
 			logger.error(msg);
@@ -118,13 +118,13 @@ import com.tcwy.distribute.result.BaseResult;
 		result.msg=msg;
 		return result;
 	}
-	
+
 
 	//获取验证码
 	@RequestMapping(value={"/getCode"}, method={RequestMethod.POST})
 	public	BaseResult getCode(@RequestBody Map map){
 		BaseResult result = new BaseResult<>();
-		
+
 		try{
 			//发送验证码
 			String valid_code = BaseTools.getRandomNumber(4);
@@ -142,6 +142,44 @@ import com.tcwy.distribute.result.BaseResult;
 				msg=response.getMessage();
 			}
 
+		} catch (Exception e) {
+			code=-1;
+			msg=e.getMessage();
+			logger.error(msg);
+		}
+		result.code=code;
+		result.msg=msg;
+		return result;
+	}
+
+	//校验验证码
+	@RequestMapping(value={"/checkCode"}, method={RequestMethod.POST})
+	public	BaseResult checkCode(@RequestBody Map map){
+		BaseResult result = new BaseResult<>();
+
+		try{
+			
+			//判断验证码是否正确
+			List list = SMS_CODEService.selectSMS_CODE(ArrayUtils.toMap(new String[][]{
+				{"CODE",MapUtils.getString(map, "YZM")},
+				{"PHONE",MapUtils.getString(map, "PHONE")},
+				{"STATE","1"},
+				{"FLAG","1"},
+			}));
+			if (list==null||list.size()==0) {
+				code=-1;
+				msg="验证码已过期或不正确";
+				result.code=code;
+				result.msg=msg;
+				return result;
+			}
+			for (int i = 0; i < list.size(); i++) {
+				Map tmap = (Map) list.get(i);
+				SMS_CODEService.updateSMS_CODE(ArrayUtils.toMap(new String[][]{
+					{"ID",MapUtils.getString(tmap, "ID")},
+					{"STATE_NEW","0"},
+				}));
+			}
 		} catch (Exception e) {
 			code=-1;
 			msg=e.getMessage();
