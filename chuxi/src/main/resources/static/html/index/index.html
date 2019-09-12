@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>除夕网络</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="keywords" content="keyword1,keyword2,keyword3">
-<meta name="description" content="this is my page">
-<meta name="content-type" content="text/html; charset=UTF-8">
-<link rel="icon" href="/images/head.ico" type="image/x-icon" />
+	<title>除夕网络</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="keywords" content="keyword1,keyword2,keyword3">
+	<meta name="description" content="this is my page">
+	<meta name="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="/images/head.ico" type="image/x-icon" />
 
-<script type="text/javascript" src="../../js/jquery/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="../../js/jquery/jquery.blockUI.js"></script>
-<script type="text/javascript" src="../../js/cookie/jquery.cookie.js"></script>
-<script type="text/javascript" src="../../js/json/json2.js"></script>
-<script type="text/javascript" src="../../js/base/base.tools.js"></script>
-<script type="text/javascript" src="../../js/layui/layui.js"></script>
-<link rel="stylesheet" href="../../js/layui/css/layui.css">
+	<script type="text/javascript" src="../../js/jquery/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../../js/jquery/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="../../js/cookie/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../js/json/json2.js"></script>
+	<script type="text/javascript" src="../../js/base/base.tools.js"></script>
+	<script type="text/javascript" src="../../js/layui/layui.js"></script>
+	<link rel="stylesheet" href="../../js/layui/css/layui.css">
 
-<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=lGXqjaxGLnDzSEQ73CN69v6lkXd2siyy"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
-<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
-<script type="text/javascript" src="./index.js"></script>
-<style>
-</style>
+	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=lGXqjaxGLnDzSEQ73CN69v6lkXd2siyy"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+	<script type="text/javascript" src="./index.js"></script>
+	<style>
+		.rTop {
+			text-align: center;
+			font-size: small;
+			line-height: 25px;
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			border-bottom-color: #333;
+			border-right-color: #333;
+			margin: 5px;
+			cursor: pointer;
+		}
+	</style>
 </head>
 
 <body style="max-width:1200px;margin:0 auto;overflow:scroll;">
@@ -37,32 +52,64 @@
 			</div>
 		</div>
 	</div>
-	<ul class="layui-nav ">
+	<ul class="layui-nav " style="width:100%;max-width:1200px;position:fixed;top:0;z-index:999">
 		<li class="layui-nav-item layui-this">
-			<a href="">首页</a>
+			<a href="index.html">首页</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="">网站开发</a>
+			<a href="#web">网站开发</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="">公众号开发</a>
+			<a href="#wxgzh">公众号开发</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="">小程序开发</a>
+			<a href="#wxxcx">小程序开发</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="">运维</a>
+			<a href="#yw">运营维护</a>
 		</li>
 		<li class="layui-nav-item">
 			<a href="#question">常见问题</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="">联系我们</a>
+			<a href="#contact">联系我们</a>
 		</li>
 	</ul>
 
+	<fieldset id="web" class="layui-elem-field" style="margin-top: 80px;">
+		<legend>网站开发</legend>
+		<div class="layui-field-box" style="font-size: 20px">
+			<p align="center">互联网时代任何企业甚至很多个人都需要网站</p>
+			<p>1：公司网站是公司的形象，网站做的漂亮、访问快、页面简洁大方、产品亮点突出这些特性容易吸引更多客户，相反公司网站做的不好、卡顿、访问慢、经常出错等问题会造成用户的流失。</p>
+			<p>2：公司后台网站可以帮助企业做一些日常工作，比如用户管理、订单管理、员工管理、考勤管理等企业工作中必然会涉及的工作都可以提需求做网站实现。具有数据方便查询、不会丢失、去纸质化办公等便捷性。</p>
+		</div>
+	</fieldset>
 
-	<fieldset id="question" class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	<fieldset id="wxgzh" class="layui-elem-field" style="margin-top: 20px;">
+		<legend>公众号开发 </legend>
+		<div class="layui-field-box" style="font-size: 20px">
+			<p>1：微信有高达10亿活跃用户量，由于关注的便捷性（并不需要在手机上另外安装应用软件）导致公众号可以促使公司业务爆发式增长。</p>
+			<p>2：公众号可以发布文章，只要这些文章写的好，就能提高公司客户的粘性，提供公司活跃用户指数。</p>
+			<p>3：公众号可以开发公司自己的业务，比如购买公司产品、订单查询、信息录入/修改、机器人客服等等业务。</p>
+			<p>4：公众号可以设立人工客服，通过于用户聊天解决用户实际问题。</p>
+			<p>5：公众号关注粉丝数量达到一定级别，可以有广告收入。</p>
+			<p>6：公众号粉丝最终引流到公司自己网站或者自己App上。</p>
+		</div>
+	</fieldset>
+	<fieldset id="wxxcx" class="layui-elem-field" style="margin-top: 20px;">
+		<legend>小程序开发 </legend>
+		<div class="layui-field-box" style="font-size: 20px">
+			<p>小程序比起公众号更具便捷性，用户无需关注、无需点击公众号菜单等步骤，直接扫码进行交易</p>
+		</div>
+	</fieldset>
+	<fieldset id="yw" class="layui-elem-field" style="margin-top: 20px;">
+		<legend>运营维护 </legend>
+		<div class="layui-field-box" style="font-size: 20px">
+			<p>网站、公众号、App等项目开发完毕以后都需要运维人员，我司提供运维业务，无论是在我司开发的项目，还是已经开发好的项目。</p>
+		</div>
+	</fieldset>
+
+	<fieldset id="question" class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 		<legend>常见问题</legend>
 	</fieldset>
 	<div class="layui-collapse" lay-accordion="">
@@ -70,6 +117,12 @@
 			<h2 class="layui-colla-title">公司名字</h2>
 			<div class="layui-colla-content">
 				<p>河南除夕网络有限责任公司</p>
+			</div>
+		</div>
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">公司宗旨</h2>
+			<div class="layui-colla-content">
+				<p>只要客户有需要，除夕夜照常工作</p>
 			</div>
 		</div>
 		<div class="layui-colla-item">
@@ -129,15 +182,13 @@
 		</div>
 		<div class="layui-colla-item">
 			<h2 class="layui-colla-title">技术力量</h2>
-			<div class="layui-colla-content  layui-show">
+			<div class="layui-colla-content">
 				<table class="layui-table">
 					<thead>
-
-
 					</thead>
 					<tbody>
 						<tr>
-							<td align="center" colspan="8">技术</td>
+							<td align="center" colspan="8" style="font-size:20px">技术</td>
 						</tr>
 						<tr>
 							<td>姓名</td>
@@ -170,7 +221,7 @@
 							<td>精通Java、JavaScript、Html、Oracle、MySql</td>
 						</tr>
 						<tr>
-							<td align="center" colspan="8">销售</td>
+							<td align="center" colspan="8" style="font-size:20px">销售</td>
 						</tr>
 						<tr>
 							<td>姓名</td>
@@ -184,7 +235,7 @@
 						</tr>
 
 						<tr>
-							<td align="center" colspan="8">人事</td>
+							<td align="center" colspan="8" style="font-size:20px">人事</td>
 						</tr>
 						<tr>
 							<td>姓名</td>
@@ -203,11 +254,47 @@
 		</div>
 	</div>
 
+	<fieldset id="contact" class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		<legend>联系我们</legend>
+	</fieldset>
+	<div>
+		<div class="layui-form">
+			<table class="layui-table">
+				<colgroup>
+					<col width="150">
+					<col width="150">
+					<col>
+				</colgroup>
 
-
-	<div style="position:absolute;right:10px;bottom: 10px;">
-		<img src="top.png" id="top" style="width:80px;height:120px;display:none" />
+				<tbody>
+					<tr>
+						<td>联系人</td>
+						<td>丁双波</td>
+					</tr>
+					<tr>
+						<td>联系方式</td>
+						<td>13683816984</td>
+					</tr>
+					<tr>
+						<td>邮件地址</td>
+						<td>2449709309@qq.com</td>
+					</tr>
+					<tr>
+						<td>地址</td>
+						<td>河南省郑州市中原区金水西路电厂路世纪香熙园9号楼1单元2506</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="allmap" style="width:100%;height:700px"></div>
 	</div>
-	<div id="foot" style="position:absolute;left:50%;bottom: 1px;">豫ICP备19028931号</div>
+
+	<div class="rTop">
+		<a href="javascript:void(0)" onclick="goTop()">
+			<img src="top.png" id="top" style="width:80px;height:120px;display:none" />
+		</a>
+	</div>
+	<div id="foot" style="position: fixed;left:50%;bottom: 1px;">豫ICP备19028931号</div>
 </body>
+
 </html>
