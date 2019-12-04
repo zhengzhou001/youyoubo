@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>鸭脖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" href="/images/head.ico" type="image/x-icon" />
+
+<script type="text/javascript" src="../../../js/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../../../js/jquery/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../../js/cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../js/json/json2.js"></script>
+<script type="text/javascript" src="../../../js/base/base.tools.js"></script>
+<script type="text/javascript" src="../../../js/layui/layui.js"></script>
+<link rel="stylesheet" href="../../../js/layui/css/layui.css">
+<script type="text/javascript" src="../../../js/plupload-3.1.2/js/plupload.full.min.js"></script>
+
+ 
+
+
+<style type="text/css">
+ 
+</style>
+</head>
+
+<body >
+	 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+	<br />
+	
+	<div id="container">
+	    <a id="pickfiles" href="javascript:;">选择文件</a>
+	</div>
+	<br />
+	<pre id="console"></pre> 
+</body>
+</html>
+
+<script type="text/javascript">
+ $(function (){
+    	init();//页面初始化
+    });
+	 //页面初始化
+    function init(){
+    var uploader = new plupload.Uploader({
+    		runtimes : 'html5,flash,silverlight,html4',
+    		browse_button : 'pickfiles', // you can pass an id...
+    		container: document.getElementById('container'), // ... or DOM Element itself
+    		url : '/upload',
+    		flash_swf_url : '../../../js/plupload-3.1.2/js/Moxie.swf',
+    		silverlight_xap_url : '../../../js/plupload-3.1.2/js/Moxie.xap',
+    		multi_selection:false,//不允许多选
+    		filters : {
+    			max_file_size : '500mb',
+    			mime_types: [
+    				{title : "Excel", extensions : "xls,xlsx"}
+    			]
+    		},
+
+    		init: {
+    			PostInit: function() {
+    				document.getElementById('filelist').innerHTML = '';
+ 
+    			},
+    			 FileUploaded: function(up, file, info) {
+    				//文件上传完成触发函数
+       				save(JSON.parse(info.response));     
+    			},
+    			FilesAdded: function(up, files) {
+    				plupload.each(files, function(file) {
+    					document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+    					uploader.start(); //选择文件以后立即上传
+    				});
+    			},
+
+    			UploadProgress: function(up, file) {
+    				document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+    			},
+
+    			Error: function(up, err) {
+    				document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
+    			}
+    		}
+    	});
+    	uploader.init();
+    }
+    
+    
+    function save(retData){
+      	baseTools.xhrAjax({
+                url: "/yabo/upload",
+            dataType: 'json',
+    		contentType: 'application/json',
+	        params:   JSON.stringify({filePath:retData.path,fileName:retData.name}),
+                 callback: [function (jsonObj, xhrArgs) {
+                	 alert("ok");
+                }],
+                callbackError: [function (data, xhrArgs) {
+                    baseTools.hideMash();
+                }]
+            });
+    }    
+     
+</script>
+
